@@ -13,8 +13,10 @@ Dictionary=["apple","cook","star","ocean","tool","shower","year","anchor","north
             ,"mouse","song","house","diamond","orange","steam"]
 
 
-
-LOCAL_REPO="C:\Users\Aaron\Documents\GitHub\Game_AI"
+import os
+import subprocess
+LOCAL_REPO=os.getcwd()
+#LOCAL_REPO="C:\Users\Aaron\Documents\GitHub\Game_AI"
 
 def new_human_player_entry():
     """Starts session to gather data from human user
@@ -28,7 +30,24 @@ def new_human_player_entry():
     
     if the vocab is 15 words, the user is asked to return 15*13 = 195 answers
     """
-    pass
+    h=open('indicies.txt','w')
+    gui=subprocess.Popen("python GUI.py",stdout=h)
+    gui.wait()
+    h.close()
+    h2=open('indicies.txt','r')
+    strindicies=""
+    for line in h2:
+        strindicies=strindicies+line
+    strindicies=strindicies.replace('{','')
+    strindicies=strindicies.replace(']}\n','')
+    strlist=strindicies.split('], ')
+    ind={}
+    for i in range(len(strlist)):
+        strlist[i]=strlist[i].split(': [')
+        strlist[i][1]=strlist[i][1].split(', ')
+        ind[int(strlist[i][0])]=[int(i2)for i2 in strlist[i][1]]
+    n=len(ind)#number of words is n
+    
 
 def create_obs_from_human_entry(name,size):
     """Generates a set of answers for combinations of key words and numbers,
