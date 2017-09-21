@@ -15,6 +15,7 @@ Dictionary=["apple","cook","star","ocean","tool","shower","year","anchor","north
 
 import os
 import subprocess
+import numpy
 LOCAL_REPO=os.getcwd()
 #LOCAL_REPO="C:\Users\Aaron\Documents\GitHub\Game_AI"
 
@@ -47,7 +48,14 @@ def new_human_player_entry():
         strlist[i][1]=strlist[i][1].split(', ')
         ind[int(strlist[i][0])]=[int(i2)for i2 in strlist[i][1]]
     n=len(ind)#number of words is n
-    
+    adj=numpy.zeros((n,n))
+    for i in range(n):
+        temp=ind[i]
+        k=1
+        for i2 in temp:
+            adj[i,i2]=float(n-k)/float(n)
+            k=k+1
+    return adj
 
 def create_obs_from_human_entry(name,size):
     """Generates a set of answers for combinations of key words and numbers,
