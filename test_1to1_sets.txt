@@ -1,0 +1,16 @@
+citrus,pome,strip,tail,source,atmosphere,quoits,hommos,heart,excretion,eec,stroke
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+orange,apple,europe,paste,slip,eye,horseshoe,back,root,shot,air,water
+bill,golem,infirmary,devotee,stone,coterie,metropolis,empire,sneak,roma,blank,centre
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+rock,worm,center,port,circle,robot,egypt,fan,hospital,note,vacuum,rome
+lunate,enhance,candy,continent,incise,buffer,discrepancy,cadre,clout,gizmo,demeanour,theologiser
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+antarctica,box,horseshoe,circle,triangle,doctor,van,knife,engine,mole,ice,tower
+dipper,diamonds,continent,dustup,shrine,robot,clivers,bouffe,larrup,chalk,loudness,bruin,triangular,rearing,titanosaur,sustentation,battlefield,ross,trine,rowlock,rubor,radiophone,mottle,branching,brogan
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+antarctica,box,horseshoe,circle,triangle,doctor,van,knife,engine,mole,ice,tower,cell,row,spike,mass,ice cream,angel,fork,dinosaur,triangle,back,UNK,opera,jam

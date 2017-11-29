@@ -1,0 +1,74 @@
+himalaya|1
+Himalaya Mountains|Himalayas
+millionaire|1
+capitalist|multimillionaire|plutocrat|nabob|tycoon|rich man|man of substance|man of means|moneyed man|millionnaire|man of wealth|richling
+snowman|1
+mantle of snow
+unicorn|1
+beast with one horn|fabled|fabled beast|fictional|horned horse|legendary|mythic|sorcery|sovereign|spell|mythical monsters|unconquered|fabulous|ferocity|intemperance|magic powers|phantasy|wildness
+Himalaya Mountains|1
+Himalayas|Himalaya
+Himalayas|1
+Himalaya Mountains|Rocky Mountains
+capitalist|1
+magnate|market economy|money|moneybags|private-enterprise|tycoon
+multimillionaire|1
+tycoon|billionaire|capitalist|nabob|millionaire|fat cat|plutocrat|bloated plutocrat
+plutocrat|1
+capitalist|magnate|millionaire|money
+nabob|1
+mogul|big name|big shot|dey|exarch|figure|heavyweight|kingpin|leader|satrap|tycoon
+tycoon|1
+businessman|merchant|notable|prince|aristocrat|big cheese|big wheel|bigwig|cacique|director|executive|merchant prince|nabob|princess|shah
+rich man|1
+wealthy man|financier|millionaire|mogul|plutocrat|tycoon|capitalist|man of means|magnate|moneyed man
+man of substance|1
+
+man of means|1
+magnate|rich man|capitalist|mogul|tycoon|wealthy man
+moneyed man|1
+
+millionnaire|1
+
+man of wealth|1
+
+richling|1
+
+mantle of snow|1
+
+beast with one horn|1
+
+fabled|1
+
+fabled beast|1
+
+fictional|1
+phony|sham|untrue
+horned horse|1
+
+legendary|1
+imagined|immense|mind-blowing|outstanding|superhero|valiant|visionary
+mythic|1
+fantastic|fantasy|ideal|made-up|nonexistent|notional|parabolic|whimsical
+sorcery|1
+witching|appeal|attraction|attractiveness|beauty|bewitchery|charisma|demonology|divining|fetishism|palmistry|prestidigitation|show
+sovereign|1
+ranking|self-legislation|self-legislative|self-ruled|self-sustained|swell|tiptop|top-drawer|topmost|utmost
+spell|1
+
+mythical monsters|1
+dragon
+unconquered|1
+undefeated|unbeaten|unvanquished
+fabulous|1
+superhero|superphysical|supersensible|thundering|top-flight|top drawer|uncommon|unearthly|unique|unnatural|whopping
+ferocity|1
+heat|savageness|tempestuousness|torture|truculency|unicorn|vandalism|vehemency
+intemperance|1
+voracity|wastefulness|abandonment|boozing|boundlessness|crapulousness|edacity|glut|gratification|hedonism|luxuriance|omnivorousness|profligacy|revelry|unicorn
+magic powers|1
+
+phantasy|1
+dream|fantasy|illusion|fancy
+wildness|1
+intractableness|libertinism|license|passion|recklessness|tumult|unconstraint|uncontrollableness|ungovernableness|unicorn|wasteland

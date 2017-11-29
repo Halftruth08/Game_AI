@@ -27,10 +27,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+#import operator
 import collections
 import math
 import os
+#import io
 import random
+import time
 from tempfile import gettempdir
 import zipfile
 import string
@@ -43,9 +46,90 @@ import matplotlib.pyplot as plt
 # Step 1: Download the data.
 url = 'http://mattmahoney.net/dc/'
 local_dir = "/mthes/mobythes.txt"
-
+open_office_thes= "th_en_US_new1.dat"
+ENC='latin_1'
 #filename = maybe_download('text8.zip', 31344016)
 filename = os.path.join(os.getcwd(),local_dir)
+
+def scrape_power_thes(word,filen="appendix01.txt",min_upvotes=5,pass_on_words=False,write_here=True,rel=False):
+    """ go to power thesaurus website,
+    scrape appropriate words from page (max 20 without link taking)
+    options:
+        
+        write_here (True) function will add entry to doc at filename. for large batches of words,
+                            more efficient is to pass up newwords and append file once
+        pass_on_words (False)  gives return newwords for batch processing and tracking
+    """
+    import requests
+    from lxml import html
+    #xml paths
+    jar = requests.cookies.RequestsCookieJar()
+    jar.set('settings','00400',domain='www.powerthesaurus.org',path='/')
+    path1='//body/div[@class="container"]/div[@id="content"]/div[@id="main_side_container"]/div[@id="main"]/div[@id="topiccontent"]/div[@id="abb"]'
+    table1='/table' #/tbody/tr
+    #begin operations
+    pt="https://www.powerthesaurus.org/"
+    # additional pages are found pt + leaf + /synonyms/2 (or 3, etc.)
+    leaf = word.replace(' ','_')
+    pagen=1
+    if rel==True:
+        ext='/related'
+    else:
+        ext=''
+    exitc=0
+    #print('debug')
+    while exitc==0:
+        if pagen>1:
+            ext="/synonyms/%i"%pagen
+        rtry=0
+        while rtry <12:
+            try:
+                rtry+=1
+                page = requests.get(pt+leaf+ext,timeout=1,cookies=jar)
+                print("scraping...%s/%i"%(word,pagen))
+                if rtry>0:
+                    time.sleep(5*rtry+4*random.random())
+                tree = html.fromstring(page.content)
+                entries = tree.xpath(path1+table1)[0].getchildren()
+                break
+            except:
+                print("didn't load")
+        if rtry>=12:
+            exitc=1
+            entries=[]
+            
+                #raise IOError("server is not cooperating")
+        newwords=[]
+        pagen+=1
+        if len(entries)<200:
+            exitc=1
+        for entry in entries:
+            v,w=entry.xpath('td')
+            if int(v.xpath('div/div[@class="rating"]/text()')[0])<min_upvotes:
+                exitc=1
+                #print(word)
+                break
+            newwords.append(w.xpath('a/text()')[0])
+    if len(newwords)==0:
+        newwords.append(word)
+            #print('plus')
+        #return exitc
+
+#append will start at end of existing line, not auto newline! (duh)
+#for this version, appendix will be written in the style of the open office
+#thesaurus, using pipes, though word sense disambiguation will not be performed
+# and no part of speech specification will be included. 
+# if it seems useful, perhaps develop these as options in this function
+#example:
+# beach|1
+# shore|seaside|coast|strand|bank|seashore|seaboard|ground|coastline|littoral|seacoast|foreshore|shoreline
+    if write_here== True:
+        apx=open(filen,'a',encoding=ENC)
+        apx.write(word+'|1\n')
+        apx.write('|'.join(newwords)+'\n')
+        apx.close()
+    if pass_on_words == True:
+        return newwords
 
 def scrape_wiki(word):
     import requests
@@ -141,6 +225,90 @@ def read_data_txt(filename):
   f.close()
   return data, entries
 
+def read_data_dat(filename):
+    """Extract data from Open Office Thesaurus , separating word senses 
+    format is as follows:
+abel janszoon tasman|1
+(noun)|Tasman|Abel Tasman|Abel Janszoon Tasman|navigator
+abel tasman|1
+(noun)|Tasman|Abel Tasman|Abel Janszoon Tasman|navigator
+abelard|1
+(noun)|Abelard|Peter Abelard|Pierre Abelard|philosopher|theologian|theologist|theologizer|theologiser
+abele|1
+(noun)|white poplar|white aspen|aspen poplar|silver-leaved poplar|Populus alba|poplar|poplar tree
+abelia|1
+(noun)|shrub|bush
+
+    
+    """
+    th = open(filename,'r',encoding=ENC)
+    #th.readline()#first line is not an entry
+    data=[]
+    try:
+        while True:
+            word,num=th.readline().replace('\n','').split('|')#num is the number of senses for a word
+            entry=[word]
+            for i in range(int(num)):
+                temp=th.readline().replace('\n','').lower()
+                if temp.find("                                                                         ")<0:
+                    entry.append(temp.split('|'))
+            data.append(entry)
+    except ValueError:
+        th.close()
+    print("%i entries found" %len(data))
+    #data is stored as [["abel janszoon tasman",["(noun)","tasman","abel tasman","abel janszoon tasman","navigator"]]...]
+    return data
+            
+def wsd(filen="wsd_thes.csv"):
+    """Takes the thesaurus data from open office and finds and replaces words
+    with word senses where possible.
+    
+    """
+    wordlist=read_data_dat(open_office_thes)
+    groups=[]
+    vocabulary=[]
+    for wordentry in wordlist:
+        word=wordentry.pop(0)
+        if len(wordentry)==1:
+            vocabulary.append(word)
+            vocabulary.extend(wordentry[0])#leaving in part of speech (noun) for now
+            temp = [word]
+            temp.extend(wordentry[0])
+            groups.append(temp)
+        else:
+            vocabulary.append(word)
+            for n,wordsense in enumerate(wordentry):
+                vocabulary.extend(wordsense)
+                ws = word + "(%i)" % n
+                temp = [ws]
+                temp.extend(wordsense)
+                groups.append(temp)
+    senselist=[]
+    mlist=[]
+    for group in groups:
+        mlist.append(group[0])
+        if group[0].find('(')>0:
+        #only words with multiple senses    
+            senselist.append(group[0])
+    wsl2=list(filter(lambda x: x.find('(0)')>-1,senselist))
+    ldex=list(map(lambda x: senselist.index(x),wsl2))
+    ldex.append(len(senselist))
+    nsenses= [ldex[i+1]-ldex[i] for i in range(len(ldex)-1)]
+    wsl2=list(map(lambda x: x.replace('(0)',''),wsl2))
+    
+    for i1 in range(len(groups)):#add a progress indicator
+        for i2 in range(2,len(groups[i1])):
+            if groups[i1][i2] in wsl2:
+                n=nsenses[wsl2.index(groups[i1][i2])]
+                temp=[]
+                for i3 in range(n):
+                    temp.append(groups[mlist.index(groups[i1][i2]+'(%i)'%i3)])
+                    #get the groups pertaining to the word sense
+                temp = list(filter(lambda x: groups[i1][1] in x,temp))
+                if len(temp)==1:
+                    pass
+                
+        
 def build_dataset(words, n_words):
   """Process raw inputs into a dataset."""
   count = [['UNK', -1]]
@@ -268,37 +436,286 @@ def plot_with_labels(low_dim_embs, labels, filename):
                  va='bottom')
 
   plt.savefig(filename)
+  
+def collocation(dataf=[open_office_thes],voc_sz=120000,dim=100,min_co=0,appb=False):
+    """appendix builder function set appb True to pass additional local data
+    """
+    vocabulary_size = voc_sz
+    #sentences = list()
+    #sentences= vocabulary.split('\n')
+    #batch_size = 256
+    #colist_target = dim  # Dimension of the embedding vector.
+    #skip_window = 2       # How many words to consider left and right.
+    #num_skips = 1         # How many times to reuse an input to generate a label.
+    #num_sampled = 128      # Number of negative examples to sample.
+    #valid_size = 8
+    #num_steps = 100001
+    wordlist=[]
+    for dat in dataf: #now works with a list of datafiles as input
+        wordlist.extend(read_data_dat(dat))
+    groups=[]
+    vocabulary=[]
+    for wordentry in wordlist:
+        word=wordentry.pop(0)
+        if len(wordentry)==1:
+            vocabulary.append(word)
+            vocabulary.extend(wordentry[0])#leaving in part of speech (noun) for now
+            temp = [word]
+            temp.extend(wordentry[0])
+            groups.append(temp)
+        else:
+            vocabulary.append(word)
+            #for collocation model, wordsense disambig makes no difference
+            temp=[word]
+            for n,wordsense in enumerate(wordentry):
+                vocabulary.extend(wordsense)
+                #ws = word + "(%i)" % n
+                #temp = [ws]
+                temp.extend(wordsense)
+            groups.append(temp)
+    data, count, dictionary, reverse_dictionary = build_dataset(vocabulary, vocabulary_size)
+    #let's try, for each word in vocab, have a dict. so: a list of dicts.
+    coloc=list({} for i in range(voc_sz))
+    ngr = list(list(dictionary.get(item,0) for item in sublist) for sublist in groups)
+#    for i in range(1,voc_sz): WAAAY SLOWER THAN ALTERNATIVE
+#        if i%1000==0:
+#            print("collocating word %i of %i %s"%(i,voc_sz,time.ctime()))
+#        #temp=list(filter(lambda x: i in ngr[x], range(len(ngr)))) #1:13*100
+#        for i2,gr in enumerate(ngr):  #1:06
+#            if i in gr:
+#                temp.append(i2)
+#        #temp = list(i2 for gr in ngr if i in gr)
+#        for i2 in temp:
+#            ntemp = ngr[i2].count(i)
+#            for wn in ngr[i2]:
+#                if wn == i:
+#                    continue
+#                else:
+#                    coloc[i][wn]=coloc[i].get(wn,0)+ntemp
+    for ig in range(len(ngr)): #group based approach, way faster
+        if ig%10000==0:
+            print("collocating group %i of %i %s"%(ig,len(ngr),time.ctime()))
+        for i in ngr[ig]:
+            for i2 in ngr[ig]:
+                if not i == i2:
+                        coloc[i][i2]=coloc[i].get(i2,0) + 1
+        #coloc[i]
+    #tcol=[]
+    # reject key:value pairs where value < minimum? if >100 keys
+    ##PRUNING FOR SPEED## optional...set min_co to 0
+    #not working b/c dic changes size during iteration. change to do all after
+    if not min_co==0:
+        for i in range(len(coloc)):
+            if len(coloc[i])>dim:
+                for key in coloc[i]:
+                    if coloc[i][key]<min_co:
+                        del coloc[i][key]
+    
+    #conversion to probabilities from counts
+    for i in range(len(coloc)):
+        tot = sum(coloc[i].values())
+        for key in coloc[i]:
+            coloc[i][key]/=tot
+    if appb==True:
+        return coloc,reverse_dictionary,dictionary,count
+    else:
+        return coloc,reverse_dictionary
 
+def test_coloc(coloc,rev_dic,dc,set_n=12,n_clues=20,wordl=[],mode=0,wmode=0,test_log="test_1to1_sets.txt"):
+    """pass out test results
+    will pad wordl to make len = set_n
+    
+    wmode = 0 wordl drawn from common (targets)
+            1 wordl drawn from most frequent fifth of vocab in dictionary
+            can also set wordl ahead of call 
+    mode 0 pick the first clue in list
+         1 pick a clue from clues at random
+         2 tbd
+    """
+    tr = open("cdnmswordlist.txt",'r')#targets
+    targets = tf.compat.as_str(tr.read()).split('\n')
+    tr.close()
+    missed=[]
+    common=[dc.get(i,0) for i in targets]
+    if wmode==0:
+        wordlpre = random.sample(common,set_n)
+        i=0
+        while len(wordl)<set_n:
+            wordl.append(wordlpre[i])
+            i+=1
+    else:
+        wordlpre = random.sample(range(4,len(coloc)//5),set_n*100)
+    #4 is to reject PoS and UNK. may change to different part of code
+    #if wordl==[]:
+        i=0
+        while len(wordl)<set_n:
+            if rev_dic[wordlpre[i]].find(' ')<0 and 1 in coloc[wordlpre[i]] and rev_dic[wordlpre[i]].find('-')<0:
+                wordl.append(wordlpre[i])
+            i+=1
+    small=[]
+    for i in range(set_n):
+        temp = list((value, key) for key, value in coloc[wordl[i]].items())
+        temp.sort(key=lambda x: x[0], reverse=True)
+        small.append(temp)
+    clu=[]
+    #combo=[]
+    #this section finds 1 to 1 clues. anything more complicated is experimental
+    
+    for w in range(set_n):
+        candidates=[]
+        pro=[]
+        prob=[]
+        odds=[]
+        for i in range(len(small[w])):
+            candidates.append(small[w][i][1])#word
+            pro.append(small[w][i][0])#values
+            odd = coloc[small[w][i][1]][wordl[w]]
+            other= sum([coloc[small[w][i][1]].get(wordl[i2],0) for i2 in range(len(wordl)) if not i2 == w])
+            prob.append(coloc[small[w][i][1]][wordl[w]])
+            odds.append(odd/(other+odd))
+        #what makes a good clue?
+        #odds ratio is high
+        #word is well-known
+        #word has no spaces or hyphens
+        #clue doesn't contain target
+        combo=[(candidates[i],odds[i],prob[i],pro[i]) for i in range(len(small[w]))]
+        combo.sort(key=lambda x: x[1],reverse=True)
+        combo2=list(filter(lambda x: rev_dic[x[0]].find(' ')<0 and rev_dic[x[0]].find('-')<0 and rev_dic[x[0]].find(rev_dic[wordl[w]])<0 and len(rev_dic[x[0]])>=3,combo))
+        oddslim=0.8*max([combo2[i][1] for i in range(len(combo2))])
+        cluelist=list(filter(lambda x: x[1]>=oddslim,combo2))
+        #cluelist.sort(key=lambda x: x[1]+x[2]+min(x[2],x[3]),reverse=True)
+        cluelist.sort(key=lambda x: x[0])
+        cutoff=max(len(cluelist)//4,min(n_clues,len(cluelist)))
+        cluelist2=list(cluelist[i] for i in range(cutoff))
+        cluelist2.sort(key=lambda x: x[2], reverse=True)
+        clues=[(rev_dic[cluelist2[i][0]],cluelist2[i][0],cluelist2[i][1],cluelist2[i][2],cluelist2[i][3]) for i in range(min(n_clues,len(cluelist2)))]
+        clu.append(clues)
+    if mode==0:
+        clu2=[clu[i][0] for i in range(len(clu))]
+    elif mode==1:
+        clu2=[clu[i][random.choice(range(len(clu[i])))] for i in range(len(clu))]
+    else:
+        pass
+    #adding: output clues and words as 
+    clu2f=[clu2[i][0] for i in range(len(clu2))]
+    random.shuffle(clu2f)
+    wordsl=[rev_dic[i] for i in wordl]
+    
+    n='1'
+    for i in range(2,set_n+1):
+        n=n+', %i'%i
+    out=open(test_log,'a')
+    out.write(','.join(clu2f)+'\n\n')
+    out.write(n+'\n')
+    out.write(','.join(wordsl)+'\n')
+    out.close()
+ 
+    return clu, wordl
+def test2_coloc(coloc,rev_dic,Wset_n=12,Bset_n=12,n_clues=20):
+    """pass out test results
+    
+    """    
+    # for a two-word clue, search would include the candidates for all whitelist words.
+    # let's assume we see full word list (blacklist and whitelist)
+    # our goal is to find any clues that give higher odds of selecting both
+    # included words than anything else
+    # define confidence as Min(odds(incl words))-max(odds(other words))
+    
+    
+def build_appendix(filena='appendix01.txt',voc_sz1=120000,mode='w',all_targets=False,min_votes1=5,related=False):
+    """using powerthesaurus.org, a group-sourced online database, build an additional
+    thesaurus to supplement the open office 
+    """
+    coloc,rev_dc,dc,count=collocation(voc_sz=voc_sz1,appb=True)
+    tr = open("cdnmswordlist.txt",'r')#targets
+    targets = tf.compat.as_str(tr.read()).split('\n')
+    tr.close()
 
-def build(keep=False,voc_sz=100000,dim=128,scrape_all=False):
+    missed=[]
+    common=[dc.get(i,0) for i in targets]
+    if all_targets==True:
+        missed.extend(targets)
+    else:
+        for i in range(len(common)):
+            if common[i]==0:
+                missed.append(targets[i])
+    to_look_up=[]
+    root_syns=[]
+    branch_syns=[]
+    for word in missed:
+        newwords = scrape_power_thes(word,pass_on_words=True,write_here=False,min_upvotes=min_votes1)
+        to_look_up.extend(newwords)
+        root_syns.append(newwords)
+    for word in to_look_up:
+        newwords = scrape_power_thes(word,pass_on_words=True,write_here=False,min_upvotes=min_votes1)
+        branch_syns.append(newwords)
+    apx=open(filena,mode,encoding=ENC)
+    #apx.write(filena+'\n')
+    for i in range(len(missed)):
+        apx.write(missed[i]+'|1\n')
+        apx.write('|'.join(root_syns[i])+'\n')
+    for i in range(len(to_look_up)):
+        apx.write(to_look_up[i]+'|1\n')
+        apx.write('|'.join(branch_syns[i])+'\n')
+    apx.close()
+    print("Found %i words for appendix"%(len(missed)+len(to_look_up)))
+    
+    
+        #if newwords has only one word in the list...
+
+def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
     global data_index1
     global data2
     global data
     global data_index
-    vocabulary ,entries= read_data_txt(filename)
-    print('Data size', len(vocabulary))
-    groups=list()
-    for i in range(len(entries)):
-        groups.append(entries[i].split(','))
-    
-    # Step 2: Build the dictionary and replace rare words with UNK token.
     vocabulary_size = voc_sz
     #sentences = list()
     #sentences= vocabulary.split('\n')
     batch_size = 256
     embedding_size = dim  # Dimension of the embedding vector.
     #skip_window = 2       # How many words to consider left and right.
-    num_skips = 4         # How many times to reuse an input to generate a label.
+    num_skips = 1         # How many times to reuse an input to generate a label.
     num_sampled = 128      # Number of negative examples to sample.
     valid_size = 8
     num_steps = 100001
+    if use_new_th == True:
+        wordlist=read_data_dat(open_office_thes)
+        groups=[]
+        vocabulary=[]
+        for wordentry in wordlist:
+            word=wordentry.pop(0)
+            if len(wordentry)==1:
+                vocabulary.append(word)
+                vocabulary.extend(wordentry[0])#leaving in part of speech (noun) for now
+                temp = [word]
+                temp.extend(wordentry[0])
+                groups.append(temp)
+            else:
+                vocabulary.append(word)
+                for n,wordsense in enumerate(wordentry):
+                    vocabulary.extend(wordsense)
+                    ws = word + "(%i)" % n
+                    temp = [ws]
+                    temp.extend(wordsense)
+                    groups.append(temp)
+        data, count, dictionary, reverse_dictionary = build_dataset(vocabulary, vocabulary_size)
+        #above call is separated for future specification        
+    else:
+        vocabulary ,entries= read_data_txt(filename)
+        print('Data size', len(vocabulary))
+        groups=list()
+        for i in range(len(entries)):
+            groups.append(entries[i].split(','))
+    
+    # Step 2: Build the dictionary and replace rare words with UNK token.
+
     # Filling 4 global variables:
     # data - list of codes (integers from 0 to vocabulary_size-1).
     #   This is the original text but words are replaced by their codes
     # count - map of words(strings) to count of occurrences
     # dictionary - map of words(strings) to their codes(integers)
     # reverse_dictionary - maps codes(integers) to words(strings)
-    data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
+        data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
                                                                 vocabulary_size)
     del vocabulary  # Hint to reduce memory.
     print('Most common words (+UNK)', count[:12])
@@ -308,7 +725,7 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False):
     data_index1 = 0
     #data_index2 = 0
     
-    tr = open("/Users/aarontallman/Downloads/cdnmswordlist.txt",'r')#targets
+    tr = open("cdnmswordlist.txt",'r')#targets
     targets = tf.compat.as_str(tr.read()).split('\n')
     tr.close()
     missed=[]

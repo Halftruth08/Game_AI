@@ -1,0 +1,2218 @@
+africa|1
+madagascar|niger|liberia|malawi
+agent|1
+solicitor|stand-in|stooge|subject|superintendent|supplier|token|trader|underling|vicar
+air|1
+tempest|transfer|traveling|travelling|traversal|traverse|troposphere|vagabondage|vaunt|view|waft|walk|wandering|warble|water travel|wave|wayfaring|weather|whiff
+alien|1
+wean|weed|weird
+amazon|1
+virago|shrew|fishwife|titan|dyke|Amazon River|bad girl|butch|ogress|scold|termagant|vixen
+angel|1
+flame|friend at court|good person|grubstake|holy being|idol|messenger|model|one and only|partisan|precursor|second|sprite|stake|sympathizer|truelove|virgin|well-wisher
+antarctica|1
+Antarctic continent
+apple|1
+navel orange|nutmeg melon|orange peel|oranges|passion fruit|plumcot|popular fruit|puke|pumpkin|red currant|simple fruit|sugar apple|sugarplum|sweet orange|true fruit|ugli fruit
+arm|1
+provide|push|ramification|rest|rod|scion|shoulder|sinew|spike|spray|strait|stream|strife|struggle|upper arm
+back|1
+wager|walk|wander|wend|wheel|whish|whisk|whoosh|wild|zoom
+band|1
+work together|wreath
+bank|1
+treasure-house|trust company|verge|waterside
+bark|1
+
+beach|1
+maroon|waterside|wreck|brink|careen|earth|go over the hill|ironbound coast|lido|playa|run aground|sand trap|seafront
+belt|1
+seal|sling|slosh|snap|sound|splice|swathe|tap|terrain|thresh|toss off|trounce|weld|whale
+berlin|1
+Israel Baline
+berry|1
+well water|wonderous blue|yale blue
+board|1
+summit|sustain|symposium|syndicate|take by storm|traverse a yard|treat|trustees|victual
+bond|1
+share|stand up for|stock|stocks and bonds|strap|sympathy|synergy|tax anticipation note|token|truss|trustee mortgage bond|unanimity|wedding|yield to maturity
+boom|1
+yell|yelp
+bow|1
+undergo|welcome|wind
+box|1
+slap the face|soup|spat|stall|store|strait|suitcase|thrust and parry|tilt|tin|tray|wage war|whomp
+bug|1
+taint|tantalize|throw into confusion|try the patience|tweak the nose|vermin|weak point|weakness
+canada|1
+
+capital|1
+topmost|topnotch|type|uncial|unique|wad|way
+cell|1
+mobile|niche|organization|part|pound|reformatory|sanctum|sanctum sanctorum|section
+center|1
+snapper
+china|1
+porcelain|bro|ceramics|dish|friend|crockery|pottery|Asia|PRC|People's Republic of China|Red China|Taiwan|chinaware|earthenware|mainland China|mate|stoneware
+chocolate|1
+truffle
+circle|1
+
+club|1
+
+compound|1
+
+copper|1
+
+crash|1
+
+cricket|1
+
+cross|1
+
+death|1
+
+dice|1
+
+dinosaur|1
+
+doctor|1
+
+dog|1
+
+dress|1
+
+dwarf|1
+
+eagle|1
+
+egypt|1
+
+engine|1
+
+england|1
+
+europe|1
+
+eye|1
+
+fair|1
+
+fall|1
+
+fan|1
+
+field|1
+
+file|1
+
+film|1
+
+fish|1
+
+flute|1
+
+fly|1
+
+forest|1
+
+fork|1
+
+france|1
+
+gas|1
+
+ghost|1
+
+giant|1
+
+glass|1
+
+glove|1
+
+gold|1
+
+grass|1
+
+greece|1
+
+green|1
+
+ham|1
+
+head|1
+
+himalaya|1
+
+hole|1
+
+hood|1
+
+hook|1
+
+human|1
+
+horseshoe|1
+
+hospital|1
+
+hotel|1
+
+ice|1
+
+ice cream|1
+
+india|1
+
+iron|1
+
+ivory|1
+
+jam|1
+
+jet|1
+
+jupiter|1
+
+kangaroo|1
+
+ketchup|1
+
+kid|1
+
+king|1
+
+kiwi|1
+
+knife|1
+
+knight|1
+
+lab|1
+
+lap|1
+
+laser|1
+
+lawyer|1
+
+lead|1
+transfer|travel along|travel purposefully|trump|trundle|twine|urge|vanadium|villain|walk-on|wear the crown|whistle|wield the baton|wing|ytterbium|yttrium|zigzag
+lemon|1
+tomato|tree|true fruit|ugli fruit|underdog|xanthic
+limousine|1
+limo|automobile|car|sedan
+lock|1
+pursue|put away|rabbet|seal off|sew|shut away|shut off|splice|strap|wedge|whorl
+log|1
+strike a balance|summary|tablet|tape|tape-record|total|traverse a yard|videotape|workbook|write in
+mammoth|1
+galactic|ginormous|grand|hippopotamus|staggering|untold|vasty
+maple|1
+sycamore|tree|oak|ebony|wood|acacia
+march|1
+wander|work
+mass|1
+surfeit|sweeping|take hold of|units of weight|universal|whole slew|width
+mercury|1
+quicksilver|Hg|lead|silver|gold|inner planet|thermometer|iron|arsenic|hydrargyrum|metal
+millionaire|1
+capitalist|multimillionaire|plutocrat|nabob|tycoon|rich man|man of substance|man of means|moneyed man|millionnaire|man of wealth|richling
+model|1
+print|replicate|replication|showcase|similitude|spitting image|study|supreme|template|trim|typify|whittle
+mole|1
+pig|platypus|radar|stain|strawberry mark|undercover agent|wall|wart
+moscow|1
+
+mouth|1
+rodomontade|side|sing|speaker|spout|sputter|voice
+mug|1
+punk|raid|rip off|rough|smile|storm|victimize
+needle|1
+try the patience|tweak the nose|urge
+net|1
+springe|stalk|stock market quotations|strainer|take-in|take after taxes|takings|tangle|tangle up with|tennis court divider|tissue|turn a penny|turn to account|turn to profit|ultimate|wage|wattle|weight
+new york|1
+New York City|Greater New York|NY
+night|1
+pitch darkness|charcoal|after hours|all the time|at night|bleak|condemned|foul|gloomy|iniquity|nite|soot|vespers
+note|1
+tape|tape-record|think about|thought|total|trait|transmission|transmittal|treasure|vibe|videotape|wave|wink|write in|write up
+novel|1
+weird|wonderful|work of fiction|yarn|young
+nurse|1
+train|watch out for
+nut|1
+reap and carry|shoot|spluge|splurge|two pump chump|vinegar strokes|weirdie
+oil|1
+methane|oil color|praise|propane|soft soap|stroke|suet|tallow|tempt|wax|wheedle
+olive|1
+ugli fruit|verdure
+olympus|1
+
+opera|1
+play|performance|opera house|pageant|musical|melodrama|ballet|extravaganza|music|show|spectacle|music hall|mystery|opera bouffe|operetta|piece|theater
+orange|1
+sugarplum|sweet orange|tawny|ugli fruit|watermelon
+paper|1
+letter of credit|manila|memoir|music|newspaper of record|newspaper publisher|note of hand|onionskin|overlay|page|pass|slate|story|term paper|veneer|warrant|white
+park|1
+tract|wood
+part|1
+yawn
+paste|1
+putty|rap|rivet|sew|snap|spank|staple|string|suture|tether|thresh|tinsel|trounce|whip|whomp
+phoenix|1
+
+piano|1
+lightly|quietly|upright piano
+telescope|1
+magnifier|binocular|scope|astronomical telescope|spyglass|telescopic|shorten|binoculars|foul|summarize|abbreviate|field glass|curtail|boil down|cut|glass|refractor|squash|trim
+teacher|1
+mistress|advisor|dominie|counsel|governess|teach|don|monitor|pundit|boss|disciplinarian|doctor|buttinsky|lord|missionary
+switch|1
+withdraw
+swing|1
+wriggle|yaw
+sub|1
+second|shooter|spell|subservient|succeed|supply|zep
+stick|1
+take no denial|take up with|take what comes|tape|tarry|throw a fight|timber|trim|truss|undergo|urge|wait|work together
+staff|1
+mast|mortarboard|old school tie|outfit|party|pike|pikestaff|quarterstaff|rod of office|shillelagh|skull and crossbones|squad|suite|support|tartan|uniform|upright|wand of office|work force
+stadium|1
+enclosure|ground|pit|playground
+sprint|1
+streak|bustle|get cracking|hie|hightail|make haste|plunge|canter|charge|festinate|floor it|haste|hurtle|move|rocket|shake a leg|step lively|whizz
+spike|1
+queer the works|ruin|saber|spill|spoil|stiletto|suppress|sword|tamper with|thrust|tie|twine|unfit|water down|wing
+snowman|1
+mantle of snow
+slip|1
+weaken|wilt|wrong|youngster
+shot|1
+umbrageous|volley|warped
+shadow|1
+string along|tailgate|take out after|tittle|track down|twiggy|twilight|whit
+server|1
+waiter|host|facilitator|computer|responder|servant|waitress
+ruler|1
+priestess|prima donna|princess regent|princess royal|sire|star|stick|supervisor
+row|1
+raise the roof|sail the sea|scale|scold|sequel|squall|steam|suite|take a voyage|tongue-lash|traverse|vendetta|whoop it up
+rose|1
+rose wine|rosebush|rosette|rouge|skull and crossbones|tulip
+root|1
+radial point|radically|resolution|rivet|rock bottom|settle down|stick|stimulus|stub|totally|turn up|uncover|underlying|utterly|wholly
+rome|1
+Roma|Eternal City|capital of Italy|church|leadership|vatican
+rock|1
+solid|throw|tip-top|tor|tough|unnerve
+robot|1
+android|automaton|machine|cyborg|animatronic|mechanism|humanoid|artificial intelligence|bionic person|golem|bot|drudge|myrmidon|automatic|labourer|mechanical|motorcar|agent
+robin|1
+redbreast|robin redbreast|Old World robin|finch|rook
+revolution|1
+vicissitude
+rat|1
+
+racket|1
+
+queen|1
+kaiserin|regal|dame|gentlewoman|raj-kumari|leader|old woman|jack|joker|tabby|baron|bower|chief|contessa|countess|fruit|sultana
+press|1
+strain every nerve|supplicate|tease|television|thronging|tighten|torment|trouble|urge on|weigh upon|whip|worry
+port|1
+to the left|vent|way of life|wine
+pilot|1
+cosmonaut|execute|ferryman|gondolier|guard|jockey|manipulate|mariner|pilot film|sailor|show the way|steerer|test pilot|tool|wheel|wheelman
+time|1
+synchronize|things|time of day|twelvemonth|unceasingly|values|whack|without delay
+tooth|1
+
+tower|1
+
+truck|1
+transaction
+triangle|1
+clover|polyhedron|shamrock|ternion|tetragram|tetrahedron|tierce|trapezoid|trefoil|triennium|trimester|trine|trireme|triseme|triskelion|triumvirate|triunity|wooden horse
+trip|1
+stride|strut|take a fall|take a flop|take a pratfall|take a spill|throw|topple down|topple over|traipse|trick|trudge|undertaking|upset|whirl
+turkey|1
+ignoramus|jerk|lark|loon|lovebird|nonstarter|owl|parrot|peacock|pelican|quail|schmuck|simple|sparrow|squab|swan|twerp|underdog|woodpecker
+undertaker|1
+funeral director|entrepreneur|mortician|epitaph
+unicorn|1
+beast with one horn|fabled|fabled beast|fictional|horned horse|legendary|mythic|sorcery|sovereign|spell|mythical monsters|unconquered|fabulous|ferocity|intemperance|magic powers|phantasy|wildness
+vacuum|1
+inanity|mop|tabula rasa|barrenness|bathe|broom|desolation|exhaustion|hiatus|hole|lacuna|launder|polish|scrub|tidy up|vacuousness|wash|whisk
+van|1
+luggage van|minivan|point|precedence|precursor|priority|roadster|scout|sedan|ship|taxicab
+wake|1
+wave|whip up|work up
+wall|1
+protection|roadblock|seawall|security|shut in|stronghold|wainscot
+war|1
+stave off|sword|take in|variance|warpath
+washer|1
+washing machine|cleaner|launderer|automatic washer|laundress|laundryman|laundrywoman|washerwoman
+washington|1
+American capital|Washington D.C.|George Washington|Capital|President Washington|WA
+water|1
+
+wave|1
+
+well|1
+
+whale|1
+
+whip|1
+
+worm|1
+pest|recoil|scallop|sidle|slink|steal|stinker|sweet-talk|twine|villain|wangle|woodworm|wring
+yard|1
+meter|mint|outdoor|pace|patio|pen in|plant|quadrant|refinery|storage area
+madagascar|1
+Republic of Madagascar
+niger|1
+
+liberia|1
+Republic of Liberia
+malawi|1
+
+solicitor|1
+asker|attorney-at-law|bidder|counselor-at-law|mouthpiece|pleader|shyster|suitor|supplicant
+stand-in|1
+sub|backup man|counterfeit|extra|false|ghost|imitation|pinch-hitter|reserve|ringer|substitution|support|token
+stooge|1
+mark|mime|mimic|perform|playact|schlemiel|sitting duck|soft touch|star|straight man|tail|toady
+subject|1
+rule|subject to|subjected|subsidiary|susceptive|syntax|task|tenor|theorem|upshot|victim|worker
+superintendent|1
+commandant|superior|auditor|chairman|chieftain|foreperson|janitor|keeper|overseeing|owner|porter|sirdar|slave driver|top dog
+supplier|1
+monger|producer|saleswoman|bidder|supply organisation
+token|1
+spokeswoman|stub|suggestion|testament|titular|track|vaticination|witness
+trader|1
+trafficker|broker|chandler|importer|salesperson|swapper|agent|changer|merchant ship|middleman|peddler
+underling|1
+foot soldier|gofer|maid|scrub|second fiddle
+vicar|1
+pope|prebendary|regent|rural dean|shepherd
+tempest|1
+chinook|explosion|fit|monsoon|passion|riot|rough weather|tropical cyclone|twister|whole gale
+transfer|1
+spirt|step|take the air|tram|transferal|transplace|turned into|vagabond|wander|wend|wheel|whish|whisk|whoosh|zoom
+traveling|1
+active|air|gone|hiking|jaunting|locomotive|marching|peripatetic|progressing|shifting|shooting|stage|staging|transported|traversal|vagabond|vagrant|voyage|water travel
+travelling|1
+leg|mobile|on vacation|progress|progressing|propelling|staging|trekking|vagabond|vagabondage|walk|water travel
+traversal|1
+water travel|wayfaring
+traverse|1
+wend
+troposphere|1
+air|atmosphere|substratosphere|layer|stratosphere
+vagabondage|1
+staging|straying|travel|travelling|traversal|walk|water travel
+vaunt|1
+magnify|mishandle|muff|ostentation|plash|prate|splatter|splosh|squander|trumpet|vaunting
+view|1
+teaching|treat|vantage point|vet|way|weigh
+waft|1
+take|tote|coast|gust|hang|plane|poise|puff of air|skim|slide|streamer|sustain
+walk|1
+stravage|stream|surpass|take a walk|thoroughfare|tram|travel over|traveling|travelling|traversal|usher|vacate|vagabondage|waddle|water travel|wheel|whish|whisk|whoosh
+wandering|1
+unfixed|unheedful|unnatural|vague|varied|varying|viscous|wander|wanton|water travel
+warble|1
+lay|meow|mew|moo|neigh|psalm|serenade|shake|singing|whinny
+water travel|1
+riding|roving|stage|staging|traveling|travelling|traversal|traverse|vagabondage|walk|wandering|wayfaring
+wave|1
+tweak|twinkle|twit|twitteration|up|vociferate|wash|waterfall|wavelet|welcome|whirl|whitecap|wiggle|worrisome|worrit|worrying
+wayfaring|1
+errantry|horseback riding|itinerancy|junketing|leg|motion|move|moving|nomadism|on the road|perambulatory|peregrine|rove|stage|staging|transient|traversal|trekking|water travel
+weather|1
+sunshine|surmount|upwind|weather condition|weather the storm|windward
+whiff|1
+relish|sapidity|sapor|vestige|whiffle|zephyr
+wean|1
+weaned
+weed|1
+shorten|shrub|subtract|thin|tree|vine|winnow
+weird|1
+
+virago|1
+cat|dragon|beldam|battle-ax|battleaxe|crone|demon|dyke|hellcat|bad girl|beast|hell-cat|monster|she-devil|siren|tigress
+shrew|1
+elephant|hare|hedgehog|hell-hag|holy terror|horse|mole|pig|platypus|randy
+fishwife|1
+xanthippe|amazon|bad girl|crone|tigress
+titan|1
+deity|giant star|saturn's greatest satellite|titanesses|titanides|terrific|monstrous|largest|superhuman|giantess|god|goddess|muscleman|titans|whopper
+dyke|1
+
+Amazon River|1
+
+bad girl|1
+woman of the streets
+butch|1
+unladylike|unwomanly
+ogress|1
+vampire
+scold|1
+rail against|randy|razz|recriminate|row|spank|speak|storm|taunt|tigress|twit|warn
+termagant|1
+tartar|tigress|tumultuous|turbulent
+vixen|1
+demon|hell-hag|hell cat|hen|hoyden|lioness|mare|monster|randy|she-devil|slut|sow
+flame|1
+mantle|match|moon|one and only|parch|pet|precious|sea of flames|send out rays|shimmer with heat|shoot out rays|smolder|source of light|sugar|suitor|swear|treasure|worship|yearning
+friend at court|1
+apologist|eminence grise
+good person|1
+good fellow|nice guy|good sort|giver|good egg|helper|honest person|sweetheart|worthy|saint|do-gooder|gooder|rock|backer|benefactor|bonhomme|supporter|trouper
+grubstake|1
+back|stake|bankroll|finance|fund|capitalize|subsidize|backing|capitalization|financing|funding|guarantee|patronize|sponsor|support|angel|endow|juice|pay for
+holy being|1
+
+idol|1
+trouper
+messenger|1
+indication|internuncio|jockey|mailman|middleman|porter|postman|servant|transporter|augury|bartender|bird of ill omen|broker|coolie|employ|errand-boy|hostler|lackey|scout
+model|1
+print|replicate|replication|showcase|similitude|spitting image|study|supreme|template|trim|typify|whittle
+one and only|1
+unrivalled
+partisan|1
+underground|underground fighter|unjustifiable
+precursor|1
+model|paradigm|pathfinder|pattern|portent|protoplast|standard|forefather|mock-up
+second|1
+twice|twinned|two-faced|twofold|upholder|validate|younger
+sprite|1
+troll|vision
+stake|1
+provision of capital|put in hock|put in pawn|right of entry|set up|speculate|speculation|split|stay|tether|tree|trust|use
+sympathizer|1
+booster|collaborator|favorer|protector|upholder
+truelove|1
+angel|ardor|beauty|dear one|dearest|dearie|desire|fervor|honeybunch|lamb|one and only|pet|sugar|suitor|swain|sweet|treasure
+virgin|1
+unexplored|unique|unknown|unwed|wench|wild|young
+well-wisher|1
+sympathizer|supporter|friend|backer|sympathiser|apologist|exponent|benefactor|angel|stalwart|acquaintance|follower|lover|patron|sponsor
+Antarctic continent|1
+
+navel orange|1
+raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+nutmeg melon|1
+pumpkin|quince|raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+orange peel|1
+raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+oranges|1
+pomegranate|popular fruit|prune|puke|pumpkin|quince|raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+passion fruit|1
+quince|raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+plumcot|1
+raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+popular fruit|1
+raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+puke|1
+raisin|raspberry|red currant|scum bag|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|throw|tomato|true fruit|ugli fruit|watermelon
+pumpkin|1
+strawberry|sugar apple|sugarplum|sweet orange|true fruit|ugli fruit|watermelon
+red currant|1
+pumpkin|quince|raisin|raspberry|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+simple fruit|1
+puke|pumpkin|quince|raisin|raspberry|red currant|strawberry|sugar apple|sugarplum|sweet orange|tangerine|ugli fruit|watermelon
+sugar apple|1
+quince|raisin|raspberry|red currant|simple fruit|strawberry|sugarplum|sweet orange|tangerine|tomato|true fruit|ugli fruit|watermelon
+sugarplum|1
+
+sweet orange|1
+raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange tree|tangerine|tomato|true fruit|ugli fruit|watermelon
+true fruit|1
+quince|raisin|raspberry|red currant|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|ugli fruit|watermelon
+ugli fruit|1
+quince|raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangelo|tangelo tree|tangerine|tomato|true fruit|watermelon
+provide|1
+throw|tolerate|translate|treat|trim|vouchsafe
+push|1
+war|whip|whistle|wind|wing|work on|zigzag|zing
+ramification|1
+lobule|radiation|resultant|separation|spray|twig
+rest|1
+slack|slack off|slothfulness|sluggishness|soundlessness|spot|stagnation|step|stick around|stump|subsist|survival|take life easy|tea break|unlax|vegetate
+rod|1
+dowel|firearm|fishing pole|flagpole|flagstaff|hard work|punishment|rail|rattan|rig|rod cell|rule|six-shooter|spindle|tackle
+scion|1
+tendril
+shoulder|1
+projection|rack|retable|shelf|shore up|take upon oneself|transport|upbear
+sinew|1
+strengthen|vigour|muscularity|pillar|powerfulness|mana|ligament|sinews|effect|push|sock|steam|strong|strong arm|thews|vim
+spike|1
+queer the works|ruin|saber|spill|spoil|stiletto|suppress|sword|tamper with|thrust|tie|twine|unfit|water down|wing
+spray|1
+trickle
+strait|1
+pretty pass|rigorous|roads|tight spot
+stream|1
+
+strife|1
+military flare-up|military flareup|military involvement|movement|ongoing conflict|operation|oppugnancy|real thing|schism|shooting war|torment|turbulence|use of force|worry
+struggle|1
+sweepstakes|tax|thrash|throes|tourney|use of force|violence|whack|wiggle|withstanding
+upper arm|1
+arm
+wager|1
+tempt fortune
+walk|1
+
+wander|1
+
+wend|1
+
+wheel|1
+
+whish|1
+
+whisk|1
+wander|wend|wheel|whisk off
+whoosh|1
+swoosh|take the air|tram|transfer|vagabond|walk|wander|wend|wheel
+wild|1
+wilds|wonderful|wound up|zealous
+zoom|1
+recede|retreat|transfer|travel|vagabond|vibration|walk|wander|wend|wheel|whine|whirr|whish|whizz along|wing|zoom along
+work together|1
+taking part|throw in together|aid|band together|cofunction|league|agree|assist|engage in|joining in|show willingness|stick|uphold
+wreath|1
+marker|memento|necklace|pot|reward|sash|scutcheon|souvenir|spray|string|whorl
+treasure-house|1
+treasury|bank|chest|coffer|depository|locker|safe|strongbox|till|vault
+trust company|1
+bank|trust corporation
+verge|1
+enclave|extreme|gravitate|hammer and sickle|hold a heading|metes and bounds|move|old school tie|precinct|precipice|redound to|ring|selvage|shoulder|show a tendency|skull and crossbones|tend to go|trench|trim
+waterside|1
+beach|coast|littoral|riverside|seashore|seaside|shore|waterfront|bank|strand|embankment|seacoast
+maroon|1
+damask|exclude|flaming|gules|inflamed|jilt|outlaw|quit|reddish|reddish-brown|rufous|throw over|wine-colored
+waterside|1
+beach|coast|littoral|riverside|seashore|seaside|shore|waterfront|bank|strand|embankment|seacoast
+wreck|1
+pile up|play havoc with|plunder|rape|remains|residue|squash|sully|swamp|take out|tarnish|tragedy|visit|wing|wrack up|wreak
+brink|1
+circumference|coast|hem|borderline|end|flange|precipice|acme|apex|bounds|brow|tip|zenith
+careen|1
+veer|cant|flounder|glance|heel|roll|slope|stumble|dip|droop|spin|toss|waver|weave
+earth|1
+defunct|earthly concern|element|existence|fill|geology|history of earth|hole|plenum|region|shelter|skeleton|subsoil|terra firma|tunnel|volcanology
+go over the hill|1
+
+ironbound coast|1
+
+lido|1
+bank|beach|coast|shore|strand
+playa|1
+bank|mesa|pampas|beach|coast|basin|desert|downs|heath|llano|moor|moorland|plateau|shore|strand
+run aground|1
+founder|ground|fail|wreck|beach|miscarry|sink|strand
+sand trap|1
+beach|bunker
+seafront|1
+waterfront|beach|coast|oceanfront|shore
+seal|1
+orb|plumb|punch|rivet|sealing wax|second|shut off|snap|strap|string|underline|undersign|vise|zipper
+sling|1
+belt|bung|cocktail|drink|drop|flip|hang up|impel|jog|mortar|pitchfork|slingback
+slosh|1
+footslog|irrigate|mantle of snow|muck|ooze|rinse|silt|sluice|sponge
+snap|1
+staple|stitch|strength|tack|taken by surprise|throw|tip|transparency|unconsidered|unprepared|winter|zest
+sound|1
+unalloyed|undeniable|unspoiled|upright|vibrant|vigourous|vowelise|vowelize|weigh|well-advised|well rounded|whistle
+splice|1
+latch|linking|make a match|marriage|merger|mesh|moor|pleach|relate|roll into one|rope|stick|synergy|tie-up|tie up|unite in marriage|wreathe
+swathe|1
+hobble|infold|involve|manacle|moor|muffle up|muzzle|package|picket|rope|shackle|sheathe|surround|tether
+tap|1
+separate|sit in on|slit|slot|sluice|smash|sound a tattoo|sound reproduction system|stick|swap|take away|take away from|taste|thrum|thumb|water tap
+terrain|1
+walk|ambience|case|corridor
+thresh|1
+threshing|trim
+toss off|1
+scratch off|swallow|toss down
+trounce|1
+smite|squeeze|squelch|suppress|switch|take to task|tan|torment|toss|total|trash|triumph over|trump|walk all over|waste|wax
+weld|1
+roll into one|staple|stick together|union|welding
+whale|1
+titan|trim
+Israel Baline|1
+Berlin
+well water|1
+water jet|waterfall|wonderous blue|yale blue
+wonderous blue|1
+waterfall|well water|yale blue
+yale blue|1
+waterfall|well water|wonderous blue
+summit|1
+stature|stratosphere|tribunal|ultimate|utmost|wonderland|zion
+sustain|1
+secure|sire|start|stay on|stiffen|stimulate|subsidize|swallow|take care of|take it|testify|transfer|transport|upbear|urge reasons for|vindicate
+symposium|1
+bat|brawl|bust|colloquy|committee|dialogue|feast|fete|panel|panel discussion|party|quorum|session|summit|wassail
+syndicate|1
+monopolize|organisation|outfit|pack|roll into one|traffic in women
+take by storm|1
+win hands down|carry by storm|kidnap|make a raid|make an inroad|scale the walls|storm|walk off with|waltz off with|win going away
+traverse a yard|1
+
+treat|1
+support|surprise|sweet|tackle|take care of|take up|talk over|think|tip|touch base|touch on|trade|value|view|womanise|womanize|work on
+trustees|1
+board|accountants|administrators|agents|committee|receivers
+victual|1
+nourishment|nurture|provisions|sustenance|bread|chow|contribute|diet|eat|eats|esculent|forage|furnish|nourish|nutriment|nutrition|pap|sell|viands
+share|1
+unite|whack
+stand up for|1
+promote|second|speak for|stand behind|subscribe to|underwrite|warrant
+stock|1
+summer stock|tedious|time-honoured|tiresome|victim|ways and means|worn out
+stocks and bonds|1
+
+strap|1
+truncheon|wallop|whop|wrap
+sympathy|1
+sympathetic chord|sympathies|warm-heartedness|welcome
+synergy|1
+simultaneity|splice|synergies|teaming
+tax anticipation note|1
+
+token|1
+spokeswoman|stub|suggestion|testament|titular|track|vaticination|witness
+truss|1
+cinch|connect|enchain|fasces|fascine|fetter|fix|hobble|hog-tie|lap|muzzle|stick|wrap|yoke
+trustee mortgage bond|1
+
+unanimity|1
+at-oneness|at oneness|bond|capitulation|common consent|compact|consistency|covenant|integration|pledge|promise|rapport|sameness|solidity|stipulation
+wedding|1
+reunion|shindig|shindy|shower|slumber party|smoker|sociable|social affair|social gathering|soiree|splice|stag party|synergy|unification
+yield to maturity|1
+
+yell|1
+battle cry|ejaculate|gripe|grouse|hosanna|huzzah|rumble|salute|shrill|sob|war cry|yawl|yip
+yelp|1
+clamor|cry out|cuckoo|fret and fume|honk|keen|lodge a complaint|mewl|outcry|raise a howl|register a complaint|shrill|squeak|twit|whimper|yammer
+undergo|1
+find|last|sense|allow|become|brave|come up against|comprehend|learn|pass through|stick
+welcome|1
+wholesome|yes
+wind|1
+winnow|withdraw
+slap the face|1
+
+soup|1
+box|plight|scrape|stew|fog|bind|bouillabaisse|consomme|cornstarch|gruel|julienne|mulligatawny|pudding|ragout|vichyssoise
+spat|1
+
+stall|1
+
+store|1
+retailer|retain|savings|schedule|shopping center|squirrel|store up|suspension of disbelief|table the motion|workshop
+strait|1
+pretty pass|rigorous|roads|tight spot
+suitcase|1
+cabinet|drawer|kit|briefcase|carpetbag|casing|casket|container|crate|knapsack|overnight bag|overnight case|pocket
+thrust and parry|1
+
+tilt|1
+proclivity|rivalry|scramble|seesaw|shelve|sidle|sling|slip|tendency|test|tiff|tip over|topple|trial|tumble|twist|upgrade|upset|veer
+tin|1
+nickel|package|silver|tin can|gold|aluminum|bag|basket|brass|cannister|pewter|pickle|platinum|provide|salt|small box|tinny|zinc
+tray|1
+board
+wage war|1
+tussle|wrestle
+whomp|1
+flog|paste|slam|smash|thud|thump|wham|whop
+taint|1
+sour|subvert|touch|water|weak point|worsen
+tantalize|1
+goad|inveigle|jolly|pique|rile|rouse|rub the right way|thwart
+throw into confusion|1
+
+try the patience|1
+
+tweak the nose|1
+
+vermin|1
+culprit|dregs|feline
+weak point|1
+weak spot
+weakness|1
+unwillingness|vacillation|volatility|washiness|wateriness|weak side|weakliness|wholeheartedness|willingness|yellowness
+topmost|1
+apical|capital|elevated|first-class|higher|pinnacle|tip|zenith|capping|crack|eminent|extreme|finest|high|main|meridian|tiptop
+topnotch|1
+
+type|1
+tone|touch|touch-type|touchstone|vintage|yardstick
+uncial|1
+capital|abecedarian|alphabetical|letter|literal
+unique|1
+world class|youthful
+wad|1
+spluge|splurge|stopper|tamp|throng|trash|treasure|troop|wherewithal
+way|1
+turnpike|uproar|variety|wherewithal|worriment|worry
+mobile|1
+
+niche|1
+
+organization|1
+
+part|1
+
+pound|1
+
+reformatory|1
+stir|amendatory|approved school|bastille|bridewell|can|cell|jug|keep|penal institution|stockade
+sanctum|1
+altar|closet|holy of holies|oasis|shelter|temple
+sanctum sanctorum|1
+sanctuary|holy of holies|sanctum
+section|1
+squad|squadron|stanza|strip|subdivide|surgery|surgical incision|variety|vicinage|ward
+snapper|1
+cracker|photographer|center|clapper|common snapping turtle|cracker bonbon|firecracker|superior|uppermost
+porcelain|1
+pottery|earthenware|china|ceramics|crockery|porcelains|ceramic|brick|enamel|enamelware|bisque|ceramic ware|terra cotta|eggshell|kaolin|adobe|chinaware
+bro|1
+pup|tail-wagger|teaser|tike|tyke|varmint|wolfhound|ally|gent|kinsman|fellow gang member|stepbrother|Mimpathy|blighter|bloke|chap|feller|lad|teammate
+ceramics|1
+crockery|pottery|porcelain|china|earthenware|baked clay|photography|sculpture|art|brick|design|fine arts|potteries|stoneware
+dish|1
+dreamboat|gossip|help|honey|mug|pan|porringer|pottery|repast|service|undo|urn
+friend|1
+
+crockery|1
+ceramics|pottery|porcelain
+pottery|1
+earthenware|ceramics|porcelain|crockery|stoneware|china|pot|terra cotta|brick|ceramic ware|clayware|delft|dish|faience|jug|mug
+Asia|1
+Far East|Middle East
+PRC|1
+China|People's Republic of China|Red China|mainland China
+People's Republic of China|1
+China|Red China|mainland China
+Red China|1
+China|People's Republic of China|mainland China
+Taiwan|1
+China
+chinaware|1
+china|crockery
+earthenware|1
+pottery|porcelain|stoneware|ceramics|terra cotta|china|crockery|faience|baked clay|ceramic|chinaware|clay|delft|dinnerware|tableware|terracotta
+mainland China|1
+China|People's Republic of China|Red China
+mate|1
+sweetie|synchronize|team|woman
+stoneware|1
+earthenware|pottery|china|crockery|ceramics
+truffle|1
+earthnut|earth-ball|peanut|chocolate truffle|groundnut
+transfer|1
+spirt|step|take the air|tram|transferal|transplace|turned into|vagabond|wander|wend|wheel|whish|whisk|whoosh|zoom
+travel along|1
+travel purposefully|trundle|whistle|wind|wing|withdraw|zigzag
+travel purposefully|1
+trundle|whistle|wind|wing|withdraw|zigzag
+trump|1
+master|master stroke|mastery|means|mirror|nice guy|nine|outgo|outmatch|power|profit|stalemate|step|subdue|top|trounce|trump out|vanquish
+trundle|1
+rove|rush|seek|shack|sit|steam|swash|travel|travel along|travel by|travel purposefully|whistle|wind|wing|withdraw|zigzag
+twine|1
+twist and turn|wire|wrap up|wring
+urge|1
+remonstrate|sanction|set forth|soft-soap|spirit|spring|start|state|stick|strike|supplicate|temperament|urgency|wake
+vanadium|1
+V|metal|gold|iron|lead|silver
+villain|1
+part|pirate|racketeer|robber|roguish|roughneck|skunk|swine|tough|traitor|transgressor|trickster|walk-on|wastrel|worm
+walk-on|1
+nonspeaking|extra|lead|part|role|super|villain
+wear the crown|1
+govern|reign|rule|hold sway|be in power|control|sway
+whistle|1
+withdraw|wow|zigzag
+wield the baton|1
+
+wing|1
+take the air|travel along|travel by|travel purposefully|tribe|troupe|trundle|whistle|wind|withdraw|zigzag|zoom
+ytterbium|1
+Yb|metal|gold|holmium|iron|lead|silver
+yttrium|1
+Y|erbium|holmium|iron|atomic number 39|dysprosium|europium|gadolinium|metal
+zigzag|1
+trundle|twisty|vacillate|waggle|warp|waver|whistle|wing|withdraw|worm
+tomato|1
+plumcot|pomegranate|popular fruit|prune|puke|quince|raisin|raspberry|red currant|strawberry|sugar apple|sugarplum|sweet orange|tangerine|true fruit|ugli fruit|watermelon
+tree|1
+redwood|rope|rosewood|sandalwood|scaffold|seedling|sequoia|shoetree|stake|stick|stock|teak|tree trunk|vegetable|vine|weed|willow|yew
+true fruit|1
+quince|raisin|raspberry|red currant|strawberry|sugar apple|sugarplum|sweet orange|tangerine|tomato|ugli fruit|watermelon
+ugli fruit|1
+quince|raisin|raspberry|red currant|simple fruit|strawberry|sugar apple|sugarplum|sweet orange|tangelo|tangelo tree|tangerine|tomato|true fruit|watermelon
+underdog|1
+toolbox|loser|stooge|dark horse|scapegoat|prey|failure|victim|casualty|also-ran|duck|giant killer|lame duck|at one's feet
+xanthic|1
+sallow|yellow|fallow|sandy|amber|buff|canary|creamy|ecru|gilded|gold|golden|lemon|primrose|straw
+limo|1
+limousine
+automobile|1
+uprise|weave|whine|wreck|zip
+car|1
+chariot|crate|motor car|sleeper|train|waggon
+sedan|1
+car|litter|automobile|limousine|sedan chair|cab|auto|coupe|jalopy|cart
+pursue|1
+steam|strive|sue|swash|take up|travel|travel by|travel purposefully|trundle|use|victimize|whistle|wind|wing|withdraw|work at|zigzag
+put away|1
+take care of|take down|take in|tender|throw out|tomb|tortured|toss away|toss out|tuck away|umbrageous|unhappy|warped|whip|wolf|wounded|zap
+rabbet|1
+snap|staple|stitch|suture|tack|wedge|zipper
+seal off|1
+seal|blockade|bolt|close|lock|plug|secure|shut
+sew|1
+tailor-make|unite
+shut away|1
+lock away|lock in|put away|shut up
+shut off|1
+removed|seclude|silence|stifle|stop up|switch|trip|withdrawn
+splice|1
+latch|linking|make a match|marriage|merger|mesh|moor|pleach|relate|roll into one|rope|stick|synergy|tie-up|tie up|unite in marriage|wreathe
+strap|1
+truncheon|wallop|whop|wrap
+wedge|1
+thrust|torpedo|triangle|wedge shape
+whorl|1
+screw|turn
+strike a balance|1
+
+summary|1
+ready|recital|rehash|repertory|retelling|schedule|skeleton|stocky|story|straight|substance|sum-up|synoptic|telling|to the point|total|transient
+tablet|1
+stone|testimonial|tomb|workbook|yearbook
+tape|1
+put down|reduce to writing|roll into one|set down|stick|support|tabulate|take down|taping|wax|write in
+tape-record|1
+
+total|1
+triangulation|unharmed|unhesitating|unit|unsevered|valuation|wax|waybill|whole enchilada|wipe out|workbook|yearbook|zap
+traverse a yard|1
+
+videotape|1
+note|put down|recording|register|set down|tabulate|take down|tape-record|write in
+workbook|1
+log|logbook|reader|table|tablet
+write in|1
+take down|tape|videotape
+galactic|1
+monstrous|monumental|mountainous|planetary|solar|vast|king-size|monster|prodigious|accumulation|astrophysical|cosmical|elephantine|interplanetary|interstellar|leviathan|lunary|lunular|starry
+ginormous|1
+gargantuan|immense|enormous|titanic|huge|humongous|massive|cyclopean|mammoth|Brobdingnagian|Bunyanesque|colossal|gigantic|large
+grand|1
+tempting|thousand dollars|tiptop|top-drawer|topnotch|total|transcendental|voluminous
+hippopotamus|1
+hippo|elephant|Hippopotamus amphibius|hare|horse|pig|river horse|Hippo
+staggering|1
+winning|wobbly
+untold|1
+unrevealed|unsaid|unsung|arcane|eternal|exhaustless|gigantic|indefinite|many|mighty|monstrous|no end of|secret|unmeasured|unproclaimed|unrelated|unthinkable|without end|without limit
+vasty|1
+gargantuan|titanic|enormous|immense|vast
+sycamore|1
+maple|tree|ebony|cottonwood|sequoia
+tree|1
+redwood|rope|rosewood|sandalwood|scaffold|seedling|sequoia|shoetree|stake|stick|stock|teak|tree trunk|vegetable|vine|weed|willow|yew
+oak|1
+papaya|peach|pear|pecan|quince|sequoia|sumac|tree|willow|wood
+ebony|1
+tree|umber|willow
+wood|1
+
+acacia|1
+mimosa|oak|tree|dogwood|ebony|locust|magnolia|flower|juniper|wood
+wander|1
+walk the tracks|whish|whisk|whoosh|zoom
+work|1
+tick|transaction|treat|treatise|wade|work at|worm|wrestle
+surfeit|1
+eat|excessiveness|extravagance|extravagancy|freight|mass|more than enough|multitude|pile|revolt|stack|supply|wealth|weary
+sweeping|1
+tally|umbrella
+take hold of|1
+catch|clasp|clutch|grab|grasp|seize|embrace|hug|snatch|take
+units of weight|1
+
+universal|1
+mass|measureless|multilateral|mundane|natural|notion|pluralistic|predominant|radical|rife|solid|spacious|staple|superior|typical|universal joint|wholesale|worldly
+whole slew|1
+mass|mickle|muckle|plenty|quite a little
+width|1
+beam|dimensions|distance|distance across|mass|orbit|wide
+quicksilver|1
+unpredictable|weathercock
+Hg|1
+hydrargyrum|mercury|quicksilver|hectogram
+lead|1
+transfer|travel along|travel purposefully|trump|trundle|twine|urge|vanadium|villain|walk-on|wear the crown|whistle|wield the baton|wing|ytterbium|yttrium|zigzag
+silver|1
+tantalum|technetium|tellurium|terbium|thallium|thulium|vanadium|wealth|white as snow|xenon|ytterbium|yttrium
+gold|1
+shekalim|shekelim|sheqalim|sheqels|sterling|sulfur|tantalum|tawny|terbium|thallium|thulium|vanadium|xanthic|xanthous|ytterbium|yttrium
+inner planet|1
+venus|mars|mercury|earth
+thermometer|1
+instrument|mercury|telethermometer|thermometrograph|thermoelectrometer|scale|thermostat|pneumometer
+iron|1
+ytterbium
+arsenic|1
+arsenic trioxide|poison|As|selenium|antimony|element|strychnine|beryllium|cadmium|white arsenic|chlorine|cyanide|lead|mercury|silver
+hydrargyrum|1
+Hg|mercury|quicksilver
+metal|1
+manganese|molybdenum|niobium|lead|osmium|platinum|ruthenium|titanium|uranium|vanadium|ytterbium|zirconium|europium|gadolinium|germanium|golden|metallic element|nickel|palladium
+capitalist|1
+magnate|market economy|money|moneybags|private-enterprise|tycoon
+multimillionaire|1
+tycoon|billionaire|capitalist|nabob|millionaire|fat cat|plutocrat|bloated plutocrat
+plutocrat|1
+capitalist|magnate|millionaire|money
+nabob|1
+mogul|big name|big shot|dey|exarch|figure|heavyweight|kingpin|leader|satrap|tycoon
+tycoon|1
+businessman|merchant|notable|prince|aristocrat|big cheese|big wheel|bigwig|cacique|director|executive|merchant prince|nabob|princess|shah
+rich man|1
+wealthy man|financier|millionaire|mogul|plutocrat|tycoon|capitalist|man of means|magnate|moneyed man
+man of substance|1
+
+man of means|1
+magnate|rich man|capitalist|mogul|tycoon|wealthy man
+moneyed man|1
+
+millionnaire|1
+
+man of wealth|1
+
+richling|1
+
+print|1
+strike|take a rubbing|text|transcript|transparency|typeface|underline|vestige|woodcut
+replicate|1
+feign|fold|forge|impersonate|mime|model|pretend|recap|recur|renew|twin
+replication|1
+similarity|simulacre|transcript
+showcase|1
+declare|establish|event|iconic|indicate|instance|manifest|mount|represent
+similitude|1
+model|parallel|unity|Twin|accord|accordance|ectype|equivalent|icon|photograph|reflection|relation|simulation
+spitting image|1
+model|resemblance
+study|1
+value|wade through|work of art
+supreme|1
+vista blue|vivid blue|vivid sky blue|washed denim|water jet|waterfall|well water|wonderous blue|worthy|yale blue
+template|1
+guide|pattern|templet|form|stencil|matrix|blueprint|model|mould|design|mold|die|sample|format|paradigm|stamp
+trim|1
+
+typify|1
+
+whittle|1
+
+pig|1
+
+platypus|1
+
+radar|1
+
+stain|1
+
+strawberry mark|1
+
+undercover agent|1
+
+wall|1
+
+wart|1
+
+rodomontade|1
+
+side|1
+
+sing|1
+
+speaker|1
+
+spout|1
+
+sputter|1
+
+voice|1
+
+punk|1
+
+raid|1
+
+rip off|1
+
+rough|1
+
+smile|1
+
+storm|1
+
+victimize|1
+
+try the patience|1
+
+tweak the nose|1
+
+urge|1
+
+springe|1
+
+stalk|1
+
+stock market quotations|1
+
+strainer|1
+
+take-in|1
+
+take after taxes|1
+
+takings|1
+
+tangle|1
+
+tangle up with|1
+
+tennis court divider|1
+
+tissue|1
+
+turn a penny|1
+
+turn to account|1
+
+turn to profit|1
+
+ultimate|1
+
+wage|1
+
+wattle|1
+
+weight|1
+
+New York City|1
+
+Greater New York|1
+
+NY|1
+
+pitch darkness|1
+
+charcoal|1
+
+after hours|1
+
+all the time|1
+
+at night|1
+
+bleak|1
+
+condemned|1
+
+foul|1
+
+gloomy|1
+
+iniquity|1
+
+nite|1
+
+soot|1
+
+vespers|1
+
+tape|1
+
+tape-record|1
+
+think about|1
+
+thought|1
+
+total|1
+
+trait|1
+
+transmission|1
+
+transmittal|1
+
+treasure|1
+
+vibe|1
+
+videotape|1
+
+wave|1
+
+wink|1
+
+write in|1
+
+write up|1
+
+weird|1
+
+wonderful|1
+
+work of fiction|1
+
+yarn|1
+
+young|1
+
+train|1
+
+watch out for|1
+
+reap and carry|1
+
+shoot|1
+
+spluge|1
+
+splurge|1
+
+two pump chump|1
+
+vinegar strokes|1
+
+weirdie|1
+
+methane|1
+
+oil color|1
+
+praise|1
+
+propane|1
+
+soft soap|1
+
+stroke|1
+
+suet|1
+
+tallow|1
+
+tempt|1
+
+wax|1
+
+wheedle|1
+
+ugli fruit|1
+
+verdure|1
+
+play|1
+
+performance|1
+
+opera house|1
+
+pageant|1
+
+musical|1
+
+melodrama|1
+
+ballet|1
+
+extravaganza|1
+
+music|1
+
+show|1
+
+spectacle|1
+
+music hall|1
+
+mystery|1
+
+opera bouffe|1
+
+operetta|1
+
+piece|1
+
+theater|1
+
+sugarplum|1
+
+sweet orange|1
+
+tawny|1
+
+ugli fruit|1
+
+watermelon|1
+
+letter of credit|1
+
+manila|1
+
+memoir|1
+
+music|1
+
+newspaper of record|1
+
+newspaper publisher|1
+
+note of hand|1
+
+onionskin|1
+
+overlay|1
+
+page|1
+
+pass|1
+
+slate|1
+
+story|1
+
+term paper|1
+
+veneer|1
+
+warrant|1
+
+white|1
+
+tract|1
+
+wood|1
+
+yawn|1
+
+putty|1
+
+rap|1
+
+rivet|1
+
+sew|1
+tailor-make|unite
+snap|1
+staple|stitch|strength|tack|taken by surprise|throw|tip|transparency|unconsidered|unprepared|winter|zest
+spank|1
+have words with|lambaste|lay on|leather|nip|paste|rap|scold|swinge|take to task|trim|trounce
+staple|1
+staple fiber|staple fibre|stick|stick on|store|supply|universal|wares|weld|zipper
+string|1
+sequence of phonemes|shoelace|sinew|stream|strengthen|string up|suspend|suture|thong|tribe|tune up|weave|word of mouth
+suture|1
+tack|thread
+tether|1
+reins|stake|tat
+thresh|1
+threshing|trim
+tinsel|1
+factitious|falseness|feigned|foofaraw|gilding|glister|illegitimate|mock|ornament|paint|pretended|scintillation|spurious|supposititious|trickery
+trounce|1
+smite|squeeze|squelch|suppress|switch|take to task|tan|torment|toss|total|trash|triumph over|trump|walk all over|waste|wax
+whip|1
+whet|whop|yaff
+whomp|1
+flog|paste|slam|smash|thud|thump|wham|whop
+lightly|1
+meagerly|no sweat|peacefully|scantily|sincerely|swimmingly|tenderly|without difficulty
+quietly|1
+low|motionlessly|mutely|piano|restfully|smoothly|soothingly|stealthily|still
+upright piano|1
+upright|piano
+magnifier|1
+lens|magnifying glass|telescope|camera|condenser|eyeglass|eyepiece|microscope|ocular|prism
+binocular|1
+telescope|binoculars|bicameral|sense organ|magnifier|microscope
+scope|1
+inspect|mount|pas|peg|plane|plateau|reaching|run|rung|scan|shade|signification|spirit|stint|time|turn|watch|wide berth
+astronomical telescope|1
+
+spyglass|1
+telescope|binoculars|glass
+telescopic|1
+farsighted|inaccessible|distant|remote
+shorten|1
+disregard|downgrade|elide|extract|hem|limit|mow|pare down|press|recede|restrict|subtract|thin|tighten|waste no words|weaken|weed
+binoculars|1
+field glasses|opera glasses|glass|telescope|bifocals|spectacles|scope|telescopes|eyeglasses|glasses|opera-glasses|optical instrument|spyglass
+foul|1
+violent|virulent|vomity|weird|wet|wormy|worthless
+summarize|1
+tote up
+abbreviate|1
+pare down|recede|scale down|squeeze|subside|syncopate|tighten|waste no words
+field glass|1
+ocular|glass
+curtail|1
+let up|lighten one of|mow|prevent|prohibit|rein in|reject|set back|short|shrivel|slow down|subdue|top|trammel|wane|weaken|wear away
+boil down|1
+clip|crop|cut off short|decrease|dock|epitomize|foreshorten|prune|shrink
+cut|1
+work|write in|zone
+glass|1
+urn|vitreous|wineglass
+refractor|1
+
+squash|1
+raze|reduce to powder|reduce to silence|shush|shut down on|shut up|silence|sit down on|slime|smash all opposition|squash racquets|stamp out|telescope|thrust|upset|vanquish|wedge|wipe out
+trim|1
+snub|stick|straight|strap|surmount|swank|take|tidy up|trick out|trim back|triumph over|well-organized|well-presented|well-proportioned|well turned out|whack|white|wing out ballast|wiry
+mistress|1
+instructress|love|moll|princess|squeeze|sugar|sweetie|trainer
+advisor|1
+guide|consultant|adviser|teacher|mentor|counsellor|doctor|instructor|master|tutor|counsel|counselor|expert|coach|director|tout|lawyer|lecturer
+dominie|1
+dominus|dominee|divine|domine|instructor|mentor|schoolteacher|teacher
+counsel|1
+lead|manage|notify|parley|point|put heads together|shyster|view
+governess|1
+nanny|mistress|duenna|teacher|guardian|nursemaid|chaperon|instructress|nurse|schoolmistress|tutoress|tutor|coach|housewife
+teach|1
+counsel|cram|determine|discover|enliven|expound|fit|give instruction|instruction|interpret|inure|practice|profess|rehearse|see|teacher
+don|1
+gentleman|get|get into|guide|lord|preceptor|slip|slip into|sport|take on
+monitor|1
+varan|vet
+pundit|1
+professional|academician|analyst|doctor|fellow|intellect|mentor|learned|pro
+boss|1
+wheel|wonderwoman
+disciplinarian|1
+caesar|enforcer
+doctor|1
+rejuvenate|renovate|resident|retouch|service|supply|take in tow|take the cure|wise old man
+buttinsky|1
+busybody|meddler|kibitzer|interloper|intermeddler|intruder|quidnunc|snoop|Nosy Parker|gossip|backseat driver|butt-in|mentor|pragmatic
+lord|1
+principal|property-owner|providence|renter|seignior|senior|sir|skipper|slumlord|subtenant|superintendent|supervisor|swell|tenant
+missionary|1
+dean|divine|mentor|parson|prelate|sister|voluntary
+withdraw|1
+travel purposefully|trundle|turn tail|undo|unyoke|veto|walk|wend|wheel|whistle|wind|wing|zigzag
+wriggle|1
+wrench|blow in|curl|distort|flounder|heave|infiltrate|ooze|rick|sprain|sway|swing|thrash|twitter
+yaw|1
+plunge|skid|spin|spiral|variation|wallow|wheel
+second|1
+twice|twinned|two-faced|twofold|upholder|validate|younger
+shooter|1
+firer|gas|gibe|grinder|guess|guessing|guesswork|hackbut|hero|hoagie|hunter|injection|jibe|peashooter|piece|shooters|sub
+spell|1
+wait|wow|write
+subservient|1
+good|groveling|lower|obeisant|respectful|slave|subjugated|supine
+succeed|1
+predominate|produce|receive|recover|spell|substitute for|survive|tail|take over|win out
+supply|1
+set up|shoot|short-range|short-term|spread|stake|staple|stuff|subsidize|subvention|supplement|temp|tender|whole
+zep|1
+hero|Cuban sandwich|Italian sandwich|hoagie|hoagy|sub|hero sandwich|poor boy|submarine|submarine sandwich|torpedo
+take no denial|1
+
+take up with|1
+befriend|join|mix|associate|buddy up|fraternize|hang out with|mingle|play footsie with|run with|tie up with
+take what comes|1
+
+tape|1
+put down|reduce to writing|roll into one|set down|stick|support|tabulate|take down|taping|wax|write in
+tarry|1
+repose|shilly-shally|stick|stop over|take time|waste time
+throw a fight|1
+
+timber|1
+grove|joist|jungle|look|park|puncheon|scrub|shingle|slab|spirit|stake|stand of timber|stick|stick of wood|tone|wooden|xylem
+trim|1
+snub|stick|straight|strap|surmount|swank|take|tidy up|trick out|trim back|triumph over|well-organized|well-presented|well-proportioned|well turned out|whack|white|wing out ballast|wiry
+truss|1
+cinch|connect|enchain|fasces|fascine|fetter|fix|hobble|hog-tie|lap|muzzle|stick|wrap|yoke
+undergo|1
+find|last|sense|allow|become|brave|come up against|comprehend|learn|pass through|stick
+urge|1
+remonstrate|sanction|set forth|soft-soap|spirit|spring|start|state|stick|strike|supplicate|temperament|urgency|wake
+wait|1
+stay up for|stick|suppress|take time
+work together|1
+taking part|throw in together|aid|band together|cofunction|league|agree|assist|engage in|joining in|show willingness|stick|uphold
+mast|1
+topmast|upright
+mortarboard|1
+badge|baton|emblem|hat|pin|cap|mantle|regalia|staff|tartan|uniform|wand
+old school tie|1
+
+outfit|1
+phalanx|prime|regalia|squadron|staff|stuff|traps|trust|utensil|vesture|wrap
+party|1
+riot|schism|search party|section|shift|someone|staff|stream|task|tear|thrash|whoop it up|woman
+pike|1
+harpoon|knoll|lane|mountain|pickerel|pinnacle|pole|prong|spur|staff
+pikestaff|1
+pole|staff
+quarterstaff|1
+baton|club|cudgel|stick|mace
+rod of office|1
+
+shillelagh|1
+club|baton|bludgeon|cudgel|truncheon|bat|cane|shillalah|staff|stick|billy|blackjack|mace
+skull and crossbones|1
+
+squad|1
+fleet|garrison|guard|junta|league|maniple|organization|rank|school|shift|side|society|union|work crew
+suite|1
+suit|assemblage|attendants|company|ensemble|faculty|line|lodging|number|order|partita|retainers|sort|trail
+support|1
+undersign|understudy|uplift|urge|verification|victuals|vise|ward|watch|wear
+tartan|1
+plaid|patchwork|check|badge|baton|emblem|insignia|pin|checked|harlequin|mantle|mortarboard|mosaic|parquet|regalia|ring|staff|uniform|wand
+uniform|1
+plumb|reconcilable|reliable|resolute|rhythmic|ring|shipshape|stabile|staff|static|stripes|symmetric|tartan|undistinguishable|unique|wand
+upright|1
+unspoiled|unswerving|uplifted|white|wholesome
+wand of office|1
+
+work force|1
+hands|men|personnel|manpower|staff
+enclosure|1
+circle|circuit|circus|confinement|container|cote|den|documents|farmyard|housing|inclusion|place|plot|precinct|rampart|rink|vault|walk
+ground|1
+
+pit|1
+
+playground|1
+
+streak|1
+
+bustle|1
+
+get cracking|1
+commence|enter upon|fall to|finger|get started|get weaving|pitch in|scamper|scurry|scuttle|set to|shake a leg|speed|sprint|start|take on|whiz
+hie|1
+roll|round|slice through|spirt|sprint|step|take the air|tram|transfer|urge|vagabond|walk|wheel|whoosh|withdraw|zoom
+hightail|1
+cut out|duck|embark|gallop|getaway|go forth|make tracks|march|part|run it|rush|scoot|scud|speed|spring|sprint|trot
+make haste|1
+shoot|career|dart|festinate|haste|hotfoot|hurry up|move|sprint|lose no time|shake a leg|zip|zoom
+plunge|1
+tend to go|toss and tumble|toss and turn|trade on margin|water|wet|yaw
+canter|1
+dog it|escape|flit|fly|gait|go like lightning|hasten|hie|hightail|hop|hustle|jaunt|jump|rack|skedaddle|skip|spring|take horse
+charge|1
+trusteeship|tuition|undertaking|vex|wages|wardship|warhead|warrant|watch and ward|wedge|weigh down|weigh heavy on|weight down with|wing|writ
+festinate|1
+whisk|zip
+floor it|1
+accelerate
+haste|1
+hurry up|impulsiveness|indiscretion|instantaneousness|nimbleness|precipitousness|prematureness|push|speed up|sprint|step on it|urge|whisk
+hurtle|1
+steam|strike|swash|travel along|travel by|travel purposefully|trundle|vagabond|wind|withdraw|zigzag
+move|1
+whirl|wind up|womanise|womanize|work on|wow|zigzag
+rocket|1
+zip
+shake a leg|1
+hotfoot|make haste|scurry|skedaddle|step on it
+step lively|1
+trot|race|scramble|sprint
+whizz|1
+fly|wiz
+queer the works|1
+
+ruin|1
+stump|stymie|thrash|thrashing|topple|torpedo|tragedy|untidiness|uproot|vandalism|vanquishment|vaporize|vestige|vitiation|whip|wiping out|wreak havoc
+saber|1
+revolver|rifle|scythe|shotgun|spike
+spill|1
+strip|submerge|swamp|tell on|vent|waste|wasteweir|water|well|well over
+spoil|1
+smirch|spoilage|spoils|stigmatize|stolen goods|suppurate|swash|tout|trash|turn sour|uglify|vaunt|wallow|wither|wrack|wrong
+stiletto|1
+arrow|assegai|bazooka|blowgun|bolo|boomerang|bowie knife|claymore|club|firearm|flamethrower|machete|missile|rapier|shotgun|spike
+suppress|1
+recant|repeal|repel|retract|secrete|shut down|spike|stamp|stanch|stay|trounce|vitiate
+sword|1
+scalpel|scythe|sickle|smallsword|spike
+tamper with|1
+garble|grease the palm|have|make a difference|meddle|meddle with|pry|spike|square|take care of|tickle the palm|water
+thrust|1
+raid|send|set going|shaft|shake|shed|shoved|significance|slam|smack|spear|spike|spur|stimulate|storm|stretch|tenor|violence|wham
+tie|1
+train track support|twine|use force upon
+twine|1
+twist and turn|wire|wrap up|wring
+unfit|1
+unskilful|unwell|unworkable|valueless
+water down|1
+dilute|cut|water|weaken|adulterate|doctor|attenuate|dissolve|reduce|thin|mitigate|spike
+wing|1
+take the air|travel along|travel by|travel purposefully|tribe|troupe|trundle|whistle|wind|withdraw|zigzag|zoom
+mantle of snow|1
+
+weaken|1
+sophisticate|split|stop|tremble|unbrace|undo|unfit|upset|wind down|wound
+wilt|1
+fizzle out|give way|go to pieces|languor|lapse|mummify|poop out|relapse|revert|slide|slip|subside|sweat|taper|washiness|wear|wear out|worsen
+wrong|1
+victimize|wretched
+youngster|1
+offspring|progeny|sprig|Fry|babe|bambino|cub|dude|hopeful|innocent|little one|newborn|puppy|slip|sprout|teenybopper|waif|young adult|youngling
+umbrageous|1
+suffering|tender|tortured|touchy|unlit|vegetated|warped|wounded
+volley|1
+firing|gunfire|outburst|crossfire|deluge|give and take|outpouring|blitz|cloth yard shaft|drumfire|enfilade|eruption|fit|rush|shot
+warped|1
+shameless|shook|shot|sore|sprung|stricken|struck|suffering|tender|tortured|turned|umbrageous|unsound|vitiated|wicked|wounded|wry
+string along|1
+swing in with|tag|tag after|tail|tailgate|take part with|take sides with|team up with|throw in with|trail|tread close upon|trick
+tailgate|1
+follow|tailboard|accompany|come after|dog|go with|pursue|shadow|string along|tag|tag after|tag along
+take out after|1
+follow|hound|pursue|chase|chivy|dog|go after|hunt|run after|search|seek
+tittle|1
+suspicion|tad|taste|trickle
+track down|1
+smell out|sniff out|stalk|Hunt|ascertain|bring to light|detect|find out|identify|look|search for|shadow|tail|trail|uncover
+twiggy|1
+pinched|puny|rangy|small|undersized|wasted
+twilight|1
+foul|murk|obscure|pin|shade|shadow|shadowy|shady|wane
+whit|1
+point|seed|shadow|snip|sprinkling|suspicion|tad|tag|tinge
+waiter|1
+wine steward|cup bearer|aid|awaiter|cup-bearer|cupbearer|employee|follower|hostess|waitperson
+host|1
+mountain|platoon|plenty|possessor|property-owner|proprietary|publican|receive guests|renter|rout|sacrament|scores|set|subtenant|tenant|throw a party|trip|troops|volume
+facilitator|1
+comforter|deputy|follower|help|help-mate|hod-bearer|hod carrier|mitigator|offsider|second banana|stooge|subsidiary|support|temporary assistant|vice
+computer|1
+calculating machine|computer hardware|cpu|electronic brain|microcomputer
+responder|1
+respondent|answerer|replier|acknowledger|bridler|communicator|reacts|reciprocator|server
+servant|1
+substitute|thrall|varlet|waitress
+waitress|1
+waiter|sommelier|bartender|barmaid|tapstress|busboy|hostess|servant|carhop|headwaiter|tapster|usher|lapster|barista|cup-bearer|wine steward
+priestess|1
+bacchante|high priestess|empress|sovereign|cleric|queen|lady|goddess|abbess|holy woman|ruler|sister
+prima donna|1
+archduchess|crowned head|crowned princess|empress|female ruler|king|lady|liege|luminary|monarch|opera singer|princess regent|princess royal|protagonist|ruler
+princess regent|1
+queen|sovereign|archduchess|crowned head|crowned princess|diva|dynast|empress|female ruler|goddess|high priestess|lady|liege|monarch|priestess|prima donna|princess royal|ruler
+princess royal|1
+queen|sovereign|archduchess|crowned head|crowned princess|diva|dynast|empress|female ruler|goddess|high priestess|lady|liege|monarch|priestess|prima donna|princess|princess regent|ruler
+sire|1
+squire|stepfather|suit|take|the|work|yield
+star|1
+wonderwoman|world
+stick|1
+take no denial|take up with|take what comes|tape|tarry|throw a fight|timber|trim|truss|undergo|urge|wait|work together
+supervisor|1
+
+raise the roof|1
+bluster|whoop it up|clamor|fume|rage|raise hell|rant|roar|storm
+sail the sea|1
+
+scale|1
+type|upspring|vernier|wafer|weighbridge
+scold|1
+rail against|randy|razz|recriminate|row|spank|speak|storm|taunt|tigress|twit|warn
+sequel|1
+suffix|sweep|swing|tenor|transition|update|upgrowth|uptick|working
+squall|1
+pule|riots|rough weather|ruckus|rumpus|shower|snarl|taking|throb|trepidity|troubled waters|troubles|tumult|ululate|way|whimper|worriment|worry
+steam|1
+singe|sit|smelt|smolder|strong arm|swash|take a voyage|thaw|travel along|travel by|travel purposefully|trundle|vigour|volatilize|whistle|wind|wing|withdraw|zigzag
+suite|1
+suit|assemblage|attendants|company|ensemble|faculty|line|lodging|number|order|partita|retainers|sort|trail
+take a voyage|1
+
+tongue-lash|1
+revile|row|tell off|wig
+traverse|1
+wend
+vendetta|1
+row|altercation|animosity|brawl|combat|contention|controversy|discord|dissension|family feud|hatred|hostility|reprisal|sweet revenge
+whoop it up|1
+jump for joy|let loose|live it up|make whoopie|party|raise the devil|spree|step out
+rose wine|1
+pink wine
+rosebush|1
+rose
+rosette|1
+insignia|little potato
+rouge|1
+blusher|paint|blush|flush|makeup|red|war paint|color|crimson|redden|cosmetics|lipstick|glow|dye|eye shadow|make-up|rose|foundation
+skull and crossbones|1
+
+tulip|1
+anemone|rose|begonia|marigold|flower|lily|rhododendron|iris|ranunculus
+radial point|1
+middle of the road|midpoint|midst|navel|nucleus|omphalos|pith|pivot|place|polestar|quick|root|seat
+radically|1
+totally|absolutely|extremely|thoroughly|essentially|fundamentally|completely|entirely|downright|drastically|excessively|purely|wholly|decidedly|severely|utterly|aforetime|anciently|at one time
+resolution|1
+woman tough
+rivet|1
+miter|moor|padlock|paste|seal|set|sew|spike|strap|unite
+rock bottom|1
+base|bottom|fundamental|bedrock|nadir|root|solid rock
+settle down|1
+subside|take in sail|take residence at
+stick|1
+take no denial|take up with|take what comes|tape|tarry|throw a fight|timber|trim|truss|undergo|urge|wait|work together
+stimulus|1
+tonic|trigger
+stub|1
+token|voucher
+totally|1
+heart and soul|heartily|in a body|in its entirety|merely|plainly|plumb|radically|right|stark|well|wholy
+turn up|1
+visit
+uncover|1
+unfurl|unkennel|unlatch|unsheathe|unshut|unstop
+underlying|1
+organic
+utterly|1
+conclusively|explicitly|finally|head over heels|hook|indubitably|plainly|precisely|simply|surely|through and through|to the limit
+wholly|1
+plumb|precisely|really|root and branch|through and through|throughout|truly|undividedly
+Roma|1
+Gypsy|Gipsy|Rome|Eternal City|Romani|Romany
+Eternal City|1
+Rome
+capital of Italy|1
+Eternal City|Rome
+church|1
+rite|schism|society|faction|Christian church|apostleship|chantry|holy place|house of God|house of prayer|ism|pagoda|priesthood|religious|school
+leadership|1
+
+vatican|1
+
+solid|1
+
+throw|1
+
+tip-top|1
+
+tor|1
+butte|crest|dune|escarpment|fell|hump|pinnacle|precipice|promontory|rock|spur
+tough|1
+
+unnerve|1
+shatter|sterilize|stir up|unbrace|unhinge|unstring
+android|1
+robot|humanoid|mechanical man|automaton|artificial human|droid|golem
+automaton|1
+robot|machine|mechanical man|automatic|golem|device|automata|zombie|zombi|grind|android|automation
+machine|1
+two-party system|utility|wheels
+cyborg|1
+bionic man|droid|bionic woman|semiautomatic|android
+animatronic|1
+
+mechanism|1
+media|operation|organ|thingummy|chemical mechanism|instrumentation|intermediation|mode|movement|organization|scheme|technology|thingamajig|thingumabob|whatchamacallit|wheels within wheels
+humanoid|1
+anthropoid|anthropomorphic|android|mechanical man|anthropomorphous|hominid|hominoid|manlike|anthropological|biped
+artificial intelligence|1
+machine intelligence|AI
+bionic person|1
+
+golem|1
+automaton|robot|automata|half-wit|machine
+bot|1
+
+drudge|1
+swot|beast of burden|drive|flunky|hacker|machine|wade through|worker
+myrmidon|1
+follower|henchman|disciple|minion
+automatic|1
+robot-like|rod|self-moving|self-starting|self-winding|semiautomatic|shooting iron|shotgun|tedious|uncontrollable|unmeditated|unvarying
+labourer|1
+hand|laborer|worker|drudge|artisan|operative|blue-collar worker|breadwinner|employee|jack|manual laborer|photographer|working girl|workman
+mechanical|1
+cursory|dead|distant|methodical|physics|production|robotlike|standardised|unemotional|unintentional|unvarying|useful|visceral
+motorcar|1
+car|automobile|auto|machine|bus|jalopy|motor|coupe|ambulance|autocar|boat|buggy|cab|convertible|gondola|hearse|limousine|motor vehicle
+agent|1
+solicitor|stand-in|stooge|subject|superintendent|supplier|token|trader|underling|vicar
+redbreast|1
+robin|robin redbreast|Old World robin
+robin redbreast|1
+redbreast
+Old World robin|1
+robin|robin redbreast
+finch|1
+canary|swan|bird|bullfinch|siskin|songbird
+rook|1
+gouge|have|humbug|jackdaw|jay|king|play|rob|robin|short-change|shortchange|snow|stick
+vicissitude|1
+revolution|shift|sport|transition|adversity|exigency|inconstancy|misfortune|permutation|predicament|transposition|trial|trouble|turn|uncertainty|unpredictability|vacillation|variability
+kaiserin|1
+princess
+regal|1
+state|statuesque|venerable|very good
+dame|1
+babe|matriarch|biddy|duchess|lass|ma'am|madame|milady|piece|princess|queen|birdie|cutie|damsel|lassie|peeress|schoolmistress|wife
+gentlewoman|1
+aristocrat|blue blood|doll|lass|lord|patrician|peeress|princess|sovereign|wench|woman of quality
+raj-kumari|1
+princess
+leader|1
+numero uno|official|pacemaker|pathfinder|presiding officer|publicist|superhero|superstar|superwoman|top|wonderwoman
+old woman|1
+old lady|mare|better half|hag|helpmate|helpmeet|wife|bride|dusty miller|lady|mama|mate|mother|grandma|mammy|matriarch|matron|mom|mum
+jack|1
+windlass
+joker|1
+burlesquer|character|deuce|difficulty|gagger|hitch|imp|jokesmith|kidder|knave|madcap|merry andrew|practical joker|punner|rogue|rub|satirist|soul|wisecracker
+tabby|1
+kitten|kitty|pussy|queen|tomcat|house cat|pussycat|stripy|telltale|blab|busybody|chatterbox|king|streaky|tattle|tom|yenta
+baron|1
+
+bower|1
+
+chief|1
+suzerain|taskmistress|top banana|top of mind|ultimate|virtuoso|winner
+contessa|1
+princess|countess|empress|sultana
+countess|1
+lady|duchess|count|princess|dame|gentlewoman|noblewoman|aristocrat|baroness|duke|empress|lord|marchioness|peer|archduke|noble
+fruit|1
+woody perennial plant
+sultana|1
+princess|duchess|empress|queen|raisin|seedless raisin|oligarch|plum
+strain every nerve|1
+
+supplicate|1
+adjure|call|call upon|desire|impetrate|demand|invite|obtest|press|ask for|call on|clamor for|entice|imprecate|plead for
+tease|1
+ridiculer|scold|spoof|sport|stimulate|tap|tattler|tattletale|tickle|tormenter|torturer|traducer|troublemaker|wind up|work|work on
+television|1
+newspaper|public relations officer|radar|station|television system|wire wave communication
+thronging|1
+swarming|crowded
+tighten|1
+
+torment|1
+torturing|try the patience|tweak|twisting|twit|tyrannize|woefulness|wrench|wrong
+trouble|1
+trepidity|trouble oneself|troubled waters|unhappiness|vale of tears|vicissitude|waters of bitterness|way|whisk|wrong
+urge on|1
+cheer|urge|inspire|barrack|exhort
+weigh upon|1
+burden|depress|oppress|weigh on|press|prey|prey on|weigh down
+whip|1
+whet|whop|yaff
+worry|1
+trump|try the patience|tumult|turbulence|tweak the nose|way|worries and cares|worrying
+to the left|1
+
+vent|1
+send forth|send out|show|sluice|throw out|touchhole|utterance|vent-hole|ventiduct|vocalize|yield
+way of life|1
+way|culture|lifestyle|school|address|air|life|society|act|bearing|carriage|demeanor|deportment|footstep
+wine|1
+bordeaux|carnelian|chestnut|coffee|damask|drink|gules|infrared|mauve|plum|punch|purple|red wine|rufous|russet|violet
+cosmonaut|1
+astronaut|spaceman|pilot|aviator|flier|alien
+execute|1
+
+ferryman|1
+boatman|boater|oarsman|waterman|bargee|bargeman|gondolier|boatswain|lighterman|oar
+gondolier|1
+boatman|ferryman|boater|gondoliere|oarsman|bargeman|bargee|boatswain|lighterman|oar|sailor|waterman
+guard|1
+ride shotgun for|security guard|sentry go|shadow|spare|squire|stronghold|supervise|treasure|umbrella|usher|wall|watchdog
+jockey|1
+roughrider|trick|wangle
+manipulate|1
+work on
+mariner|1
+shellback|steersman|swabbie|tarpaulin
+pilot film|1
+pilot program
+sailor|1
+mate|old salt|shipman|shipmate|skipper|traveler|water dog
+show the way|1
+guide|conduct|direct|lead|steer
+steerer|1
+helmsman|steersman|decoy|pilot
+test pilot|1
+
+tool|1
+timeserver|toad|toady|way|wrench
+wheel|1
+transfer|tricycle|truck|turn around|volte-face|walk|water wheel|wend|whish|whisk|whoosh|wing|zoom
+wheelman|1
+helmsman|steersman|navigator|pilot|coxswain|cyclist|driver
+synchronize|1
+keep pace with|make uniform|manage|mate|methodize|occur simultaneously|pool|rectify|regularize|tally|time|true
+things|1
+time|toggery|togs|traps|trousseau
+time of day|1
+hour
+twelvemonth|1
+year|yr|annum|sun|time
+unceasingly|1
+infinitely|lastingly|successively|abidingly|all the time|consistently|habitually|hourly|indefatigably|invariably|monotonously|on and on|time
+values|1
+taxes|time|totals|valuations
+whack|1
+
+without delay|1
+time
+transaction|1
+fashion|handiwork|happening|maneuver|occupation|purchase|stroke|tour de force|truck|venture|work
+clover|1
+triplet|triptych|troika|wealth
+polyhedron|1
+cube|triangle|dodecahedron|tetrahedron|octahedron|hexahedron
+shamrock|1
+trefoil|Oxalis acetosella|lesser yellow trefoil|tripod|clover|common wood sorrel|leash
+ternion|1
+triad|trinity|trio|troika|ternary|triplet|leash|three|threesome|trine|trey|3|III|tercet|deuce-ace|terzetto|tierce
+tetragram|1
+rectangle|quadrangle|square|triangle
+tetrahedron|1
+dodecahedron|cube|hexahedron|octahedron|polyhedron|quadrilateral|rectangle
+tierce|1
+duty|evensong|matins|office|terce|trefoil
+trapezoid|1
+quadrilateral|square|triangle|tetragon|trapezoid bone|os trapezoideum|quadrangle
+trefoil|1
+clover|medic|shamrock|three|medick|tierce|tripod|leash
+triennium|1
+trident|triangle|leash|shamrock|trefoil|triad
+trimester|1
+tripod|clover|semester|triad|triangle|trident|trilogy|trio|triplet|triptych|troika
+trine|1
+terzetto|third|tierce|triangle|trilogy|triplex|triptych|triunity|deuce-ace|trinal
+trireme|1
+triangle|trident|galley|leash|trefoil|triad|trio|triplet
+triseme|1
+
+triskelion|1
+triskele
+triumvirate|1
+trio|threesome|triad|troika|trinity|three|triple|triplet|triune|trine|triptych|triangle|trilogy|triunity|autonomy|hierarchy|synergy|teamwork|theocracy
+triunity|1
+triad|troika|threesome|trinity|trine|trio|triumvirate|triune|three|triangle|trilogy|triple|triplet|triptych
+wooden horse|1
+
+stride|1
+stretch|striddle|trek|trip|trot
+strut|1
+stroll|strutting|swaggering|talk big|trip|vapor
+take a fall|1
+tumble
+take a flop|1
+
+take a pratfall|1
+
+take a spill|1
+
+throw|1
+trip|turn|unhorse|unseat|vomit|waft|waste
+topple down|1
+
+topple over|1
+tip
+traipse|1
+stumble|totter|trip|wade
+trick|1
+
+trudge|1
+waddle|wander
+undertaking|1
+travail|trip|voyage|whack
+upset|1
+worst
+whirl|1
+sway|tear|toss|tour|trial|trip|volte-face|zip
+ignoramus|1
+chump|cretin|dim-wit|donkey|fathead|goose|greenhorn|ignorant|lame-brain|loon|mooncalf|ninny-hammer|numbskull|oaf
+jerk|1
+strain|stupid person|tear|thresh|tumble|turkey|twitter|whip|whisk
+lark|1
+horseplay|jest|orgy|picnic|pigeon|pleasure|recreation|rig|riot|roister|sparrow|swan|thrush|turkey|woodpecker
+loon|1
+ignoramus|imbecile|jerk|lamebrain|moron|nutjob|oaf|paranoid|simpleton|turkey
+lovebird|1
+peacock|pelican|pigeon|sparrow|swan|turkey|woodpecker
+nonstarter|1
+failure|loser|flop|dud|unsuccessful person|also-ran|debacle|underdog|fiasco|lemon|turkey
+owl|1
+hooter|bird of night|bird|owlet|eagle|birdie|goose|magpie|peacock|pigeon|swan|robber|nestling|squab|turkey|woodpecker
+parrot|1
+lark|mocker|mockingbird|monkey|owl|peacock|pedant|pelican|pigeon|plagiarist|sparrow|swan|turkey|woodpecker
+peacock|1
+vista blue|vivid blue|vivid sky blue|washed denim|water jet|waterfall|well water|wonderous blue|woodpecker|yale blue
+pelican|1
+
+quail|1
+shrink back|skulk|slink|sneak|truckle
+schmuck|1
+imbecile|nitwit|scumbag|simple|simpleton|turkey|victim
+simple|1
+unsullied|unsuspecting|untainted|untarnished|upright|user-friendly|vanilla|vernacular|virtuous
+sparrow|1
+dunnock|bird|magpie|rook|crow|duck|eagle|goose|hawk|lark|lovebird|owl|parrot|peacock|pelican|pigeon|swan|turkey|woodpecker
+squab|1
+goose|grouse|owl|partridge|peacock|pheasant|plump|songbird|swan|turkey
+swan|1
+
+twerp|1
+
+underdog|1
+
+woodpecker|1
+
+funeral director|1
+
+entrepreneur|1
+sole proprietorship|startupper|strategist|intermediator|adventurous|author|brunel|builder|dealmaster|interagent|interceder|intercessor|inventor|keeper|magnate|man of commerce|mediator|stakeholder|taker
+mortician|1
+funeral director|undertaker|funeral undertaker|embalmer
+epitaph|1
+eulogy|memorial|commemoration|remembrance|monument|inscription|elegy|legend|sentiment|cypress|dirge|epigraph|hic jacet
+beast with one horn|1
+
+fabled|1
+
+fabled beast|1
+
+fictional|1
+phony|sham|untrue
+horned horse|1
+
+legendary|1
+imagined|immense|mind-blowing|outstanding|superhero|valiant|visionary
+mythic|1
+fantastic|fantasy|ideal|made-up|nonexistent|notional|parabolic|whimsical
+sorcery|1
+witching|appeal|attraction|attractiveness|beauty|bewitchery|charisma|demonology|divining|fetishism|palmistry|prestidigitation|show
+sovereign|1
+ranking|self-legislation|self-legislative|self-ruled|self-sustained|swell|tiptop|top-drawer|topmost|utmost
+spell|1
+wait|wow|write
+mythical monsters|1
+dragon
+unconquered|1
+undefeated|unbeaten|unvanquished
+fabulous|1
+superhero|superphysical|supersensible|thundering|top-flight|top drawer|uncommon|unearthly|unique|unnatural|whopping
+ferocity|1
+heat|savageness|tempestuousness|torture|truculency|unicorn|vandalism|vehemency
+intemperance|1
+voracity|wastefulness|abandonment|boozing|boundlessness|crapulousness|edacity|glut|gratification|hedonism|luxuriance|omnivorousness|profligacy|revelry|unicorn
+magic powers|1
+
+phantasy|1
+dream|fantasy|illusion|fancy
+wildness|1
+intractableness|libertinism|license|passion|recklessness|tumult|unconstraint|uncontrollableness|ungovernableness|unicorn|wasteland
+inanity|1
+vanity|void|witlessness|commonplace|goofiness|invalidity|ludicrousness|nugacity|nuttiness|rashness|simplicity|triviality|worthlessness|zaniness
+mop|1
+
+tabula rasa|1
+clean slate|fresh start|blank|blank mind
+barrenness|1
+poorness|unproductiveness|vacuousness|vacuum
+bathe|1
+lip|purge|rinse out|slosh|sluice|sponge bath|sprinkle|swimming|take a bath|wade
+broom|1
+sweep|besom|brush|mop|whisk|sweeper|carpet sweeper|ling|heather|hairbrush|brush off|rake|vacuum
+desolation|1
+disintegration|dissatisfaction|doldrums|dolor|glumness|hollowness|holocaust|joylessness|mournfulness|obliteration|pain|solitariness|spoliation|suffering|trouble|vacuum|void
+exhaustion|1
+faintness|paralysis|shrinkage|tedium|weakening
+hiatus|1
+cavity|chink|deficit|discontinuance|flaw|shortage|slot
+hole|1
+shelter|sink of corruption|sinkhole|stab|standstill|vacuum|warren|yawn
+lacuna|1
+stoppage
+launder|1
+flush|laundering|legitimatize|legitimize|pick up|rectify|soak|soap|tidy|tub|washing
+polish|1
+recover|refurbish|renovate|rise|shampoo|skill|sleekness|slickness|study|sweep|tactfulness|wash
+scrub|1
+nullify|obliterate|park|pick up|quit|rectify|refrain|rub off|shine|shrimp|soap|stand of timber|subordinate|tub|underling|underwood|wash out|washing
+tidy up|1
+neaten|straighten|clean up|tidy|arrange|spruce up|straighten up|clean|order|sweep|clean house|clear|clear the decks|clear up|polish|straighten out|trim
+vacuousness|1
+vacuity|emptiness|vacancy|inanity|blankness|barrenness
+wash|1
+
+whisk|1
+wander|wend|wheel|whisk off
+luggage van|1
+
+minivan|1
+automobile|minibus|bus|van
+point|1
+value|wave|where|worth|wow
+precedence|1
+
+precursor|1
+model|paradigm|pathfinder|pattern|portent|protoplast|standard|forefather|mock-up
+priority|1
+primary issue|promotion|significance|urgency|elevation|preferment|advancement|favoritism|favoured treatment|prelation
+roadster|1
+buggy|car|automobile|runabout|bidet|bus|convertible|two-seater|hack|cab
+scout|1
+scrutinize|sleuth|sneer|snoop|talent scout|throw away|track|usher|watcher
+sedan|1
+car|litter|automobile|limousine|sedan chair|cab|auto|coupe|jalopy|cart
+ship|1
+scram|set sail|ship out|skiff|sled|sledge|sloop|space craft|steamboat|stow|submarine|take off|tender|transmogrify|tub|van|vehicle|wagon|whaler
+taxicab|1
+taxi|cab|hack|bus|auto|automobile|car|limousine|motorcycle|coupe|jalopy|jeep|motorcar|roadster|sedan
+wave|1
+tweak|twinkle|twit|twitteration|up|vociferate|wash|waterfall|wavelet|welcome|whirl|whitecap|wiggle|worrisome|worrit|worrying
+whip up|1
+pique|prepare|push|raise|scrap the plan|set on|set on fire|start|stir the blood|stir the embers|stir the feelings|throw together|wake|wake up|warm the blood
+work up|1
+stir the feelings|touch off|trigger|upset|vivify|wake|wake up|warm|warm the blood
+protection|1
+privilege|prohibition|protective covering|rampart|remedy|stronghold|trade protection|tribute|wall|wardship|wellness
+roadblock|1
+regulating station|search point|secure entrance|security check point|security checkpoint|security control point|security gatehouse|traffic control point|traffic jam|visitor control center
+seawall|1
+breakwater|mole|groin|jetty|bulwark|dam|dike|embankment|groyne|rampart|pier|sea wall|weir
+security|1
+expectation|faithfulness|forfeit|hopes|lien|peace|positiveness|prospect|quiet|resistance|safe keeping|security system|self-confidence|wall
+shut in|1
+keep|patient|victim
+stronghold|1
+protection|sanctuary|shelter|station|stockade|support|wall
+wainscot|1
+paneling
+stave off|1
+suspend|turn aside
+sword|1
+scalpel|scythe|sickle|smallsword|spike
+take in|1
+put something over|put under arrest|put up|recognize|regard|roll into one|save|scam|seize the meaning|sell|set foot in|slang|swallow|take into consideration|throw open to|trim|win
+variance|1
+shifting|split|strain|unevenness|unharmoniousness|vicissitude|war|warfare
+warpath|1
+hostility|aggression|belligerence|belligerency|fight|antagonism|campaign|crusade|militancy|pugnacity|truculence
+washing machine|1
+washer|basin|automatic washer
+cleaner|1
+cleanser|purifier|cleansing agent|detergent|custodian|washer|disinfectant|scourer|clearer
+launderer|1
+
+automatic washer|1
+
+laundress|1
+washerwoman|washwoman|laundrywoman
+laundryman|1
+washerman|laundry
+laundrywoman|1
+washwoman|washerwoman|laundress|washer
+washerwoman|1
+laundress|washwoman|laundrywoman|washer
+American capital|1
+Washington D.C.
+Washington D.C.|1
+
+George Washington|1
+President Washington|Washington
+Capital|1
+topmost|topnotch|type|uncial|unique|wad|way
+President Washington|1
+George Washington|Washington
+WA|1
+Washington
+pest|1
+bugbear|crashing bore|hassle|heckler|pain in the neck|pester|thorn|torment|worm
+recoil|1
+ward off|writhe
+scallop|1
+cutlet|dent|frizzle|shellfish|contort|crenulate|curl|lobster|meander|scarify|scotch|serrate|shell|shrimp|tooth|wring
+sidle|1
+shy|sidetrack|stride|tilt|walk|worm
+slink|1
+pad|quail|shift away|amble|flinch|prance|shrink|stride|walk|worm
+steal|1
+simulate|thievery|usurp|worm
+stinker|1
+polecat|scum bag|viper|worm
+sweet-talk|1
+
+twine|1
+twist and turn|wire|wrap up|wring
+villain|1
+part|pirate|racketeer|robber|roguish|roughneck|skunk|swine|tough|traitor|transgressor|trickster|walk-on|wastrel|worm
+wangle|1
+sell|trick|wrest
+woodworm|1
+
+wring|1
+scarify|shake down|twist and turn|wound|wring out|wringing
+meter|1
+magnetometer|measurer|music|pace|prosody|quantity|rate|rod|standard|tetrameter
+mint|1
+taffy|toffee|ton|unblemished|untouched|unused|volume|wealth|whole
+outdoor|1
+outside|exterior|outer|alfresco|out-of-door|external|open-air|outward|out of doors|outmost|out-of-doors|extrinsic|foreign|free|out|outdoors
+pace|1
+toddle|travel along|travel by|travel purposefully|trundle|wander|whisk|whistle|wind|wing|withdraw|yard|zigzag
+patio|1
+porch|yard|courtyard|enclosure|veranda|terrace|court|square|out of the house
+pen in|1
+
+plant|1
+
+quadrant|1
+quarter|quad|yard|courtyard|sector|sextant|area|lot|patch|enclosure
+refinery|1
+refiner|purifier|factory|cannery|clarifier|filter|armory|bindery|cleaner|cleanser|dockyard|kitchen|foundry|mint|oil refinery|refineries
+storage area|1
+cargo deck
