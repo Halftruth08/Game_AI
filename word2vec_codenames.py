@@ -17,7 +17,7 @@ for right now 12/21/17
 
 use collocation() to make a dictionary and reverse_dictionary
 
-use prepped_to_colloc() to convert natural language to a thesaurus-type data 
+use prepped_to_colloc() to convert natural language to a thesaurus-type data
 source
 
 create a new collocation that includes the new thesaurus in the input data.
@@ -27,13 +27,13 @@ create a new collocation that includes the new thesaurus in the input data.
 
 
 use word2vec on thesaurus and wikipedia data to establish meanings for the
- words to be used in Codenames. 
+ words to be used in Codenames.
  Open issues:
-     wikipedia scraper doesn't always pick an optimal page when disambiguation 
+     wikipedia scraper doesn't always pick an optimal page when disambiguation
      pages are hit
-     
+
      a good strategy for picking clues is not yet obvious. need to experiment.
-     
+
      need to save model and use a new function to test decision making.
      """
 
@@ -69,7 +69,7 @@ def scrape_power_thes(word,filen="appendix01.txt",min_upvotes=5,pass_on_words=Fa
     """ go to power thesaurus website,
     scrape appropriate words from page (max 20 without link taking)
     options:
-        
+
         write_here (True) function will add entry to doc at filename. for large batches of words,
                             more efficient is to pass up newwords and append file once
         pass_on_words (False)  gives return newwords for batch processing and tracking
@@ -111,7 +111,7 @@ def scrape_power_thes(word,filen="appendix01.txt",min_upvotes=5,pass_on_words=Fa
         if rtry>=12:
             exitc=1
             entries=[]
-            
+
                 #raise IOError("server is not cooperating")
         newwords=[]
         pagen+=1
@@ -132,7 +132,7 @@ def scrape_power_thes(word,filen="appendix01.txt",min_upvotes=5,pass_on_words=Fa
 #append will start at end of existing line, not auto newline! (duh)
 #for this version, appendix will be written in the style of the open office
 #thesaurus, using pipes, though word sense disambiguation will not be performed
-# and no part of speech specification will be included. 
+# and no part of speech specification will be included.
 # if it seems useful, perhaps develop these as options in this function
 #example:
 # beach|1
@@ -152,7 +152,7 @@ def scrape_wiki(word):
     listpath='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div[@class="mw-parser-output"]/ul/li/a/text()'
     docpath='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div[@class="mw-parser-output"]/p/text()'
     links='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div[@class="mw-parser-output"]/p/a/text()'
-    cats ='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="catlinks"]/div[@id="mw-normal-catlinks"]/ul/li' 
+    cats ='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="catlinks"]/div[@id="mw-normal-catlinks"]/ul/li'
     print("scraping...")
     leaf = word.replace(' ','_')
     page = requests.get(wiki+leaf)
@@ -180,7 +180,7 @@ def scrape_wiki(word):
                 buds = branches[0].xpath('li')
             else:
                 buds = tree.xpath(path2)
-        
+
             link = buds[0].xpath('a')[0].get('href')
             new_leaf = link.replace('/wiki/','')
         else:
@@ -200,11 +200,11 @@ def scrape_wiki(word):
                     temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
                     flat.extend(temp.lower().split(' '))
                 flat=list(filter(lambda x: not x=='',flat))
-        
-        
+
+
         #link = buds[0].xpath('a')[0].get('href')
         #new_leaf = link.replace('/wiki/','')
-        
+
     return flat,new_leaf
 # pylint: disable=redefined-outer-name
 def maybe_download(filename, expected_bytes):
@@ -240,7 +240,7 @@ def read_data_txt(filename):
   return data, entries
 
 def read_data_dat(filename):
-    """Extract data from Open Office Thesaurus , separating word senses 
+    """Extract data from Open Office Thesaurus , separating word senses
     format is as follows:
 abel janszoon tasman|1
 (noun)|Tasman|Abel Tasman|Abel Janszoon Tasman|navigator
@@ -253,7 +253,7 @@ abele|1
 abelia|1
 (noun)|shrub|bush
 
-    
+
     """
     th = open(filename,'r',encoding=ENC)
     #th.readline()#first line is not an entry
@@ -288,29 +288,29 @@ def prep_raw(inp, out,dev=False):
     for line in ip:  #use this once done with dev
         itz+=1
         temp = line
-        
+
         temp = temp.replace('-',' ')
         temp = temp.replace('“','')
         temp = temp.replace('”','')
         temp = temp.replace('•','')
         temp = temp.replace('—','')
         #temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
-        
+
         templ = temp.lower().split(' ')
         templ = list(filter(lambda x: not x=='',templ))
         temp = ' '.join(templ)
         ot.write(temp)
-        if dev==True && itz > 5000:
+        if dev==True and itz > 5000:
             break
     ip.close()
     ot.close()
-    
+
 def prepped_to_colloc(seedlist,dc,rd,nldata='news2011procd_dev',iterations=2,
                       thesname="collocationthesaurus001.txt",nlevels=3,mincut=3):
     """take natural language passages, and isolate the most common ordered collocations
 (as if they are tuples). Using the lead word as a label, establish a new thesaurus
 that contains the most common collocations for every word in a target list.
-the target list is updated to include the collocated words in the next iteration, 
+the target list is updated to include the collocated words in the next iteration,
 where the seedlist is the target list for the inital search.
 
 needs: dictionary, reverse_dictionary
@@ -321,7 +321,7 @@ dc -- dictionary, keys are strings, entries are ints
 rd -- reverse dictionary, keys are ints, entries are strings
 iterations -- int, number of times to expand on findings from initial seed.
 thesname -- string, what to name the thesaurus written to hold the findings.
-""" 
+"""
     #current plan
     #peek at top 50 lines of data in natural language corpus file
     #figure out necessary preprocessing. DO THIS IN SEPARATE func
@@ -334,7 +334,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
     # test on smaller data set
     # use testing to establish useful threshholds.
     #seedlist
-    
+
     targetlist=seedlist
     bigrams={}
     hits={}
@@ -351,9 +351,9 @@ thesname -- string, what to name the thesaurus written to hold the findings.
             temp = line.replace('\n','').split(' ')
             for i2 in temp:
                 if i2 in targetlist:
-                    #get prev and next 
+                    #get prev and next
                     #save bigrams as numbers? sparseness precludes array or indicial storage
-                  
+
                     if temp.index(i2)==0:
                         a=0
                     else:
@@ -366,7 +366,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                     if hits.get(b,0) == 0:
                         hits[b]=[]
                     if not a == 0:
-                        if not len(temp[temp.index(i2)-1]) < 3: 
+                        if not len(temp[temp.index(i2)-1]) < 3:
                             #we are not interested in clues shorter than 3 letters long
                             ab = '%i %i'%(a,b)
                             if ab in bigrams.keys():
@@ -375,7 +375,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                                 bigrams[ab]=1
                                 hits[b].append(a)
                     if not c == 0:
-                        if not len(temp[temp.index(i2)+1]) < 3: 
+                        if not len(temp[temp.index(i2)+1]) < 3:
                             bc = '%i %i'%(b,c)
                             if bc in bigrams.keys():
                                 bigrams[bc]+=1
@@ -399,7 +399,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                             if hits.get(b,0) == 0:
                                 hits[b]=[]
                             if not a == 0:
-                                if not len(temp[temp.index(i2)-1-mod]) < 3: 
+                                if not len(temp[temp.index(i2)-1-mod]) < 3:
                                     #we are not interested in clues shorter than 3 letters long
                                     ab = '%i %i'%(a,b)
                                     if ab in bigrams.keys():
@@ -408,7 +408,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                                         bigrams[ab]=1
                                         hits[b].append(a)
                             if not c == 0:
-                                if not len(temp[temp.index(i2)+2-mod]) < 3: 
+                                if not len(temp[temp.index(i2)+2-mod]) < 3:
                                     bc = '%i %i'%(b,c)
                                     if bc in bigrams.keys():
                                         bigrams[bc]+=1
@@ -438,7 +438,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
             tl.sort(key=lambda x: x[0], reverse=True)
             if not len(tl) == 0:
                 targs[i]=tl
-        targetlist=next_targetlist 
+        targetlist=next_targetlist
         ###### iteration reloads and rereads for new targets####
     ak = open(thesname,'w',encoding=ENC)
     for i in targs.keys():
@@ -462,13 +462,13 @@ thesname -- string, what to name the thesaurus written to hold the findings.
             if not len(temp) == 0:
                 ak.write(rd[i]+'|1\n')
                 ak.write('|'.join(temp)+'\n')
-    ak.close()          
+    ak.close()
     #leveling of associations is done linearly. although the data trends indicate
     #an exponential distribution of odds, the thesaurus building routine should
     #maintain the occurrence likelihoods for later odds ratio decision making.
     #the normalization performed here is relevant to the process of choosing word
     #specific clues.
-    
+
 #    for key in bg3.keys():
 #        temp = key.split(' ')
 #        #ts=''
@@ -479,11 +479,11 @@ thesname -- string, what to name the thesaurus written to hold the findings.
 #        bigs.append(ts)
 #        nums.append(bg3[key])
     return targs
-    
+
 def wsd(filen="wsd_thes.csv"):
     """Takes the thesaurus data from open office and finds and replaces words
     with word senses where possible.
-    
+
     """
     wordlist=read_data_dat(open_office_thes)
     groups=[]
@@ -509,14 +509,14 @@ def wsd(filen="wsd_thes.csv"):
     for group in groups:
         mlist.append(group[0])
         if group[0].find('(')>0:
-        #only words with multiple senses    
+        #only words with multiple senses
             senselist.append(group[0])
     wsl2=list(filter(lambda x: x.find('(0)')>-1,senselist))
     ldex=list(map(lambda x: senselist.index(x),wsl2))
     ldex.append(len(senselist))
     nsenses= [ldex[i+1]-ldex[i] for i in range(len(ldex)-1)]
     wsl2=list(map(lambda x: x.replace('(0)',''),wsl2))
-    
+
     for i1 in range(len(groups)):#add a progress indicator
         for i2 in range(2,len(groups[i1])):
             if groups[i1][i2] in wsl2:
@@ -528,8 +528,8 @@ def wsd(filen="wsd_thes.csv"):
                 temp = list(filter(lambda x: groups[i1][1] in x,temp))
                 if len(temp)==1:
                     pass
-                
-        
+
+
 def build_dataset(words, n_words):
   """Process raw inputs into a dataset."""
   count = [['UNK', -1]]
@@ -601,7 +601,7 @@ def generate_batch2(batch_size, num_skips, plus_rev = True):
     for i2 in range(0,len(spokes),2):
       it=int(i2/2)
       batch[fac*i * num_skips + hf*num_skips+it*hf]=buffer[spokes[i2]]
-      labels[fac*i * num_skips + hf*num_skips+it*hf, 0]=buffer[spokes[i2+1]]  
+      labels[fac*i * num_skips + hf*num_skips+it*hf, 0]=buffer[spokes[i2+1]]
       if plus_rev == True:
           batch[fac*i * num_skips + hf*num_skips+it*hf+1]=buffer[spokes[i2+1]]
           labels[fac*i * num_skips + hf*num_skips+it*hf+1, 0]=buffer[spokes[i2]]
@@ -657,7 +657,7 @@ def plot_with_labels(low_dim_embs, labels, filename):
                  va='bottom')
 
   plt.savefig(filename)
-  
+
 def collocation(dataf=[open_office_thes],voc_sz=120000,dim=100,min_co=0,appb=False):
     """appendix builder function set appb True to pass additional local data
     """
@@ -731,7 +731,7 @@ def collocation(dataf=[open_office_thes],voc_sz=120000,dim=100,min_co=0,appb=Fal
                 for key in coloc[i]:
                     if coloc[i][key]<min_co:
                         del coloc[i][key]
-    
+
     #conversion to probabilities from counts
     for i in range(len(coloc)):
         tot = sum(coloc[i].values())
@@ -745,10 +745,10 @@ def collocation(dataf=[open_office_thes],voc_sz=120000,dim=100,min_co=0,appb=Fal
 def test_coloc(coloc,rev_dic,dc,set_n=12,n_clues=20,wordl=[],mode=0,wmode=0,test_log="test_1to1_sets.txt"):
     """pass out test results
     will pad wordl to make len = set_n
-    
+
     wmode = 0 wordl drawn from common (targets)
             1 wordl drawn from most frequent fifth of vocab in dictionary
-            can also set wordl ahead of call 
+            can also set wordl ahead of call
     mode 0 pick the first clue in list
          1 pick a clue from clues at random
          2 tbd
@@ -781,7 +781,7 @@ def test_coloc(coloc,rev_dic,dc,set_n=12,n_clues=20,wordl=[],mode=0,wmode=0,test
     clu=[]
     #combo=[]
     #this section finds 1 to 1 clues. anything more complicated is experimental
-    
+
     for w in range(set_n):
         candidates=[]
         pro=[]
@@ -817,11 +817,11 @@ def test_coloc(coloc,rev_dic,dc,set_n=12,n_clues=20,wordl=[],mode=0,wmode=0,test
         clu2=[clu[i][random.choice(range(len(clu[i])))] for i in range(len(clu))]
     else:
         pass
-    #adding: output clues and words as 
+    #adding: output clues and words as
     clu2f=[clu2[i][0] for i in range(len(clu2))]
     random.shuffle(clu2f)
     wordsl=[rev_dic[i] for i in wordl]
-    
+
     n='1'
     for i in range(2,set_n+1):
         n=n+', %i'%i
@@ -830,22 +830,22 @@ def test_coloc(coloc,rev_dic,dc,set_n=12,n_clues=20,wordl=[],mode=0,wmode=0,test
     out.write(n+'\n')
     out.write(','.join(wordsl)+'\n')
     out.close()
- 
+
     return clu, wordl
 def test2_coloc(coloc,rev_dic,Wset_n=12,Bset_n=12,n_clues=20):
     """pass out test results
-    
-    """    
+
+    """
     # for a two-word clue, search would include the candidates for all whitelist words.
     # let's assume we see full word list (blacklist and whitelist)
     # our goal is to find any clues that give higher odds of selecting both
     # included words than anything else
     # define confidence as Min(odds(incl words))-max(odds(other words))
-    
-    
+
+
 def build_appendix(filena='appendix01.txt',voc_sz1=120000,mode='w',all_targets=False,min_votes1=5,related=False):
     """using powerthesaurus.org, a group-sourced online database, build an additional
-    thesaurus to supplement the open office 
+    thesaurus to supplement the open office
     """
     coloc,rev_dc,dc,count=collocation(voc_sz=voc_sz1,appb=True)
     tr = open("cdnmswordlist.txt",'r')#targets
@@ -880,8 +880,8 @@ def build_appendix(filena='appendix01.txt',voc_sz1=120000,mode='w',all_targets=F
         apx.write('|'.join(branch_syns[i])+'\n')
     apx.close()
     print("Found %i words for appendix"%(len(missed)+len(to_look_up)))
-    
-    
+
+
         #if newwords has only one word in the list...
 
 def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
@@ -920,14 +920,14 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
                     temp.extend(wordsense)
                     groups.append(temp)
         data, count, dictionary, reverse_dictionary = build_dataset(vocabulary, vocabulary_size)
-        #above call is separated for future specification        
+        #above call is separated for future specification
     else:
         vocabulary ,entries= read_data_txt(filename)
         print('Data size', len(vocabulary))
         groups=list()
         for i in range(len(entries)):
             groups.append(entries[i].split(','))
-    
+
     # Step 2: Build the dictionary and replace rare words with UNK token.
 
     # Filling 4 global variables:
@@ -941,11 +941,11 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
     del vocabulary  # Hint to reduce memory.
     print('Most common words (+UNK)', count[:12])
     print('Sample data', data[:10], [reverse_dictionary[i] for i in data[:10]])
-    
+
 
     data_index1 = 0
     #data_index2 = 0
-    
+
     tr = open("cdnmswordlist.txt",'r')#targets
     targets = tf.compat.as_str(tr.read()).split('\n')
     tr.close()
@@ -955,8 +955,8 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
         if common[i]==0:
             missed.append(targets[i])
     #for words not in thesaurus, get related words from wikipedia
-    
-    wgroups=[] 
+
+    wgroups=[]
     if scrape_all == True:
         missed = targets
     for word in missed:
@@ -970,10 +970,10 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
         enter = [word]
         enter.extend(flat)#or new
         wgroups.append(enter)
-        
+
     groups.extend(wgroups)
-    
-    
+
+
     wg = [item for sublist in wgroups for item in sublist]
     wgf=list(filter(lambda x: dictionary.get(x,0)==0,wg))
     vocabulary_size2 = vocabulary_size + len(collections.Counter(wgf))
@@ -983,17 +983,17 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
     common2=[dictionary2.get(i,0) for i in targets]
     # Step 3: Function to generate a training batch for the skip-gram model.
     #completely rework to sample entries and then randomly pair a word from the entry with the first word
-    
-    
+
+
     batch, labels = generate_batch2(batch_size=8, num_skips=2)
     for i in range(8):
       print(batch[i], reverse_dictionary2[batch[i]],
             '->', labels[i, 0], reverse_dictionary2[labels[i, 0]])
-    
+
     # Step 4: Build and train a skip-gram model.
     common2f = list(filter(lambda x: not x==0, common2))
     print(common2f[:])
-    
+
     # We pick a random validation set to sample nearest neighbors. Here we limit the
     # validation samples to the words that have a low numeric ID, which by
     # construction are also the most frequent. These 3 variables are used only for
@@ -1002,29 +1002,29 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
     #valid_window = 100  # Only pick dev samples in the head of the distribution.
     #valid_examples = np.random.choice(common2f, valid_size, replace=False)
     valid_examples = common2f[:valid_size]#deterministic to check changes
-    
+
     graph = tf.Graph()
-    
+
     with graph.as_default():
-    
+
       # Input data.
       train_inputs = tf.placeholder(tf.int32, shape=[batch_size])
       train_labels = tf.placeholder(tf.int32, shape=[batch_size, 1])
       valid_dataset = tf.constant(valid_examples, dtype=tf.int32)
-    
+
       # Ops and variables pinned to the CPU because of missing GPU implementation
       with tf.device('/cpu:0'):
         # Look up embeddings for inputs.
         embeddings = tf.Variable(
             tf.random_uniform([vocabulary_size2, embedding_size], -1.0, 1.0))
         embed = tf.nn.embedding_lookup(embeddings, train_inputs)
-    
+
         # Construct the variables for the NCE loss
         nce_weights = tf.Variable(
             tf.truncated_normal([vocabulary_size2, embedding_size],
                                 stddev=1.0 / math.sqrt(embedding_size)))
         nce_biases = tf.Variable(tf.zeros([vocabulary_size2]))
-    
+
       # Compute the average NCE loss for the batch.
       # tf.nce_loss automatically draws a new sample of the negative labels each
       # time we evaluate the loss.
@@ -1037,10 +1037,10 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
                          inputs=embed,
                          num_sampled=num_sampled,
                          num_classes=vocabulary_size2))
-    
+
       # Construct the SGD optimizer using a learning rate of 1.0.
       optimizer = tf.train.GradientDescentOptimizer(1.0).minimize(loss)
-    
+
       # Compute the cosine similarity between minibatch examples and all embeddings.
       norm = tf.sqrt(tf.reduce_sum(tf.square(embeddings), 1, keep_dims=True))
       normalized_embeddings = embeddings / norm
@@ -1048,36 +1048,36 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
           normalized_embeddings, valid_dataset)
       similarity = tf.matmul(
           valid_embeddings, normalized_embeddings, transpose_b=True)
-    
+
       # Add variable initializer.
       init = tf.global_variables_initializer()
-    
+
     # Step 5: Begin training.
 
-    
+
     with tf.Session(graph=graph) as session:
       # We must initialize all variables before we use them.
       init.run()
       print('Initialized')
-    
+
       average_loss = 0
       for step in xrange(num_steps):
         batch_inputs, batch_labels = generate_batch2(
             batch_size, num_skips)
         feed_dict = {train_inputs: batch_inputs, train_labels: batch_labels}
-    
+
         # We perform one update step by evaluating the optimizer op (including it
         # in the list of returned values for session.run()
         _, loss_val = session.run([optimizer, loss], feed_dict=feed_dict)
         average_loss += loss_val
-    
+
         if step % 2000 == 0:
           if step > 0:
             average_loss /= 2000
           # The average loss is an estimate of the loss over the last 2000 batches.
           print('Average loss at step ', step, ': ', average_loss)
           average_loss = 0
-    
+
         # Note that this is expensive (~20% slowdown if computed every 500 steps)
         if step % 10000 == 0:
           sim = similarity.eval()
@@ -1092,7 +1092,7 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
             for k in xrange(keep):
               close_word = reverse_dictionary2[best[k]]
               log_str = '%s %s %f,' % (log_str, close_word, sim[i,best[k]])
-            
+
             print(log_str)
           for i in xrange(3):
               for i2 in range(i+1,valid_size):
@@ -1129,12 +1129,12 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
             log_str = '%s %s %f,' % (log_str, close_word, sim[i,best[k]]-baseline[best[k]])
           print(log_str)
     # Step 6: Visualize the embeddings.
-    
-    
+
+
     # pylint: disable=missing-docstring
     # Function to draw visualization of distance between embeddings.
-    
-    
+
+
     try:
       # pylint: disable=g-import-not-at-top
 
@@ -1144,7 +1144,7 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
       low_dim_embs = tsne.fit_transform(final_embeddings[:plot_only, :])
       labels = [reverse_dictionary[i] for i in xrange(plot_only)]
       plot_with_labels(low_dim_embs, labels, os.path.join(os.getcwd(), 'tsne.png'))
-    
+
     except ImportError as ex:
       print('Please install sklearn, matplotlib, and scipy to show embeddings.')
       print(ex)
