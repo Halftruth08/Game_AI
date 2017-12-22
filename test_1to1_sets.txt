@@ -14,3 +14,15 @@ dipper,diamonds,continent,dustup,shrine,robot,clivers,bouffe,larrup,chalk,loudne
 
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
 antarctica,box,horseshoe,circle,triangle,doctor,van,knife,engine,mole,ice,tower,cell,row,spike,mass,ice cream,angel,fork,dinosaur,triangle,back,UNK,opera,jam
+new,misstep,footing,abrogation,supplanting,neighborly,alkaloid,conformity,clouded,france,baulk,abysmal,pulse,lucent,signboard,spoof,late,piercing,bogey,demigod,festinate,attachment,cabin,weekly,jujube
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+sign in,spirit,u-turn,bar,latest,brace,dawdle,number one,make off,touch off,crop,consent,document,trip,board,author,deportation,tremble,faint,unspeakable,latest,champion,UNK,soiree,post
+persist,citron,european,furor,dome,moosewood,noisemaker,harpy,empire,continental,pretension,transformation,intellectual,bharat,vision,girth,cargo,extraneous,dessert,flounce,continent,writer,washout,cheek,redbreast
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+sprint,fish,stadium,van,robin,europe,revolution,maple,egypt,alien,antarctica,racket,amazon,france,bond,ghost,truck,crash,band,dice,teacher,apple,mouth,jupiter,india
+prevent,salientian,troubler,crunch,wheelbarrow,cataflam,puzzle,criticise,ploughing,fence,glaser,interrupt
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+order,discordant,controller,confused,toddy palm,theologiser,substitute,awful,intravenous anesthetic,olfactory property,pitched battle,personage
