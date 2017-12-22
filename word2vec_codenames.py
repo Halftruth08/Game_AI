@@ -1147,4 +1147,5 @@ def build(keep=False,voc_sz=100000,dim=128,scrape_all=False,use_new_th=True):
         return final_embeddings, count2, dictionary2, reverse_dictionary2, targets
 
 if __name__ is "__main__":
-    build()
+    #build()
+    pass
