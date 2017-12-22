@@ -272,7 +272,7 @@ abelia|1
     print("%i entries found" %len(data))
     #data is stored as [["abel janszoon tasman",["(noun)","tasman","abel tasman","abel janszoon tasman","navigator"]]...]
     return data
-def prep_raw(inp, out):
+def prep_raw(inp, out,dev=False):
     """the database is sentences, each separated by .\n
     preprocessing steps:
     replace '-' with ' '
@@ -283,20 +283,25 @@ def prep_raw(inp, out):
     """
     ip = open(inp,'r',encoding='UTF-8')
     ot = open(out,'w',encoding='UTF-8')
-    for i in range(5000): #500 is the number of sentences to use during development
-    #for line in ip:  #use this once done with dev
-        temp = ip.readline()
+    #for i in range(5000): #500 is the number of sentences to use during development
+    itz=0
+    for line in ip:  #use this once done with dev
+        itz+=1
+        temp = line
+        
         temp = temp.replace('-',' ')
         temp = temp.replace('“','')
         temp = temp.replace('”','')
         temp = temp.replace('•','')
         temp = temp.replace('—','')
-        temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
+        #temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
         
         templ = temp.lower().split(' ')
         templ = list(filter(lambda x: not x=='',templ))
         temp = ' '.join(templ)
         ot.write(temp)
+        if dev==True && itz > 5000:
+            break
     ip.close()
     ot.close()
     
