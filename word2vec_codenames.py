@@ -300,7 +300,7 @@ def prep_raw(inp, out,dev=False):
         templ = list(filter(lambda x: not x=='',templ))
         temp = ' '.join(templ)
         ot.write(temp)
-        if dev==True && itz > 5000:
+        if dev==True and itz > 5000:
             break
     ip.close()
     ot.close()
