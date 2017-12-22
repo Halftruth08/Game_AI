@@ -12,7 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""use word2vec on thesaurus and wikipedia data to establish meanings for the
+"""
+for right now 12/21/17
+
+use collocation() to make a dictionary and reverse_dictionary
+
+use prepped_to_colloc() to convert natural language to a thesaurus-type data 
+source
+
+create a new collocation that includes the new thesaurus in the input data.
+
+
+
+
+
+use word2vec on thesaurus and wikipedia data to establish meanings for the
  words to be used in Codenames. 
  Open issues:
      wikipedia scraper doesn't always pick an optimal page when disambiguation 
@@ -341,7 +355,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                         a=dc.get(temp[temp.index(i2)-1],0)
                     b=dc.get(i2,0)
                     if len(temp)-temp.index(i2)==1:
-                        c==0
+                        c=0
                     else:
                         c=dc.get(temp[temp.index(i2)+1],0)
                     if hits.get(b,0) == 0:
@@ -374,7 +388,7 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                                 a= dc.get(temp[temp.index(i2)-1-mod],0)
                             b= dc.get(full,0)
                             if len(temp)-temp.index(i2)==2-mod:
-                                c==0
+                                c=0
                             else:
                                 c= dc.get(temp[temp.index(i2)+2-mod],0)
                             if hits.get(b,0) == 0:
@@ -438,11 +452,12 @@ thesname -- string, what to name the thesaurus written to hold the findings.
                 if odds[i3]>il:
                     wd = rd.get(tempwords[i3],'')
                     if not len(wd)==0:
-                        temp.append(rd.get(tempwords[i3],''))
+                        if not wd in temp:
+                            temp.append(wd)
             if not len(temp) == 0:
                 ak.write(rd[i]+'|1\n')
-                ak.write(+'\n')
-                
+                ak.write('|'.join(temp)+'\n')
+    ak.close()          
     #leveling of associations is done linearly. although the data trends indicate
     #an exponential distribution of odds, the thesaurus building routine should
     #maintain the occurrence likelihoods for later odds ratio decision making.
