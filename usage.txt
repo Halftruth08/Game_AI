@@ -1,6 +1,8 @@
 tr = open("cdnmswordlist.txt", "r")
 targets = tr.read().split('\n')
 
+prep_raw("training-monolingual/news.2011.en.shuffled", "news2011procd")
+
 [coloc, reverse_dictionary, dictionary, cnt] = collocation(appb=True)
 
-prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd_dev', iterations=1, nlevels=12, mincut=3)
+prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd', iterations=1, nlevels=12, mincut=3)
