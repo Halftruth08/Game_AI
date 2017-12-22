@@ -1,6 +1,6 @@
 tr = open("cdnmswordlist.txt", "r")
 targets = tr.read().split('\n')
-
+tr.close()
 prep_raw("training-monolingual/news.2011.en.shuffled", "news2011procd")
 
 [coloc, reverse_dictionary, dictionary, cnt] = collocation(appb=True)

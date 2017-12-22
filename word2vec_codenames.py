@@ -281,7 +281,7 @@ abelia|1
     return data
 
 
-def prep_raw(inp, out, dev=False):
+def prep_raw(inp, out, dev=0):
     """the database is sentences, each separated by .\n
     preprocessing steps:
     replace '-' with ' '
@@ -308,7 +308,7 @@ def prep_raw(inp, out, dev=False):
         templ = list(filter(lambda x: not x == '', templ))
         temp = ' '.join(templ)
         ot.write(temp)
-        if dev == True and itz > 5000:
+        if dev > 0  and itz > dev:
             break
     ip.close()
     ot.close()
