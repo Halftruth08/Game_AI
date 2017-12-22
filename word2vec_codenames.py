@@ -294,8 +294,7 @@ def prep_raw(inp, out,dev=False):
         temp = temp.replace('”','')
         temp = temp.replace('•','')
         temp = temp.replace('—','')
-        #temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
-
+        temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
         templ = temp.lower().split(' ')
         templ = list(filter(lambda x: not x=='',templ))
         temp = ' '.join(templ)
