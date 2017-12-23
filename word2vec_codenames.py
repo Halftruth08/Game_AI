@@ -316,9 +316,130 @@ def prep_raw(inp, out, dev=0):
     ip.close()
     ot.close()
 
+def compress_to_targets(targetlist,dc,data,bigrams):
+    "called by prepped_to_colloc"
+
+    sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
+    spw = []
+    for isp in sp:
+        spw.extend(isp.split(' '))
+    # any codenames with spaces? clues can't contain spaces, so no need for support
+    # beyond first iteration
+    
+    d = open(data, 'r', encoding='UTF-8')
+    for line in d:
+        temp = line.replace('\n', '').split(' ')
+        for i2 in temp:
+            if i2 in targetlist:
+                # get prev and next
+                # save bigrams as numbers? sparseness precludes array or indicial storage
+
+                if temp.index(i2) == 0:
+                    a = 0
+                else:
+                    a = dc.get(temp[temp.index(i2) - 1], 0)
+                b = dc.get(i2, 0)
+                if len(temp) - temp.index(i2) == 1:
+                    c = 0
+                else:
+                    c = dc.get(temp[temp.index(i2) + 1], 0)
+#                if hits.get(b, 0) == 0:
+#                    hits[b] = []
+                if not a == 0:
+                    if not len(temp[temp.index(i2) - 1]) < 3:
+                        # we are not interested in clues shorter than 3 letters long
+                        #ab = '%i %i' % (a, b)
+                        if b in bigrams.keys():
+                            if a in bigrams[b].keys():
+                                bigrams[b][a][0] += 1
+                            else:
+                                bigrams[b][a] = [1,0]
+                        else:
+                            bigrams[b] = {a:[1,0]}
+#                            hits[b].append(a)
+                if not c == 0:
+                    if not len(temp[temp.index(i2) + 1]) < 3:
+                        #bc = '%i %i' % (b, c)
+                        if b in bigrams.keys():
+                            if c in bigrams[b].keys():
+                                bigrams[b][c][1] += 1
+                            else:
+                                bigrams[b][c] = [0,1]
+                        else:
+                            bigrams[b] = {c:[0,1]}
+#                            hits[b].append(c)
+            elif i2 in spw:
+                mod = spw.index(i2) % 2
+                full = sp[spw.index(i2) // 2]
+                if min(len(temp) - temp.index(i2) - 2 + mod, temp.index(i2) - mod) > -1:
+                    if temp[temp.index(i2) + 1 - 2 * mod] == spw[2 * (spw.index(i2) // 2) + 1 - mod]:
+                        if temp.index(i2) == mod:
+                            a = 0
+                        else:
+                            a = dc.get(temp[temp.index(i2) - 1 - mod], 0)
+                        b = dc.get(full, 0)
+                        if len(temp) - temp.index(i2) == 2 - mod:
+                            c = 0
+                        else:
+                            c = dc.get(temp[temp.index(i2) + 2 - mod], 0)
+#                        if hits.get(b, 0) == 0:
+#                            hits[b] = []
+                        if not a == 0:
+                            if not len(temp[temp.index(i2) - 1 - mod]) < 3:
+                                # we are not interested in clues shorter than 3 letters long
+                                #ab = '%i %i' % (a, b)
+                                if b in bigrams.keys():
+                                    if a in bigrams[b].keys():
+                                        bigrams[b][a][0] += 1
+                                    else:
+                                        bigrams[b][a] = [1,0]
+                                else:
+                                    bigrams[b] = {a:[1,0]}
+#                                    hits[b].append(a)
+                        if not c == 0:
+                            if not len(temp[temp.index(i2) + 2 - mod]) < 3:
+                                #bc = '%i %i' % (b, c)
+                                if b in bigrams.keys():
+                                    if c in bigrams[b].keys():
+                                        bigrams[b][c][1] += 1
+                                    else:
+                                        bigrams[b][c] = [0,1]
+                                else:
+                                    bigrams[b] = {c:[0,1]}
+#                                    hits[b].append(c)
+    
+    return bigrams
+
+def targetlist_update(rd,bigrams,targs,mincut):
+    bg3 = {}
+    #    bigs=[]
+    #    nums=[]
+    targetlist = []
+    for i2 in bigrams.keys():
+        bg3[i2]={}
+        for i3 in bigrams[i2].keys():
+            if max(bigrams[i2][i3]) > mincut:
+                bg3[i2][i3] = bigrams[i2][i3]
+    for i2 in bg3.keys():
+        #        m=dc.get(i,0)
+        #        if not m == 0:
+        tl = []
+        for i3 in bg3[i2]:  # get the number of times better collocation is found
+            temp = max(bg3.get(i2,0).get(i3,0))
+            if not temp == 0:
+                tl.append((temp, i3))
+                if not i3 in bg3.keys():
+                    word = rd.get(i3, 0)
+                    if not word == 0:
+                        targetlist.append(word)
+        tl.sort(key=lambda x: x[0], reverse=True)
+        if not len(tl) == 0:
+            targs[i2] = tl
+    return targs,targetlist
+
 
 def prepped_to_colloc(seedlist, dc, rd, nldata='news2011procd_dev', iterations=2,
-                      thesname="collocationthesaurus001.txt", nlevels=3, mincut=3):
+                      thesname="collocationthesaurus001.txt", nlevels=3, mincut=3,devmode=1):
     """take natural language passages, and isolate the most common ordered collocations
 (as if they are tuples). Using the lead word as a label, establish a new thesaurus
 that contains the most common collocations for every word in a target list.
@@ -328,7 +449,8 @@ where the seedlist is the target list for the inital search.
 needs: dictionary, reverse_dictionary
 
 seedlist-- list of strings
-
+devmode -- tries to optimize enty methods, in addition to leading to more insightful 
+compression rules
 dc -- dictionary, keys are strings, entries are ints
 rd -- reverse dictionary, keys are ints, entries are strings
 iterations -- int, number of times to expand on findings from initial seed.
@@ -349,108 +471,13 @@ thesname -- string, what to name the thesaurus written to hold the findings.
 
     targetlist = seedlist
     bigrams = {}
-    hits = {}
+    #bigrams = {}
     targs = {}
-    for i in range(iterations):
-        sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
-        spw = []
-        for isp in sp:
-            spw.extend(isp.split(' '))
-        # any codenames with spaces? clues can't contain spaces, so no need for support
-        # beyond first iteration
-        d = open(nldata, 'r', encoding='UTF-8')
-        for line in d:
-            temp = line.replace('\n', '').split(' ')
-            for i2 in temp:
-                if i2 in targetlist:
-                    # get prev and next
-                    # save bigrams as numbers? sparseness precludes array or indicial storage
-
-                    if temp.index(i2) == 0:
-                        a = 0
-                    else:
-                        a = dc.get(temp[temp.index(i2) - 1], 0)
-                    b = dc.get(i2, 0)
-                    if len(temp) - temp.index(i2) == 1:
-                        c = 0
-                    else:
-                        c = dc.get(temp[temp.index(i2) + 1], 0)
-                    if hits.get(b, 0) == 0:
-                        hits[b] = []
-                    if not a == 0:
-                        if not len(temp[temp.index(i2) - 1]) < 3:
-                            # we are not interested in clues shorter than 3 letters long
-                            ab = '%i %i' % (a, b)
-                            if ab in bigrams.keys():
-                                bigrams[ab] += 1
-                            else:
-                                bigrams[ab] = 1
-                                hits[b].append(a)
-                    if not c == 0:
-                        if not len(temp[temp.index(i2) + 1]) < 3:
-                            bc = '%i %i' % (b, c)
-                            if bc in bigrams.keys():
-                                bigrams[bc] += 1
-                            else:
-                                bigrams[bc] = 1
-                                hits[b].append(c)
-                elif i2 in spw:
-                    mod = spw.index(i2) % 2
-                    full = sp[spw.index(i2) // 2]
-                    if min(len(temp) - temp.index(i2) - 2 + mod, temp.index(i2) - mod) > -1:
-                        if temp[temp.index(i2) + 1 - 2 * mod] == spw[2 * (spw.index(i2) // 2) + 1 - mod]:
-                            if temp.index(i2) == mod:
-                                a = 0
-                            else:
-                                a = dc.get(temp[temp.index(i2) - 1 - mod], 0)
-                            b = dc.get(full, 0)
-                            if len(temp) - temp.index(i2) == 2 - mod:
-                                c = 0
-                            else:
-                                c = dc.get(temp[temp.index(i2) + 2 - mod], 0)
-                            if hits.get(b, 0) == 0:
-                                hits[b] = []
-                            if not a == 0:
-                                if not len(temp[temp.index(i2) - 1 - mod]) < 3:
-                                    # we are not interested in clues shorter than 3 letters long
-                                    ab = '%i %i' % (a, b)
-                                    if ab in bigrams.keys():
-                                        bigrams[ab] += 1
-                                    else:
-                                        bigrams[ab] = 1
-                                        hits[b].append(a)
-                            if not c == 0:
-                                if not len(temp[temp.index(i2) + 2 - mod]) < 3:
-                                    bc = '%i %i' % (b, c)
-                                    if bc in bigrams.keys():
-                                        bigrams[bc] += 1
-                                    else:
-                                        bigrams[bc] = 1
-                                        hits[b].append(c)
-        # return bigrams
-        bg3 = {}
-        #    bigs=[]
-        #    nums=[]
-        next_targetlist = []
-        for i in bigrams.keys():
-            if bigrams[i] > mincut:
-                bg3[i] = bigrams[i]
-        for i in hits.keys():
-            #        m=dc.get(i,0)
-            #        if not m == 0:
-            tl = []
-            for i2 in hits[i]:  # get the number of times better collocation is found
-                temp = max(bg3.get('%i %i' % (i, i2), 0), bg3.get('%i %i' % (i2, i), 0))
-                if not temp == 0:
-                    tl.append((temp, i2))
-                    if not i2 in hits.keys():
-                        word = rd.get(i2, 0)
-                        if not word == 0:
-                            next_targetlist.append(word)
-            tl.sort(key=lambda x: x[0], reverse=True)
-            if not len(tl) == 0:
-                targs[i] = tl
-        targetlist = next_targetlist
+    if devmode==1:
+        for i in range(iterations):
+            bigrams=compress_to_targets(targetlist,dc,nldata,bigrams)
+            targs,targetlist=targetlist_update(rd,bigrams,targs,mincut)
+            
         ###### iteration reloads and rereads for new targets####
     ak = open(thesname, 'w', encoding=ENC)
     for i in targs.keys():
@@ -491,8 +518,6 @@ thesname -- string, what to name the thesaurus written to hold the findings.
     #        bigs.append(ts)
     #        nums.append(bg3[key])
     return targs
-
-
 def wsd(filen="wsd_thes.csv"):
     """Takes the thesaurus data from open office and finds and replaces words
     with word senses where possible.
