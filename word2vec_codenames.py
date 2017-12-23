@@ -246,7 +246,7 @@ def read_data_txt(filename):
     return data, entries
 
 
-def read_data_dat(filename):
+def read_data_dat(filename,weight=1):
     """Extract data from Open Office Thesaurus , separating word senses
     format is as follows:
 abel janszoon tasman|1
@@ -273,7 +273,8 @@ abelia|1
                 temp = th.readline().replace('\n', '').lower()
                 if temp.find("                                                                         ") < 0:
                     entry.append(temp.split('|'))
-            data.append(entry)
+            for i in range(weight):
+                data.append(entry)
     except ValueError:
         th.close()
     print("%i entries found" % len(data))
@@ -673,8 +674,10 @@ def plot_with_labels(low_dim_embs, labels, filename):
     plt.savefig(filename)
 
 
-def collocation(dataf=[open_office_thes], voc_sz=120000, dim=100, min_co=0, appb=False):
+def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
     """appendix builder function set appb True to pass additional local data
+    weight is list of ints, same len as dataf, controls the weight given 
+        to each file in dataf
     """
     vocabulary_size = voc_sz
     # sentences = list()
@@ -687,8 +690,10 @@ def collocation(dataf=[open_office_thes], voc_sz=120000, dim=100, min_co=0, appb
     # valid_size = 8
     # num_steps = 100001
     wordlist = []
-    for dat in dataf:  # now works with a list of datafiles as input
-        wordlist.extend(read_data_dat(dat))
+    if len(weights)==1 and len(dataf)>1:
+        weights = [1 for i in range(len(dataf))]
+    for i in range(len(dataf)):  # now works with a list of datafiles as input
+        wordlist.extend(read_data_dat(dataf[i],weights[i]))
     groups = []
     vocabulary = []
     for wordentry in wordlist:
@@ -759,7 +764,8 @@ def collocation(dataf=[open_office_thes], voc_sz=120000, dim=100, min_co=0, appb
 
 
 def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode=0, test_log="test_1to1_sets.txt"):
-    """pass out test results
+    """returns: clu, wordl 
+    pass out test results
     will pad wordl to make len = set_n
 
     wmode = 0 wordl drawn from common (targets)
