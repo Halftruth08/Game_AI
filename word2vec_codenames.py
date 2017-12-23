@@ -262,6 +262,7 @@ abelia|1
 
 
     """
+    import copy
     th = open(filename, 'r', encoding=ENC)
     # th.readline()#first line is not an entry
     data = []
@@ -273,8 +274,9 @@ abelia|1
                 temp = th.readline().replace('\n', '').lower()
                 if temp.find("                                                                         ") < 0:
                     entry.append(temp.split('|'))
+            #data.append(entry)
             for i in range(weight):
-                data.append(entry)
+                data.append(copy.deepcopy(entry))
     except ValueError:
         th.close()
     print("%i entries found" % len(data))
@@ -693,7 +695,7 @@ def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, m
     if len(weights)==1 and len(dataf)>1:
         weights = [1 for i in range(len(dataf))]
     for i in range(len(dataf)):  # now works with a list of datafiles as input
-        wordlist.extend(read_data_dat(dataf[i],weights[i]))
+        wordlist.extend(read_data_dat(dataf[i],weight=weights[i]))
     groups = []
     vocabulary = []
     for wordentry in wordlist:
