@@ -57,7 +57,8 @@ from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
-
+import requests
+from lxml import html
 # Step 1: Download the data.
 url = 'http://mattmahoney.net/dc/'
 local_dir = "/mthes/mobythes.txt"
@@ -65,7 +66,83 @@ open_office_thes = "th_en_US_new1.dat"
 ENC = 'latin_1'
 # filename = maybe_download('text8.zip', 31344016)
 filename = os.path.join(os.getcwd(), local_dir)
-
+def scrape_wiktionary(word):
+    """
+    """
+    wiki='https://en.wiktionary.org/wiki/'
+    root='https://en.wiktionary.org'
+    h2='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/h2'
+    ol='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/ol'
+    seeother='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/div/b/a'
+    page = requests.get(wiki+word,timeout=1)
+    tree= html.fromstring(page.content)
+    languages=tree.xpath(h2+'/span/text()')
+    entry_words=[]
+    if 'English' in languages:
+        #read the stuff on the page
+        olist=tree.xpath(ol)
+        lang_entry=olist[languages.index('English')]
+        bullets=lang_entry.xpath('li')
+        if len(bullets)>1:#if this is one, maybe do something special
+            for bullet in bullets:
+                temp = bullet.xpath('a')
+                for a in temp:
+                    entry_words.append(a.attrib['title'])
+        else:
+            bullet_content = bullets[0].getchildren()
+        if len(bullet_content)==1:
+            breadcrumbs=bullet_content.xpath('span/span/i/a')[0].attrib
+            entry_words.append(breadcrumbs['title'])
+            page2 = requests.get(root+breadcrumbs['href'])
+            tree= html.fromstring(page2.content)
+            olist=tree.xpath(ol)
+            languages=tree.xpath(h2+'/span/text()')
+            lang_entry=olist[languages.index('English')]
+            bullets=lang_entry.xpath('li')
+            if len(bullets)>1:#if this is one, maybe do something special
+                for bullet in bullets:
+                    temp = bullet.xpath('a')
+                    for a in temp:
+                        entry_words.append(a.attrib['title'])
+            
+    else:
+        #read list of "see also" pages
+        pages=[]
+        seealso=tree.xpath(seeother)
+        for i in seealso:
+            pages.append(i.attrib['href'])
+            for page1 in pages:
+                page = requests.get(root+page1)
+                tree= html.fromstring(page.content)
+                languages=tree.xpath(h2+'/span/text()')
+                if 'English' in languages:
+                    break
+            olist=tree.xpath(ol)
+            lang_entry=olist[languages.index('English')]
+            bullets=lang_entry.xpath('li')
+            if len(bullets)>1:#if this is one, maybe do something special
+                for bullet in bullets:
+                    temp = bullet.xpath('a')
+                    for a in temp:
+                        entry_words.append(a.attrib['title'])
+            else:
+                bullet_content = bullets[0].getchildren()
+            if len(bullet_content)==1:
+                breadcrumbs=bullet_content[0].xpath('span/i/a')[0].attrib
+                entry_words.append(breadcrumbs['title'])
+                page2 = requests.get(root+breadcrumbs['href'])
+                print(root+breadcrumbs['href'])
+                tree= html.fromstring(page2.content)
+                olist=tree.xpath(ol)
+                languages=tree.xpath(h2+'/span/text()')
+                lang_entry=olist[languages.index('English')]
+                bullets=lang_entry.xpath('li')
+                #if len(bullets)>1:#if this is one, maybe do something special
+                for bullet in bullets:
+                    temp = bullet.xpath('a')
+                    for a in temp:
+                        entry_words.append(a.attrib['title'])
+    return entry_words
 
 def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5, pass_on_words=False, write_here=True, rel=False):
     """ go to power thesaurus website,
@@ -284,7 +361,7 @@ abelia|1
     return data
 
 
-def prep_raw(inp, out, dev=0):
+def prep_raw(inp, out, remove_and=1,dev=0):
     """the database is sentences, each separated by .\n
     preprocessing steps:
     replace '-' with ' '
@@ -306,7 +383,10 @@ def prep_raw(inp, out, dev=0):
         temp = temp.replace('”', '')
         temp = temp.replace('•', '')
         temp = temp.replace('—', '')
+
         temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
+        if remove_and==1:
+            temp = temp.replace(' and ',' ')
         templ = temp.lower().split(' ')
         templ = list(filter(lambda x: not x == '', templ))
         temp = ' '.join(templ)
@@ -436,16 +516,42 @@ def targetlist_update(rd,bigrams,targs,mincut):
         if not len(tl) == 0:
             targs[i2] = tl
     return targs,targetlist
-
+def targetlist_update2(rd,bigrams,targs,nlevels):
+    bg3 = {}
+    #    bigs=[]
+    #    nums=[]
+    targetlist = []
+    for i2 in bigrams.keys():
+        bg3[i2]={}
+        mincut= max([item for sublist in list(bigrams[i2].values()) for item in sublist])//(nlevels+1)
+        for i3 in bigrams[i2].keys():
+            if max(bigrams[i2][i3]) > mincut:
+                bg3[i2][i3] = bigrams[i2][i3]
+    for i2 in bg3.keys():
+        #        m=dc.get(i,0)
+        #        if not m == 0:
+        tl = []
+        for i3 in bg3[i2]:  # get the number of times better collocation is found
+            temp = max(bg3.get(i2,0).get(i3,0))
+            if not temp == 0:
+                tl.append((temp, i3))
+                if not i3 in bg3.keys():
+                    word = rd.get(i3, 0)
+                    if not word == 0:
+                        targetlist.append(word)
+        tl.sort(key=lambda x: x[0], reverse=True)
+        if not len(tl) == 0:
+            targs[i2] = tl
+    return targs,targetlist
 
 def prepped_to_colloc(seedlist, dc, rd, nldata='news2011procd_dev', iterations=2,
-                      thesname="collocationthesaurus001.txt", nlevels=3, mincut=3,devmode=1):
+                      thesname="collocationthesaurus001.txt", nlevels=50, mincut=3,devmode=1):
     """take natural language passages, and isolate the most common ordered collocations
 (as if they are tuples). Using the lead word as a label, establish a new thesaurus
 that contains the most common collocations for every word in a target list.
 the target list is updated to include the collocated words in the next iteration,
 where the seedlist is the target list for the inital search.
-
+targs1=wvc.prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd',thesname='2011newsthes3.txt', iterations=2, nlevels=60, mincut=10)
 needs: dictionary, reverse_dictionary
 
 seedlist-- list of strings
@@ -473,11 +579,13 @@ thesname -- string, what to name the thesaurus written to hold the findings.
     bigrams = {}
     #bigrams = {}
     targs = {}
-    if devmode==1:
-        for i in range(iterations):
-            bigrams=compress_to_targets(targetlist,dc,nldata,bigrams)
+    
+    for i in range(iterations):
+        bigrams=compress_to_targets(targetlist,dc,nldata,bigrams)
+        if devmode==1:
             targs,targetlist=targetlist_update(rd,bigrams,targs,mincut)
-            
+        elif devmode==2:
+            targs,targetlist=targetlist_update2(rd,bigrams,targs,nlevels)
         ###### iteration reloads and rereads for new targets####
     ak = open(thesname, 'w', encoding=ENC)
     for i in targs.keys():
@@ -790,7 +898,7 @@ def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, m
         return coloc, reverse_dictionary
 
 
-def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode=0, test_log="test_1to1_sets.txt"):
+def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode=0, test_log="test_1to1_sets.csv"):
     """returns: clu, wordl 
     pass out test results
     will pad wordl to make len = set_n
@@ -869,19 +977,31 @@ def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode
         clu2 = [clu[i][random.choice(range(len(clu[i])))] for i in range(len(clu))]
     else:
         pass
-    # adding: output clues and words as
-    clu2f = [clu2[i][0] for i in range(len(clu2))]
-    random.shuffle(clu2f)
-    wordsl = [rev_dic[i] for i in wordl]
-
     n = '1'
+    z = '0'
     for i in range(2, set_n + 1):
         n = n + ', %i' % i
-    out = open(test_log, 'a')
-    out.write(','.join(clu2f) + '\n\n')
-    out.write(n + '\n')
+        z = z + ', 0'
+    # adding: output clues and words as
+    clu2f = [clu2[i][0] for i in range(len(clu2))]
+    wordsl = [rev_dic[i] for i in wordl]
+    ans = open(test_log.replace('.','_answers.'),'w')
+    ans.write(','.join(clu2f)+'\n')
+    ans.write(n+'\n')
+    
+    ans.write(','.join(wordsl) + '\n')
+    ans.close()
+    random.shuffle(clu2f)
+    
+
+    
+    out = open(test_log, 'w')
+    out.write(','.join(clu2f) + '\n')
+    out.write(z + '\n')
     out.write(','.join(wordsl) + '\n')
+    out.write(n + '\n')
     out.close()
+    
 
     return clu, wordl
 
