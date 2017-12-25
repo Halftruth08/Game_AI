@@ -64,9 +64,10 @@ url = 'http://mattmahoney.net/dc/'
 local_dir = "/mthes/mobythes.txt"
 open_office_thes = "th_en_US_new1.dat"
 ENC = 'latin_1'
+ENC = 'UTF-8' #see if this breaks things???
 # filename = maybe_download('text8.zip', 31344016)
 filename = os.path.join(os.getcwd(), local_dir)
-def scrape_wiktionary(word):
+def scrape_wiktionary(word,require_success=0):
     """
     """
     wiki='https://en.wiktionary.org/wiki/'
@@ -74,7 +75,50 @@ def scrape_wiktionary(word):
     h2='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/h2'
     ol='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/ol'
     seeother='//body/div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/div/div/b/a'
-    page = requests.get(wiki+word,timeout=1)
+    def find_correct_lang(tree):
+        indicies=[]
+        
+        return indicies
+    def follow_breadcrumbs(pocket):
+        "look at this! functional programming!"
+        more_words=[]
+        breadcrumbs=pocket.xpath('span/i/a')[0].attrib#*******
+        entry_words.append(breadcrumbs['title'])
+        page2 = requests.get(root+breadcrumbs['href'])
+        tree= html.fromstring(page2.content)
+        olist=tree.xpath(ol)
+        languages=tree.xpath(h2+'/span/text()')
+        lang_entry=olist[languages.index('English')]
+        bullets=lang_entry.xpath('li')
+        if len(bullets)>1 or len(bullets[0].getchildren())>1:#if this is one, maybe do something special
+            for bullet in bullets:
+                temp = bullet.xpath('a')
+                for a in temp:
+                    more_words.append(a.attrib['title'])
+        return more_words
+
+    def gather_scraps(fridge):
+        more_words=[]
+        scraps = fridge.xpath('text()')
+        for scrap in scraps:
+            more_words.extend(list(filter(lambda x: len(x)>2,linewise_filter(scrap,rem_and=1,lower=0))))
+        shelf = fridge.getchildren()
+        while len(shelf)>0:
+            new_shelf=[]
+            for item in shelf:
+                lines=item.xpath('text()')
+                for line in lines:
+                    more_words.extend(list(filter(lambda x: len(x)>2,linewise_filter(line,rem_and=1,lower=0))))
+                new_shelf.extend(item.getchildren())
+            shelf=new_shelf
+        return more_words
+    word2=word.replace(' ','_')
+    try:
+        page = requests.get(wiki+word2,timeout=2)
+    except:
+        time.sleep(2+np.random.random())
+        page = requests.get(wiki+word2,timeout=5)
+        
     tree= html.fromstring(page.content)
     languages=tree.xpath(h2+'/span/text()')
     entry_words=[]
@@ -83,28 +127,22 @@ def scrape_wiktionary(word):
         olist=tree.xpath(ol)
         lang_entry=olist[languages.index('English')]
         bullets=lang_entry.xpath('li')
-        if len(bullets)>1:#if this is one, maybe do something special
+        if len(bullets)>1 or len(bullets[0].getchildren())>1:#if this is one, maybe do something special
             for bullet in bullets:
                 temp = bullet.xpath('a')
                 for a in temp:
                     entry_words.append(a.attrib['title'])
         else:
             bullet_content = bullets[0].getchildren()
-        if len(bullet_content)==1:
-            breadcrumbs=bullet_content.xpath('span/span/i/a')[0].attrib
-            entry_words.append(breadcrumbs['title'])
-            page2 = requests.get(root+breadcrumbs['href'])
-            tree= html.fromstring(page2.content)
-            olist=tree.xpath(ol)
-            languages=tree.xpath(h2+'/span/text()')
-            lang_entry=olist[languages.index('English')]
-            bullets=lang_entry.xpath('li')
-            if len(bullets)>1:#if this is one, maybe do something special
-                for bullet in bullets:
-                    temp = bullet.xpath('a')
-                    for a in temp:
-                        entry_words.append(a.attrib['title'])
-            
+            if len(bullet_content[0].xpath('span/i/a'))>0:
+                entry_words.extend(follow_breadcrumbs(bullet_content[0]))
+            else:#strategy 2
+                new_words=gather_scraps(bullets[0])
+                if len(new_words)==0:
+                    if require_success==1:
+                        raise IOError("no existing strategies worked for %s"%word)
+                else:
+                    entry_words.extend(new_words)
     else:
         #read list of "see also" pages
         pages=[]
@@ -120,28 +158,22 @@ def scrape_wiktionary(word):
             olist=tree.xpath(ol)
             lang_entry=olist[languages.index('English')]
             bullets=lang_entry.xpath('li')
-            if len(bullets)>1:#if this is one, maybe do something special
+            if len(bullets)>1 or len(bullets[0].getchildren())>1:#if this is one, maybe do something special
                 for bullet in bullets:
                     temp = bullet.xpath('a')
                     for a in temp:
                         entry_words.append(a.attrib['title'])
             else:
                 bullet_content = bullets[0].getchildren()
-            if len(bullet_content)==1:
-                breadcrumbs=bullet_content[0].xpath('span/i/a')[0].attrib
-                entry_words.append(breadcrumbs['title'])
-                page2 = requests.get(root+breadcrumbs['href'])
-                print(root+breadcrumbs['href'])
-                tree= html.fromstring(page2.content)
-                olist=tree.xpath(ol)
-                languages=tree.xpath(h2+'/span/text()')
-                lang_entry=olist[languages.index('English')]
-                bullets=lang_entry.xpath('li')
-                #if len(bullets)>1:#if this is one, maybe do something special
-                for bullet in bullets:
-                    temp = bullet.xpath('a')
-                    for a in temp:
-                        entry_words.append(a.attrib['title'])
+                if len(bullet_content[0].xpath('span/i/a'))>0:
+                    entry_words.extend(follow_breadcrumbs(bullet_content[0]))
+                else:#strategy 2
+                    new_words=gather_scraps(bullets[0])
+                    if len(new_words)==0:
+                        if require_success==1:
+                            raise IOError("no existing strategies worked for %s"%word)
+                    else:
+                        entry_words.extend(new_words)
     return entry_words
 
 def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5, pass_on_words=False, write_here=True, rel=False):
@@ -359,8 +391,85 @@ abelia|1
     print("%i entries found" % len(data))
     # data is stored as [["abel janszoon tasman",["(noun)","tasman","abel tasman","abel janszoon tasman","navigator"]]...]
     return data
+####THIS FUNCTION IS FOR BUILDING A THESAURUS BY SCRAPING WIKTIONARY#####
 
 
+def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
+    """need:
+        condition when missing capitalization is not indicated by  
+        default page-- leading to a retry with capitalized(word)
+    """
+    wiktionary={}
+    opt=1
+    timer=[]
+    #targetlist=targets
+    for i in range(iterations):
+        new_targets=[]
+        for target in targets:
+            try:
+                temp=scrape_wiktionary(target,require_success=opt)
+            except:
+                temp=[]
+            temp1 = list(map(lambda a: a.replace(' (page does not exist)',''),temp))
+            temp2 = list(map(lambda a: a.replace('w:',''),temp1))
+            if len(temp2)>0:
+                wiktionary[target]=temp2
+                print("got words for %s"%target)
+            else:
+                print("no words for %s"%target)
+            time.sleep(1+2*np.random.random())
+            if len(wiktionary.keys())%100==0:
+                
+        opt=0
+        for value in wiktionary.values():
+            new_targets.extend(value)
+        targets=new_targets
+        
+    dict_to_thes(wiktionary,out)
+
+    
+def dict_to_thes(inp,out):
+     file=open(out,'w',encoding=ENC)
+     for key,value in inp.items():
+         file.write(key.lower() + '|1\n')
+         try:
+             file.write('|'.join(value).lower() + '\n')
+         except UnicodeEncodeError:
+             temp=open('temp.txt','w',encoding='UTF-8')
+             for item_n in range(len(value)):
+                 try:
+                     temp.write(value[item_n])
+                 except UnicodeEncodeError:
+                     value.pop(item_n)
+             file.write('|'.join(value).lower() + '\n')
+                     
+     file.close()
+         
+        
+        
+
+#####BELOW HERE ARE FUNCTIONS FOR PARSING AND COMPRESSING REAL TEXT (SENTENCES) 
+def linewise_filter(line,rem_and=1,lower=1):
+    """
+    """
+    line = line.replace('\n','')
+    line = line.replace('-', ' ')
+    line = line.replace('“', '')
+    line = line.replace('”', '')
+    line = line.replace('•', '')
+    line = line.replace('—', '')
+
+    line = line.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
+    if rem_and==1:
+        line = line.replace(' and ',' ')
+    if lower == 1:
+        
+        linel = line.lower().split(' ')
+    else:
+        linel = line.split(' ')
+    linel = list(filter(lambda x: not x == '', linel))
+    return linel
+    
 def prep_raw(inp, out, remove_and=1,dev=0):
     """the database is sentences, each separated by .\n
     preprocessing steps:
@@ -373,25 +482,13 @@ def prep_raw(inp, out, remove_and=1,dev=0):
     ip = open(inp, 'r', encoding='UTF-8')
     ot = open(out, 'w', encoding='UTF-8')
     # for i in range(5000): #500 is the number of sentences to use during development
-    itz = 0
+    lines = 0
     for line in ip:  # use this once done with dev
-        itz += 1
-        temp = line
-
-        temp = temp.replace('-', ' ')
-        temp = temp.replace('“', '')
-        temp = temp.replace('”', '')
-        temp = temp.replace('•', '')
-        temp = temp.replace('—', '')
-
-        temp = temp.translate(str.maketrans({key: None for key in string.punctuation or string.digits}))
-        if remove_and==1:
-            temp = temp.replace(' and ',' ')
-        templ = temp.lower().split(' ')
-        templ = list(filter(lambda x: not x == '', templ))
-        temp = ' '.join(templ)
-        ot.write(temp)
-        if dev > 0  and itz > dev:
+        lines += 1
+        linel=linewise_filter(line,rem_and=remove_and)
+        temp = ' '.join(linel)
+        ot.write(temp+'\n')
+        if dev > 0  and lines > dev:
             break
     ip.close()
     ot.close()
