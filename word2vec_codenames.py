@@ -104,7 +104,7 @@ def scrape_wiktionary(word,require_success=0):
             more_words.extend(list(filter(lambda x: len(x)>2,linewise_filter(scrap,rem_and=1,lower=0))))
         shelf = fridge.getchildren()
         while len(shelf)>0:
-            new_shelf=[]
+            new_shelf=[] 
             for item in shelf:
                 lines=item.xpath('text()')
                 for line in lines:
@@ -1065,6 +1065,12 @@ def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode
         cutoff = max(len(cluelist) // 4, min(n_clues, len(cluelist)))
         cluelist2 = list(cluelist[i] for i in range(cutoff))
         cluelist2.sort(key=lambda x: x[2], reverse=True)
+        #the contents of clu are:
+        #wordstring,
+        #wordnumber, lower is more common (better)
+        #odds ratio, higher is more specificity among wordlist
+        #normalized collocation frequency clue to codename, higher means relationship is more likely important
+        #normalized collocation frequency codename to clue, higher means relationship is more likely important
         clues = [(rev_dic[cluelist2[i][0]], cluelist2[i][0], cluelist2[i][1], cluelist2[i][2], cluelist2[i][3]) for i in
                  range(min(n_clues, len(cluelist2)))]
         clu.append(clues)

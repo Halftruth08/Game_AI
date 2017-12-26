@@ -6,3 +6,7 @@ prep_raw("training-monolingual/news.2011.en.shuffled", "news2011procd")
 [coloc, reverse_dictionary, dictionary, cnt] = collocation(appb=True)
 
 prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd', iterations=1, nlevels=12, mincut=3)
+
+[coloc5, rd5, dc5, cnt5] = wvc.collocation(dataf=['2011newsthes_na_utf8.txt','appendixfull01utf8.txt',wvc.open_office_thes,'wiktionary_thes02.txt'],weights=[1,3,1,20],appb=True)
+
+clu,wordlist= wvc.test_coloc(coloc5,rd5,dc5,wordl=[], n_clues=10,mode=1,test_log="3thes_clues7.csv")
