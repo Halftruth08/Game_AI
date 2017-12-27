@@ -419,7 +419,8 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
                 print("no words for %s"%target)
             time.sleep(1+2*np.random.random())
             if len(wiktionary.keys())%100==0:
-                
+                #timer tracking here?
+                pass
         opt=0
         for value in wiktionary.values():
             new_targets.extend(value)
@@ -1106,8 +1107,149 @@ def test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=0, wmode
     out.close()
     
 
-    return clu, wordl
-
+    return clu,clu2, wordl
+def game_maker():
+    """returns a dict with the words from targets
+    split into 4 lists:
+        red (9)-- red team's codenames
+        blue (8)-- blue team's codenames
+        grey (7)-- bystanders
+        black (1)-- assassin
+    for the sake of simplicity,
+    red will always go first. 
+    the number of words in each list are shown in the above parenthesis
+    """
+    gameboard={}
+    tr = open("cdnmswordlist.txt", 'r')  # targets
+    targets = tf.compat.as_str(tr.read()).split('\n')
+    tr.close()
+    board=np.random.choice(targets,25)
+    gameboard['red']=board[0:9]#len=9
+    gameboard['blue']=board[9:17]#len=8
+    gameboard['grey']=board[17:24]#len=7
+    gameboard['black']=[board[24]]#len=1
+        
+    return gameboard
+def make_model_for_codemaster():
+    """ease of use function, returns dict model,
+    model[0] is collocation data
+    model[1] is a reverse dictionary for wordstrings from ints
+    model[2] is a dictionary for ints from wordstrings
+    runs using *best* thesauri and weighting 
+    
+    * best is subject to change, and this function must be updated 
+    to reflect any changes
+    """
+    model={}
+    best_data=['2011newsthes_na_utf8.txt','appendixfull01utf8.txt',open_office_thes,'wiktionary_thes02.txt']
+    [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
+    return model
+def codemaster(model):
+    """
+    """
+    import pandas
+    def get_clues_array(targets,grey,blue,black):
+        """will run once per game, returning the needed data 
+        to calculate clue strength as a function of what
+        words remain on the board.
+        out refers to collocations going outwards from a codename
+        in as in collocations coming back inwards to a codename.
+        think: "codename-centric" terminology
+        """
+        clue_likelihoods={'out':{},'in':{}}
+        temp=[]
+        for target in targets:
+            temp.extend(list(coloc[target].keys()))
+        temp.sort()
+        candidates=[temp[0]]
+        for i in range(1,len(temp)):
+            if not temp[i]==temp[i-1]:
+                candidates.append(temp[i])
+        n_metrics=len(targets)+len(grey)+len(blue)+len(black)#2*targets+1 for odds, 1 for counterweights
+        for candidate in candidates:
+            clue_likelihoods['out'][candidate]=[0. for i in range(n_metrics)]
+            clue_likelihoods['in'][candidate]=[0. for i in range(n_metrics)]
+        for candidate in candidates:
+            for i2 in range(len(targets)):
+                clue_likelihoods['out'][candidate][i2]+=coloc[targets[i2]].get(candidate,0.)
+                clue_likelihoods['in'][candidate][i2]+=coloc[candidate].get(targets[i2],0.)
+            temp=len(targets)
+            for i2 in range(len(grey)):
+                clue_likelihoods['out'][candidate][i2+temp]+=coloc[grey[i2]].get(candidate,0.)
+                clue_likelihoods['in'][candidate][i2+temp]+=coloc[candidate].get(grey[i2],0.)
+            temp+=len(grey)
+            for i2 in range(len(blue)):
+                clue_likelihoods['out'][candidate][i2+temp]+=coloc[blue[i2]].get(candidate,0.)
+                clue_likelihoods['in'][candidate][i2+temp]+=coloc[candidate].get(blue[i2],0.)
+            temp+=len(blue)
+            for i2 in range(len(black)):
+                clue_likelihoods['out'][candidate][i2+temp]+=coloc[black[i2]].get(candidate,0.)
+                clue_likelihoods['in'][candidate][i2+temp]+=coloc[candidate].get(black[i2],0.)
+        return clue_likelihoods
+    def get_col_names():#uses gamenumbers defined in codemaster
+        cols=[]
+        directions=['out','in']
+        for direction in directions:
+            for key in gamenumbers.keys():
+                for i in range(len(gamenumbers[key])):
+                    cols.append('%s%i_%s'%(key,i,direction))
+        return cols
+                    
+#            
+#    
+#        for i in range(len(small[w])):
+#                candidates.append(small[w][i][1])  # word
+#                pro.append(small[w][i][0])  # values
+#                odd = coloc[small[w][i][1]][wordl[w]]
+#                other = sum([coloc[small[w][i][1]].get(wordl[i2], 0) for i2 in range(len(wordl)) if not i2 == w])
+#                prob.append(coloc[small[w][i][1]][wordl[w]])
+#                odds.append(odd / (other + odd))
+#            # what makes a good clue?
+#            # odds ratio is high
+#            # word is well-known
+#            # word has no spaces or hyphens
+#            # clue doesn't contain target
+#            combo = [(candidates[i], odds[i], prob[i], pro[i]) for i in range(len(small[w]))]
+#            combo.sort(key=lambda x: x[1], reverse=True)
+#            combo2 = list(filter(
+#                lambda x: rev_dic[x[0]].find(' ') < 0 and rev_dic[x[0]].find('-') < 0 and rev_dic[x[0]].find(
+#                    rev_dic[wordl[w]]) < 0 and len(rev_dic[x[0]]) >= 3, combo))
+#            oddslim = 0.8 * max([combo2[i][1] for i in range(len(combo2))])
+#            cluelist = list(filter(lambda x: x[1] >= oddslim, combo2))
+#            # cluelist.sort(key=lambda x: x[1]+x[2]+min(x[2],x[3]),reverse=True)
+#            cluelist.sort(key=lambda x: x[0])
+#            cutoff = max(len(cluelist) // 4, min(n_clues, len(cluelist)))
+#            cluelist2 = list(cluelist[i] for i in range(cutoff))
+#            cluelist2.sort(key=lambda x: x[2], reverse=True)
+#        return clue_likelihoods
+    coloc=model[0]
+    rd = model[1]
+    dc = model[2]
+    weights={'grey':1.0,'blue':2.0,'black':5.0}#how much weight do we give to 
+    #avoiding the chance of mistakes, based on cost of the mistake
+    #PRIME TARGET FOR DEEP Q LEARNING
+    
+    gameboard=game_maker()
+    gamenumbers={}
+    for key in gameboard.keys():
+        temp=[]
+        for item in gameboard[key]:
+            temp.append(dc.get(item,0))
+        gamenumbers[key]=temp
+    cols=get_col_names()
+        
+    likelihoods=get_clues_array(gamenumbers['red'],gamenumbers['grey'],gamenumbers['blue'],gamenumbers['black'])
+    likes_out=pandas.DataFrame(likelihoods['out']).transpose()
+    likes_in=pandas.DataFrame(likelihoods['in']).transpose()
+    likes=pandas.concat([likes_out,likes_in],axis=1)
+    likes.columns=cols
+    #now, all necessary information is stored as a dataframe
+    singles={}
+    
+    doubles={}
+    triples={}
+    
+    
 
 def test2_coloc(coloc, rev_dic, Wset_n=12, Bset_n=12, n_clues=20):
     """pass out test results
@@ -1119,6 +1261,8 @@ def test2_coloc(coloc, rev_dic, Wset_n=12, Bset_n=12, n_clues=20):
     # included words than anything else
     # define confidence as Min(odds(incl words))-max(odds(other words))
 
+    
+    clu,clu2,wordl=test_coloc(coloc, rev_dic, dc, set_n=12, n_clues=20, wordl=[], mode=1, test_log="test_1to1_sets.csv")
 
 def build_appendix(filena='appendix01.txt', voc_sz1=120000, mode='w', all_targets=False, min_votes1=5, related=False):
     """using powerthesaurus.org, a group-sourced online database, build an additional
