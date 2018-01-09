@@ -1120,7 +1120,7 @@ def game_maker():
     the number of words in each list are shown in the above parenthesis
     """
     gameboard={}
-    tr = open("cdnmswordlist.txt", 'r')  # targets
+    tr = open("cdnmswordlist_old.txt", 'r')  # targets
     targets = tr.read().split('\n')
     tr.close()
     board=np.random.choice(targets,25,replace=False)
@@ -1245,7 +1245,7 @@ def codemaster(model):
     def enact_guess(word):
         for key in gameboard.keys():
             try:
-                colf=gameboard[key].tolist().index(word)
+                colf=np.array(gameboard[key]).tolist().index(word)
                 color=key
                 break
             except ValueError:
