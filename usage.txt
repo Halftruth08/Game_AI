@@ -2,7 +2,7 @@
 
 model = make_model_for_codemaster()
 
-
+codemaster(model)
 
 
 
