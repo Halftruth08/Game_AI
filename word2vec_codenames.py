@@ -59,6 +59,7 @@ from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 import requests
 from lxml import html
+LOCAL=os.path.dirname(__file__)
 # Step 1: Download the data.
 url = 'http://mattmahoney.net/dc/'
 local_dir = "/mthes/mobythes.txt"
@@ -402,6 +403,7 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
     wiktionary={}
     opt=1
     timer=[]
+    misses=[]
     #targetlist=targets
     for i in range(iterations):
         new_targets=[]
@@ -417,6 +419,7 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
                 print("got words for %s"%target)
             else:
                 print("no words for %s"%target)
+                misses.append(target)
             time.sleep(1+2*np.random.random())
             if len(wiktionary.keys())%100==0:
                 #timer tracking here?
@@ -425,7 +428,9 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
         for value in wiktionary.values():
             new_targets.extend(value)
         targets=new_targets
-        
+    h=open('wiki_misses.csv','w',encoding=ENC) 
+    h.write('\n'.join(misses))
+    h.close()
     dict_to_thes(wiktionary,out)
 
     
@@ -471,7 +476,7 @@ def linewise_filter(line,rem_and=1,lower=1):
     linel = list(filter(lambda x: not x == '', linel))
     return linel
     
-def prep_raw(inp, out, remove_and=1,dev=0):
+def prep_raw(inp, out, remove_and=1,dev=0,enc=ENC):
     """the database is sentences, each separated by .\n
     preprocessing steps:
     replace '-' with ' '
@@ -480,7 +485,7 @@ def prep_raw(inp, out, remove_and=1,dev=0):
     ??? should punctuation start a new line???
     this could be done easily at this stage. later, maybe
     """
-    ip = open(inp, 'r', encoding='UTF-8')
+    ip = open(inp, 'r', encoding=enc)
     ot = open(out, 'w', encoding='UTF-8')
     # for i in range(5000): #500 is the number of sentences to use during development
     lines = 0
@@ -1463,6 +1468,7 @@ def codemaster(model):
         for guess in range(1,cluenumber+1):
             guessword=prompt_user(clueword,cluenumber,guess)
             if guessword=='':
+                color=enact_guess(guessword)
                 break
             else:
                 color=enact_guess(guessword)
@@ -1517,13 +1523,16 @@ def codemaster(model):
         #clues can neither contain nor be contained in any codenames
 
     
-def build_appendix(filena='appendix01.txt', voc_sz1=120000, mode='w', all_targets=False, min_votes1=5, related=False):
+def build_appendix(model,filena='appendix01.txt', voc_sz1=120000, mode='w', all_targets=False, min_votes1=5, related=False):
     """using powerthesaurus.org, a group-sourced online database, build an additional
     thesaurus to supplement the open office
     """
-    coloc, rev_dc, dc, count = collocation(voc_sz=voc_sz1, appb=True)
+    #coloc, rev_dc, dc, count = collocation(voc_sz=voc_sz1, appb=True)
+    coloc=model[0]
+    rev_dc=model[1]
+    dc=model[2]
     tr = open("cdnmswordlist.txt", 'r')  # targets
-    targets = tf.compat.as_str(tr.read()).split('\n')
+    targets = tr.read().split('\n')
     tr.close()
 
     missed = []
