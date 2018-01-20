@@ -11,5 +11,6 @@ sklearn
 matplotlib
 requests
 lxml
+pandas
 
 Then, see usage for how to initiate AI in an ipython session.
