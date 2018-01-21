@@ -8,3 +8,5 @@ virtualenv
 .DS_Store
 clojure/project.clj
 clojure/*.iml
+data/models/*
+data/raw/*.txt
