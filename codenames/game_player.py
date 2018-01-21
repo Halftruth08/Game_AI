@@ -11,7 +11,7 @@ import os
 import numpy as np
 
 LOCAL=os.path.dirname(os.path.dirname(__file__))
-CDNM =LOCAL+'/cdnmswordlist.txt'
+CDNM =LOCAL+'/data/wordslist.txt'
 def codemaster(model):
     """
     """

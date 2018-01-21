@@ -13,7 +13,7 @@ import numpy as np
 import requests
 from lxml import html
 LOCAL=os.path.dirname(os.path.dirname(__file__))
-CDNM =LOCAL+'/cdnmswordlist.txt'
+CDNM =LOCAL+'/data/wordslist.txt'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
