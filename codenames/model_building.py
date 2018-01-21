@@ -61,36 +61,33 @@ def collocation(dataf=[LOCAL+'/data/thesauri/'+open_office_thes], weights=[1], v
         to each file in dataf
     """
     vocabulary_size = voc_sz
-    # sentences = list()
-    # sentences= vocabulary.split('\n')
-    # batch_size = 256
-    # colist_target = dim  # Dimension of the embedding vector.
-    # skip_window = 2       # How many words to consider left and right.
-    # num_skips = 1         # How many times to reuse an input to generate a label.
-    # num_sampled = 128      # Number of negative examples to sample.
-    # valid_size = 8
-    # num_steps = 100001
     wordlist = []
     if len(weights)==1 and len(dataf)>1:
         weights = [1 for i in range(len(dataf))]
     for i in range(len(dataf)):  # now works with a list of datafiles as input
         wordlist.extend(read_data_dat(dataf[i],weight=weights[i]))
     groups = []
+    groupweights=[]
     vocabulary = []
     for wordentry in wordlist:
         word = wordentry.pop(0)
+        wnum = int(wordentry.pop(0))
+        groupweights.append(wnum)
         if len(wordentry) == 1:
-            vocabulary.append(word)
-            vocabulary.extend(wordentry[0])  # leaving in part of speech (noun) for now
+            for rep in range(wnum):
+                vocabulary.append(word)
+                vocabulary.extend(wordentry[0])  # leaving in part of speech (noun) for now
             temp = [word]
             temp.extend(wordentry[0])
             groups.append(temp)
         else:
-            vocabulary.append(word)
+            for rep in range(wnum):
+                vocabulary.append(word)
             # for collocation model, wordsense disambig makes no difference
             temp = [word]
             for n, wordsense in enumerate(wordentry):
-                vocabulary.extend(wordsense)
+                for rep in range(wnum):
+                    vocabulary.extend(wordsense)
                 # ws = word + "(%i)" % n
                 # temp = [ws]
                 temp.extend(wordsense)
@@ -106,7 +103,7 @@ def collocation(dataf=[LOCAL+'/data/thesauri/'+open_office_thes], weights=[1], v
         for i in ngr[ig]:
             for i2 in ngr[ig]:
                 if not i == i2:
-                    coloc[i][i2] = coloc[i].get(i2, 0) + 1
+                    coloc[i][i2] = coloc[i].get(i2, 0) + groupweights[ig]
  
     ##PRUNING FOR SPEED## optional...set min_co to 0
     # not working b/c dic changes size during iteration. change to do all after
@@ -161,23 +158,20 @@ abelia|1
 
 
     """
-    import copy
     th = open(filename, 'r', encoding=ENC)
     # th.readline()#first line is not an entry
     data = []
     try:
         while True:
             word, num = th.readline().replace('\n', '').split('|')  # num is the number of senses for a word
-            entry = [word]
-            for i in range(int(num)):
-                temp = th.readline().replace('\n', '').lower()
-                if temp.find("                                                                         ") < 0:
-                    entry.append(temp.split('|'))
-            #data.append(entry)
-            for i in range(weight):
-                data.append(copy.deepcopy(entry))
+            num=int(num)*weight
+            entry = [word,str(num)]
+            temp = th.readline().replace('\n', '').lower()
+            if temp.find("                                                                         ") < 0:
+                entry.append(temp.split('|'))
+            data.append(entry)
     except ValueError:
         th.close()
-    print("%i entries found" % len(data))
+    print("%i entries found, given weight = %i" %(len(data),weight))
     # data is stored as [["abel janszoon tasman",["(noun)","tasman","abel tasman","abel janszoon tasman","navigator"]]...]
     return data
