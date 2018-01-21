@@ -14,19 +14,39 @@ import requests
 from lxml import html
 LOCAL=os.path.dirname(os.path.dirname(__file__))
 CDNM =LOCAL+'/data/wordslist.txt'
+THES=LOCAL+'/data/thesauri'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
+tr = open(CDNM, 'r',encoding=ENC)  # targets
+TARGETS = tr.read().split('\n')
+tr.close()
 
-def build_appendix(filena='appendix01.txt',model={}, voc_sz1=120000, mode='w', min_votes1=5, related=False):
+def build_appendix(targets,filena='PTsynonyms01.txt',model={}, mode='w', min_votes1=5, related=False):
     """using powerthesaurus.org, a group-sourced online database, build an additional
     thesaurus to supplement the open office
+    Usage:
+        targets: list of strings, indicating codenames, or other words.
+                These become to focus of the new thesaurus.
+        filena: string filename of the new thesaurus to be built in the 
+                appropriate folder
+        model: optional, if included, the web will only scrape for 
+                target words not already present. See 
+                codenames.model_building.make_full_model() for the structure
+                of model
+        mode: 'w' or 'a' to write or append to the file to be written
+        min_votes1: int, determines the number of upvotes, for a word to be 
+                included in the thesaurus (see powerthesaurus.com)
+        related: NOT OPERATIONAL plans to include an additional category 
+                of word entries which exist on the website, however they
+                are much more sparse.
+                
     """
     #coloc, rev_dc, dc, count = collocation(voc_sz=voc_sz1, appb=True)
     
-    tr = open(CDNM, 'r',encoding=ENC)  # targets
-    targets = tr.read().split('\n')
-    tr.close()
+#    tr = open(CDNM, 'r',encoding=ENC)  # targets
+#    targets = tr.read().split('\n')
+#    tr.close()
 
     missed = []
     
@@ -48,7 +68,7 @@ def build_appendix(filena='appendix01.txt',model={}, voc_sz1=120000, mode='w', m
     for word in to_look_up:
         newwords = scrape_power_thes(word, pass_on_words=True, write_here=False, min_upvotes=min_votes1)
         branch_syns.append(newwords)
-    apx = open(filena, mode, encoding=ENC)
+    apx = open(THES+'/'+filena, mode, encoding=ENC)
     # apx.write(filena+'\n')
     for i in range(len(missed)):
         apx.write(missed[i] + '|1\n')
@@ -60,14 +80,26 @@ def build_appendix(filena='appendix01.txt',model={}, voc_sz1=120000, mode='w', m
     print("Found %i words for appendix" % (len(missed) + len(to_look_up)))
 
 def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
-    """need:
+    """Builds a new ontologically associative thesaurus, pulling words from
+    partially context sensitive parts of wiktionary pages.
+    Usage:
+        targets: list of strings, indicating codenames, or other words.
+                These become to focus of the new thesaurus.
+        iterations: int, 1 justs scrapes the targets, 2 scrapes the words 
+                returned by the 1st iteration of scraping as well. Higher
+                numbers haven't been tested.
+        out: str, output file name 
+    Generates:
+        output file in /data/thesauri, log file in /logs
+    
+    need:
         condition when missing capitalization is not indicated by  
         default page-- leading to a retry with capitalized(word)
     """
     wiktionary={}
     opt=1
-    timer=[]
-    misses=[]
+    #timer=[]
+    misses=[out]
     #targetlist=targets
     for i in range(iterations):
         new_targets=[]
@@ -92,10 +124,10 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
         for value in wiktionary.values():
             new_targets.extend(value)
         targets=new_targets
-    h=open(LOCAL+'\wiki_misses.csv','w',encoding=ENC) 
+    h=open(LOCAL+'logs\wiki_misses.csv','w',encoding=ENC) 
     h.write('\n'.join(misses))
     h.close()
-    dict_to_thes(wiktionary,out)
+    dict_to_thes(wiktionary,THES+'/'+out)
 
     
 def dict_to_thes(inp,out):
@@ -225,9 +257,10 @@ def scrape_wiktionary(word,require_success=0):
     return entry_words
 
 
-def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5, pass_on_words=False, write_here=True, rel=False):
+def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5, 
+                      pass_on_words=False, write_here=True, rel=False):
     """ go to power thesaurus website,
-    scrape appropriate words from page (max 20 without link taking)
+    scrape appropriate words from page (max 100 using cookies)
     options:
 
         write_here (True) function will add entry to doc at filename. for large batches of words,
