@@ -1125,7 +1125,7 @@ def game_maker():
     the number of words in each list are shown in the above parenthesis
     """
     gameboard={}
-    tr = open("cdnmswordlist_old.txt", 'r')  # targets
+    tr = open("cdnmswordlist.txt", 'r')  # targets
     targets = tr.read().split('\n')
     tr.close()
     board=np.random.choice(targets,25,replace=False)
@@ -1162,6 +1162,21 @@ def make_model_for_codemaster():
     best_data=['2011newsthes_na_utf8.txt','appendixfull01utf8.txt',open_office_thes,'wiktionary_thes02.txt']
     [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
     return model
+def make_full_model():
+    """ease of use function, returns dict model,
+    model[0] is collocation data
+    model[1] is a reverse dictionary for wordstrings from ints
+    model[2] is a dictionary for ints from wordstrings
+    runs using *best* thesauri and weighting 
+    
+    * best is subject to change, and this function must be updated 
+    to reflect any changes
+    """
+    model={}
+    best_data=['europarl-v6.enthes.txt','fulllist_appx.txt',open_office_thes,'wiki_full_2deg.txt']
+    [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
+    return model
+
 def codemaster(model):
     """
     """
@@ -1468,7 +1483,7 @@ def codemaster(model):
         for guess in range(1,cluenumber+1):
             guessword=prompt_user(clueword,cluenumber,guess)
             if guessword=='':
-                color=enact_guess(guessword)
+                color=''
                 break
             else:
                 color=enact_guess(guessword)

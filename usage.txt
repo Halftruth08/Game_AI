@@ -1,6 +1,6 @@
 ############NEW WAY##############
 
-model = make_model_for_codemaster()
+model = make_full_model()
 
 codemaster(model)
 
