@@ -255,7 +255,7 @@ part
 pass
 paste
 penguin
-pheonix
+phoenix
 piano
 pie
 pilot
