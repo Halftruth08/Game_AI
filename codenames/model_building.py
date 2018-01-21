@@ -25,6 +25,24 @@ from lxml import html
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
+
+
+def make_full_model():
+    """ease of use function, returns dict model,
+    model[0] is collocation data
+    model[1] is a reverse dictionary for wordstrings from ints
+    model[2] is a dictionary for ints from wordstrings
+    runs using *best* thesauri and weighting 
+    
+    * best is subject to change, and this function must be updated 
+    to reflect any changes
+    """
+    model={}
+    best_data=['europarl-v6.enthes.txt','fulllist_appx.txt',open_office_thes,'wiki_full_2deg.txt']
+    [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
+    return model
+
+
 def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
     """appendix builder function set appb True to pass additional local data
     weight is list of ints, same len as dataf, controls the weight given 
@@ -69,21 +87,7 @@ def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, m
     # let's try, for each word in vocab, have a dict. so: a list of dicts.
     coloc = list({} for i in range(voc_sz))
     ngr = list(list(dictionary.get(item, 0) for item in sublist) for sublist in groups)
-    #    for i in range(1,voc_sz): WAAAY SLOWER THAN ALTERNATIVE
-    #        if i%1000==0:
-    #            print("collocating word %i of %i %s"%(i,voc_sz,time.ctime()))
-    #        #temp=list(filter(lambda x: i in ngr[x], range(len(ngr)))) #1:13*100
-    #        for i2,gr in enumerate(ngr):  #1:06
-    #            if i in gr:
-    #                temp.append(i2)
-    #        #temp = list(i2 for gr in ngr if i in gr)
-    #        for i2 in temp:
-    #            ntemp = ngr[i2].count(i)
-    #            for wn in ngr[i2]:
-    #                if wn == i:
-    #                    continue
-    #                else:
-    #                    coloc[i][wn]=coloc[i].get(wn,0)+ntemp
+
     for ig in range(len(ngr)):  # group based approach, way faster
         if ig % 10000 == 0:
             print("collocating group %i of %i %s" % (ig, len(ngr), time.ctime()))
@@ -91,9 +95,7 @@ def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, m
             for i2 in ngr[ig]:
                 if not i == i2:
                     coloc[i][i2] = coloc[i].get(i2, 0) + 1
-        # coloc[i]
-    # tcol=[]
-    # reject key:value pairs where value < minimum? if >100 keys
+ 
     ##PRUNING FOR SPEED## optional...set min_co to 0
     # not working b/c dic changes size during iteration. change to do all after
     if not min_co == 0:
@@ -112,3 +114,22 @@ def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, m
         return coloc, reverse_dictionary, dictionary, count
     else:
         return coloc, reverse_dictionary
+    
+def build_dataset(words, n_words):
+    """Process raw inputs into a dataset."""
+    count = [['UNK', -1]]
+    count.extend(collections.Counter(words).most_common(n_words - 1))
+    dictionary = dict()
+    for word, _ in count:
+        dictionary[word] = len(dictionary)
+    data = list()
+    unk_count = 0
+    for word in words:
+        index = dictionary.get(word, 0)
+        if index == 0:  # dictionary['UNK']
+            unk_count += 1
+        data.append(index)
+    count[0][1] = unk_count
+    reversed_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
+    return data, count, dictionary, reversed_dictionary
+
