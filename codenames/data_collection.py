@@ -440,20 +440,24 @@ thesname -- string, what to name the thesaurus written to hold the findings.
             tempprob.append(i2[0])
             tempwords.append(i2[1])
         odds = np.divide(tempprob, sum(tempprob))
+        
         m = np.max(odds)
         n = nlevels
-        lvls = np.linspace(m * n / (n + 1), m / (n + 1), num=n)
-        for il in lvls:
-            temp = []
-            for i3 in range(len(odds)):
-                if odds[i3] > il:
-                    wd = tempwords[i3]
-                    if not len(wd) == 0:
-                        if not wd in temp:
-                            temp.append(wd)
-            if not len(temp) == 0:
-                ak.write(i + '|1\n')
-                ak.write('|'.join(temp) + '\n')
+        wnum= list(map(lambda a: int(np.floor(a)),np.multiply(odds,(n+1.)/m)))
+        #lvls = np.linspace(m * n / (n + 1), m / (n + 1), num=n)
+        
+        leveling=[[] for i5 in range(max(wnum))]
+        for i3 in range(len(wnum)):
+            if wnum[i3]==0:
+                continue
+            else:
+                wd = tempwords[i3]
+                if not len(wd) == 0:
+                    leveling[wnum[i3]-1].append(wd)
+        for i4 in range(1,max(wnum)+1):
+            if not len(leveling[i4-1]) == 0:
+                    ak.write(i + '|%i\n'%i4)
+                    ak.write('|'.join(leveling[i4-1]) + '\n')
     ak.close()
     # leveling of associations is done linearly. although the data trends indicate
     # an exponential distribution of odds, the thesaurus building routine should
@@ -473,7 +477,10 @@ thesname -- string, what to name the thesaurus written to hold the findings.
     return targs
     
 def compress_to_targets(targetlist,data,bigrams):
-    "called by prepped_to_colloc"
+    """called by prepped_to_colloc and is the bottleneck, at the moment
+    let's sub functionalize this and use a profiler to speed up the slow bits
+    
+    """
 
     sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
     spw = []
