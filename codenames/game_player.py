@@ -75,6 +75,7 @@ def codemaster(model):
                             if any([gameboard[key][i].find(model[1][a])>-1,
                                     model[1][a].find(gameboard[key][i])>-1,
                                     model[1][a].find(' ')>-1,
+                                    model[1][a].find('(')>-1
                                     ]):
                                 return False
                 return True
