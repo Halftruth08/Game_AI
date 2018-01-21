@@ -15,6 +15,7 @@ from lxml import html
 LOCAL=os.path.dirname(os.path.dirname(__file__))
 CDNM =LOCAL+'/data/wordslist.txt'
 THES=LOCAL+'/data/thesauri'
+RAW=LOCAL+'/data/raw'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
@@ -339,7 +340,14 @@ def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5,
         return newwords        
    
 def prep_raw(inp, out, remove_and=1,dev=0,enc=ENC):
-    """the database is sentences, each separated by .\n
+    """Usage:
+        inp: str, input file absolute path (guide: *.txt in /data/raw)
+        out: str, output file absolute path (guide: *prep.txt in /data/raw)
+        remove_and: int, 1 to remove the word 'and' or 0 to keep it
+        dev: int, number of lines to process, 0 to process full file
+        enc: str, type of encoding used for raw data input file.
+    
+    the database is sentences, each separated by .\n
     preprocessing steps:
     replace '-' with ' '
     remove additional punctuation
@@ -348,7 +356,7 @@ def prep_raw(inp, out, remove_and=1,dev=0,enc=ENC):
     this could be done easily at this stage. later, maybe
     """
     ip = open(inp, 'r', encoding=enc)
-    ot = open(out, 'w', encoding='UTF-8')
+    ot = open(out, 'w', encoding=ENC)
     # for i in range(5000): #500 is the number of sentences to use during development
     lines = 0
     for line in ip:  # use this once done with dev
@@ -381,8 +389,90 @@ def linewise_filter(line,rem_and=1,lower=1):
         linel = line.split(' ')
     linel = list(filter(lambda x: not x == '', linel))
     return linel
+
+def prepped_to_colloc(seedlist, nldata='news2011procd_dev', iterations=2,
+                      thesname="collocationthesaurus001.txt", nlevels=50, 
+                      mincut=3,devmode=1):
+    """take natural language passages, and isolate the most common ordered collocations
+(as if they are tuples). Using the lead word as a label, establish a new thesaurus
+that contains the most common collocations for every word in a target list.
+the target list is updated to include the collocated words in the next iteration,
+where the seedlist is the target list for the inital search.
+targs1=wvc.prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd',thesname='2011newsthes3.txt', iterations=2, nlevels=60, mincut=10)
+needs: dictionary, reverse_dictionary
+
+seedlist-- list of strings
+devmode -- int (1 or 2) tries to optimize enty methods, in addition to leading to more insightful 
+compression rules
+iterations -- int, number of times to expand on findings from initial seed.
+thesname -- string, what to name the thesaurus written to hold the findings.
+"""
+    # current plan
+    # peek at top 50 lines of data in natural language corpus file
+    # figure out necessary preprocessing. DO THIS IN SEPARATE func
+    # call prepped raw data instead, since the proc is iterative
+    # figure out a sneaky way to gather the info without mass translation
+    # or expensive searching...
+    # iterate the above
+    # eventually, copy thesaurus formatting and writing from another func in
+    # this module
+    # test on smaller data set
+    # use testing to establish useful threshholds.
+    # seedlist
+
+    targetlist = seedlist
+    bigrams = {}
+    #bigrams = {}
+    targs = {}
     
-def compress_to_targets(targetlist,dc,data,bigrams):
+    for i in range(iterations):
+        bigrams=compress_to_targets(targetlist,RAW+'/'+nldata,bigrams)
+        if devmode==1:
+            targs,targetlist=targetlist_update(bigrams,targs,mincut)
+        elif devmode==2:
+            targs,targetlist=targetlist_update2(bigrams,targs,nlevels)
+        ###### iteration reloads and rereads for new targets####
+    ak = open(THES+'/'+thesname, 'w', encoding=ENC)
+    for i in targs.keys():
+        tempprob = []
+        tempwords = []
+        for i2 in targs[i]:
+            tempprob.append(i2[0])
+            tempwords.append(i2[1])
+        odds = np.divide(tempprob, sum(tempprob))
+        m = np.max(odds)
+        n = nlevels
+        lvls = np.linspace(m * n / (n + 1), m / (n + 1), num=n)
+        for il in lvls:
+            temp = []
+            for i3 in range(len(odds)):
+                if odds[i3] > il:
+                    wd = tempwords[i3]
+                    if not len(wd) == 0:
+                        if not wd in temp:
+                            temp.append(wd)
+            if not len(temp) == 0:
+                ak.write(i + '|1\n')
+                ak.write('|'.join(temp) + '\n')
+    ak.close()
+    # leveling of associations is done linearly. although the data trends indicate
+    # an exponential distribution of odds, the thesaurus building routine should
+    # maintain the occurrence likelihoods for later odds ratio decision making.
+    # the normalization performed here is relevant to the process of choosing word
+    # specific clues.
+
+    #    for key in bg3.keys():
+    #        temp = key.split(' ')
+    #        #ts=''
+    #        for i in range(len(temp)):
+    #           temp[i]= rd[int(temp[i])]
+    #        #temp.append('%i'%(bg3[key]))
+    #        ts=' '.join(temp)
+    #        bigs.append(ts)
+    #        nums.append(bg3[key])
+    return targs
+    
+def compress_to_targets(targetlist,data,bigrams):
     "called by prepped_to_colloc"
 
     sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
@@ -392,7 +482,7 @@ def compress_to_targets(targetlist,dc,data,bigrams):
     # any codenames with spaces? clues can't contain spaces, so no need for support
     # beyond first iteration
     
-    d = open(data, 'r', encoding='UTF-8')
+    d = open(data, 'r', encoding=ENC)
     for line in d:
         temp = line.replace('\n', '').split(' ')
         for i2 in temp:
@@ -403,12 +493,12 @@ def compress_to_targets(targetlist,dc,data,bigrams):
                 if temp.index(i2) == 0:
                     a = 0
                 else:
-                    a = dc.get(temp[temp.index(i2) - 1], 0)
-                b = dc.get(i2, 0)
+                    a = temp[temp.index(i2) - 1]
+                b = i2
                 if len(temp) - temp.index(i2) == 1:
                     c = 0
                 else:
-                    c = dc.get(temp[temp.index(i2) + 1], 0)
+                    c = temp[temp.index(i2) + 1]
 #                if hits.get(b, 0) == 0:
 #                    hits[b] = []
                 if not a == 0:
@@ -442,12 +532,12 @@ def compress_to_targets(targetlist,dc,data,bigrams):
                         if temp.index(i2) == mod:
                             a = 0
                         else:
-                            a = dc.get(temp[temp.index(i2) - 1 - mod], 0)
-                        b = dc.get(full, 0)
+                            a = temp[temp.index(i2) - 1 - mod]
+                        b = full
                         if len(temp) - temp.index(i2) == 2 - mod:
                             c = 0
                         else:
-                            c = dc.get(temp[temp.index(i2) + 2 - mod], 0)
+                            c = temp[temp.index(i2) + 2 - mod]
 #                        if hits.get(b, 0) == 0:
 #                            hits[b] = []
                         if not a == 0:
@@ -476,7 +566,7 @@ def compress_to_targets(targetlist,dc,data,bigrams):
     
     return bigrams
 
-def targetlist_update(rd,bigrams,targs,mincut):
+def targetlist_update(bigrams,targs,mincut):
     bg3 = {}
     #    bigs=[]
     #    nums=[]
@@ -495,14 +585,12 @@ def targetlist_update(rd,bigrams,targs,mincut):
             if not temp == 0:
                 tl.append((temp, i3))
                 if not i3 in bg3.keys():
-                    word = rd.get(i3, 0)
-                    if not word == 0:
-                        targetlist.append(word)
+                    targetlist.append(i3)
         tl.sort(key=lambda x: x[0], reverse=True)
         if not len(tl) == 0:
             targs[i2] = tl
     return targs,targetlist
-def targetlist_update2(rd,bigrams,targs,nlevels):
+def targetlist_update2(bigrams,targs,nlevels):
     bg3 = {}
     #    bigs=[]
     #    nums=[]
@@ -522,93 +610,8 @@ def targetlist_update2(rd,bigrams,targs,nlevels):
             if not temp == 0:
                 tl.append((temp, i3))
                 if not i3 in bg3.keys():
-                    word = rd.get(i3, 0)
-                    if not word == 0:
-                        targetlist.append(word)
+                    targetlist.append(i3)
         tl.sort(key=lambda x: x[0], reverse=True)
         if not len(tl) == 0:
             targs[i2] = tl
     return targs,targetlist
-
-def prepped_to_colloc(seedlist, dc, rd, nldata='news2011procd_dev', iterations=2,
-                      thesname="collocationthesaurus001.txt", nlevels=50, mincut=3,devmode=1):
-    """take natural language passages, and isolate the most common ordered collocations
-(as if they are tuples). Using the lead word as a label, establish a new thesaurus
-that contains the most common collocations for every word in a target list.
-the target list is updated to include the collocated words in the next iteration,
-where the seedlist is the target list for the inital search.
-targs1=wvc.prepped_to_colloc(targets, dictionary, reverse_dictionary, nldata='news2011procd',thesname='2011newsthes3.txt', iterations=2, nlevels=60, mincut=10)
-needs: dictionary, reverse_dictionary
-
-seedlist-- list of strings
-devmode -- tries to optimize enty methods, in addition to leading to more insightful 
-compression rules
-dc -- dictionary, keys are strings, entries are ints
-rd -- reverse dictionary, keys are ints, entries are strings
-iterations -- int, number of times to expand on findings from initial seed.
-thesname -- string, what to name the thesaurus written to hold the findings.
-"""
-    # current plan
-    # peek at top 50 lines of data in natural language corpus file
-    # figure out necessary preprocessing. DO THIS IN SEPARATE func
-    # call prepped raw data instead, since the proc is iterative
-    # figure out a sneaky way to gather the info without mass translation
-    # or expensive searching...
-    # iterate the above
-    # eventually, copy thesaurus formatting and writing from another func in
-    # this module
-    # test on smaller data set
-    # use testing to establish useful threshholds.
-    # seedlist
-
-    targetlist = seedlist
-    bigrams = {}
-    #bigrams = {}
-    targs = {}
-    
-    for i in range(iterations):
-        bigrams=compress_to_targets(targetlist,dc,LOCAL+'/'+nldata,bigrams)
-        if devmode==1:
-            targs,targetlist=targetlist_update(rd,bigrams,targs,mincut)
-        elif devmode==2:
-            targs,targetlist=targetlist_update2(rd,bigrams,targs,nlevels)
-        ###### iteration reloads and rereads for new targets####
-    ak = open(LOCAL+'/'+thesname, 'w', encoding=ENC)
-    for i in targs.keys():
-        tempprob = []
-        tempwords = []
-        for i2 in targs[i]:
-            tempprob.append(i2[0])
-            tempwords.append(i2[1])
-        odds = np.divide(tempprob, sum(tempprob))
-        m = np.max(odds)
-        n = nlevels
-        lvls = np.linspace(m * n / (n + 1), m / (n + 1), num=n)
-        for il in lvls:
-            temp = []
-            for i3 in range(len(odds)):
-                if odds[i3] > il:
-                    wd = rd.get(tempwords[i3], '')
-                    if not len(wd) == 0:
-                        if not wd in temp:
-                            temp.append(wd)
-            if not len(temp) == 0:
-                ak.write(rd[i] + '|1\n')
-                ak.write('|'.join(temp) + '\n')
-    ak.close()
-    # leveling of associations is done linearly. although the data trends indicate
-    # an exponential distribution of odds, the thesaurus building routine should
-    # maintain the occurrence likelihoods for later odds ratio decision making.
-    # the normalization performed here is relevant to the process of choosing word
-    # specific clues.
-
-    #    for key in bg3.keys():
-    #        temp = key.split(' ')
-    #        #ts=''
-    #        for i in range(len(temp)):
-    #           temp[i]= rd[int(temp[i])]
-    #        #temp.append('%i'%(bg3[key]))
-    #        ts=' '.join(temp)
-    #        bigs.append(ts)
-    #        nums.append(bg3[key])
-    return targs
