@@ -3,7 +3,13 @@
 
 (set-env! :resource-paths #{"resources" "src"}
           :source-paths   #{"test"}
-          :dependencies   '[[org.clojure/clojure "RELEASE"]
+          :dependencies   '[[org.clojure/clojure "1.9.0" :scope "provided"]
+                            [org.clojure/spec.alpha "0.1.143"]
+                            [org.clojure/test.check "0.9.0"]
+                            [org.clojure/core.async "0.4.474"]
+                            [org.clojure/core.memoize "0.5.9"]
+                            [org.clojure/tools.namespace "0.3.0-alpha4"]
+                            [mount "0.1.11"]
                             [adzerk/boot-test "RELEASE" :scope "test"]])
 
 (task-options!
