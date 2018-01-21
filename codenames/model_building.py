@@ -8,8 +8,10 @@ Created on Sat Jan 20 21:09:28 2018
 import os
 import collections
 import time
+import pickle
 LOCAL=os.path.dirname(os.path.dirname(__file__))
 CDNM =LOCAL+'/data/wordslist.txt'
+MODELS=LOCAL+'/data/models'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
@@ -36,9 +38,21 @@ def store_model(model):
     """docstring goes here
     
     Usage:
+        stored_name = store_model(model)
         model - model as returned by make_full_model()
     """
-    pass
+    existing_models=list(filter(lambda a: a.find('model')>-1,os.listdir(MODELS)))
+    model_numbers=list(map(lambda a: int(a.replace('model','')),existing_models))
+    stored_name='model'+'{:02d}'.format(max(model_numbers)+1)
+    h=open(MODELS+'/'+stored_name,'wb')
+    pickle.dump(model,h)
+    h.close()
+    return stored_name
+
+def load_model(stored_name):
+    h=open(MODELS+'/'+stored_name,'rb')
+    model=pickle.load(h)
+    return model
 
 def collocation(dataf=[LOCAL+'/thesauri/'+open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
     """appendix builder function set appb True to pass additional local data
