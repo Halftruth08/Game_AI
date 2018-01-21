@@ -30,7 +30,7 @@ def make_full_model():
     model={}
     best_data=['europarl-v6.enthes.txt','fulllist_appx.txt',open_office_thes,'wiki_full_2deg.txt']
     for i in range(len(best_data)):
-        best_data[i] = LOCAL+'/thesauri/'+best_data[i]
+        best_data[i] = LOCAL+'/data/thesauri/'+best_data[i]
     [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
     return model
 
@@ -54,7 +54,7 @@ def load_model(stored_name):
     model=pickle.load(h)
     return model
 
-def collocation(dataf=[LOCAL+'/thesauri/'+open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
+def collocation(dataf=[LOCAL+'/data/thesauri/'+open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
     """appendix builder function set appb True to pass additional local data
     weight is list of ints, same len as dataf, controls the weight given 
         to each file in dataf
