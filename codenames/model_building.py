@@ -43,6 +43,7 @@ def store_model(model):
     """
     existing_models=list(filter(lambda a: a.find('model')>-1,os.listdir(MODELS)))
     model_numbers=list(map(lambda a: int(a.replace('model','')),existing_models))
+    model_numbers.append(0)
     stored_name='model'+'{:02d}'.format(max(model_numbers)+1)
     h=open(MODELS+'/'+stored_name,'wb')
     pickle.dump(model,h)
