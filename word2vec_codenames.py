@@ -1231,15 +1231,18 @@ def codemaster(model):
     def filter_out_cheat_clues(candidates):#uses gameboard & candidates defined in codemaster
         honest=[]
         def onboard(a):
-            for key in gameboard.keys():
-                for i in range(len(gameboard[key])):
-                    if remaining[key][i]==1:
-                        if any([gameboard[key][i].find(model[1][a])>-1,
-                                model[1][a].find(gameboard[key][i])>-1,
-                                model[1][a].find(' ')>-1,
-                                ]):
-                            return False
-            return True
+            if int(a) == 0:
+                return False
+            else:
+                for key in gameboard.keys():
+                    for i in range(len(gameboard[key])):
+                        if remaining[key][i]==1:
+                            if any([gameboard[key][i].find(model[1][a])>-1,
+                                    model[1][a].find(gameboard[key][i])>-1,
+                                    model[1][a].find(' ')>-1,
+                                    ]):
+                                return False
+                return True
                         
         honest=list(filter(onboard, candidates))
         
