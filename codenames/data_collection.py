@@ -5,13 +5,15 @@ Created on Sat Jan 20 21:08:47 2018
 
 @author: aarontallman
 """
-
+import os
 import random
 import time
 import string
 import numpy as np
 import requests
 from lxml import html
+LOCAL=os.path.dirname(os.path.dirname(__file__))
+CDNM =LOCAL+'/cdnmswordlist.txt'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
@@ -22,7 +24,7 @@ def build_appendix(filena='appendix01.txt',model={}, voc_sz1=120000, mode='w', m
     """
     #coloc, rev_dc, dc, count = collocation(voc_sz=voc_sz1, appb=True)
     
-    tr = open("cdnmswordlist.txt", 'r')  # targets
+    tr = open(CDNM, 'r',encoding=ENC)  # targets
     targets = tr.read().split('\n')
     tr.close()
 
@@ -90,7 +92,7 @@ def build_wiktionary(targets,iterations=1,out='wiktionary_thes01.txt'):
         for value in wiktionary.values():
             new_targets.extend(value)
         targets=new_targets
-    h=open('wiki_misses.csv','w',encoding=ENC) 
+    h=open(LOCAL+'\wiki_misses.csv','w',encoding=ENC) 
     h.write('\n'.join(misses))
     h.close()
     dict_to_thes(wiktionary,out)
@@ -103,7 +105,7 @@ def dict_to_thes(inp,out):
          try:
              file.write('|'.join(value).lower() + '\n')
          except UnicodeEncodeError:
-             temp=open('temp.txt','w',encoding='UTF-8')
+             temp=open(LOCAL+'\temp.txt','w',encoding='UTF-8')
              for item_n in range(len(value)):
                  try:
                      temp.write(value[item_n])
@@ -296,7 +298,7 @@ def scrape_power_thes(word, filen="appendix01.txt", min_upvotes=5, pass_on_words
     # beach|1
     # shore|seaside|coast|strand|bank|seashore|seaboard|ground|coastline|littoral|seacoast|foreshore|shoreline
     if write_here == True:
-        apx = open(filen, 'a', encoding=ENC)
+        apx = open(LOCAL+'/'+filen, 'a', encoding=ENC)
         apx.write(word + '|1\n')
         apx.write('|'.join(newwords) + '\n')
         apx.close()
@@ -532,13 +534,13 @@ thesname -- string, what to name the thesaurus written to hold the findings.
     targs = {}
     
     for i in range(iterations):
-        bigrams=compress_to_targets(targetlist,dc,nldata,bigrams)
+        bigrams=compress_to_targets(targetlist,dc,LOCAL+'/'+nldata,bigrams)
         if devmode==1:
             targs,targetlist=targetlist_update(rd,bigrams,targs,mincut)
         elif devmode==2:
             targs,targetlist=targetlist_update2(rd,bigrams,targs,nlevels)
         ###### iteration reloads and rereads for new targets####
-    ak = open(thesname, 'w', encoding=ENC)
+    ak = open(LOCAL+'/'+thesname, 'w', encoding=ENC)
     for i in targs.keys():
         tempprob = []
         tempwords = []

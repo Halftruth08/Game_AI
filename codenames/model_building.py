@@ -5,23 +5,11 @@ Created on Sat Jan 20 21:09:28 2018
 
 @author: aarontallman
 """
-mport collections
-import math
 import os
-# import io
-import random
+import collections
 import time
-from tempfile import gettempdir
-import zipfile
-import string
-import numpy as np
-from six.moves import urllib
-from six.moves import xrange  # pylint: disable=redefined-builtin
-import tensorflow as tf
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-import requests
-from lxml import html
+LOCAL=os.path.dirname(os.path.dirname(__file__))
+CDNM =LOCAL+'/data/wordslist.txt'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8' #see if this breaks things???
@@ -39,11 +27,20 @@ def make_full_model():
     """
     model={}
     best_data=['europarl-v6.enthes.txt','fulllist_appx.txt',open_office_thes,'wiki_full_2deg.txt']
+    for i in range(len(best_data)):
+        best_data[i] = LOCAL+'/thesauri/'+best_data[i]
     [model[0],model[1],model[2],count]=collocation(dataf=best_data,weights=[1,3,1,20],appb=True)
     return model
 
+def store_model(model):
+    """docstring goes here
+    
+    Usage:
+        model - model as returned by make_full_model()
+    """
+    pass
 
-def collocation(dataf=[open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
+def collocation(dataf=[LOCAL+'/thesauri/'+open_office_thes], weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
     """appendix builder function set appb True to pass additional local data
     weight is list of ints, same len as dataf, controls the weight given 
         to each file in dataf
@@ -133,3 +130,39 @@ def build_dataset(words, n_words):
     reversed_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
     return data, count, dictionary, reversed_dictionary
 
+def read_data_dat(filename,weight=1):
+    """Extract data from Open Office Thesaurus , separating word senses
+    format is as follows:
+abel janszoon tasman|1
+(noun)|Tasman|Abel Tasman|Abel Janszoon Tasman|navigator
+abel tasman|1
+(noun)|Tasman|Abel Tasman|Abel Janszoon Tasman|navigator
+abelard|1
+(noun)|Abelard|Peter Abelard|Pierre Abelard|philosopher|theologian|theologist|theologizer|theologiser
+abele|1
+(noun)|white poplar|white aspen|aspen poplar|silver-leaved poplar|Populus alba|poplar|poplar tree
+abelia|1
+(noun)|shrub|bush
+
+
+    """
+    import copy
+    th = open(filename, 'r', encoding=ENC)
+    # th.readline()#first line is not an entry
+    data = []
+    try:
+        while True:
+            word, num = th.readline().replace('\n', '').split('|')  # num is the number of senses for a word
+            entry = [word]
+            for i in range(int(num)):
+                temp = th.readline().replace('\n', '').lower()
+                if temp.find("                                                                         ") < 0:
+                    entry.append(temp.split('|'))
+            #data.append(entry)
+            for i in range(weight):
+                data.append(copy.deepcopy(entry))
+    except ValueError:
+        th.close()
+    print("%i entries found" % len(data))
+    # data is stored as [["abel janszoon tasman",["(noun)","tasman","abel tasman","abel janszoon tasman","navigator"]]...]
+    return data

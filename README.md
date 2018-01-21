@@ -1,16 +1,14 @@
 # Game_AI
 When dancers collaborate on coding, fun is sure to ensue...
-before using, use pip (or conda) to install the required packages:
-collections
-math
-tempfile
-zipfile
-six
-tensorflow
-sklearn
-matplotlib
-requests
-lxml
-pandas
+before using, install requirements
 
 Then, see usage for how to initiate AI in an ipython session.
+
+Usage:
+import codenames.model_building as cmb
+
+model = cmb.make_full_model()
+
+import codenames.game_player as cgp
+
+cgp.codemaster(model)

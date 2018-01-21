@@ -5,7 +5,13 @@ Created on Sat Jan 20 21:10:18 2018
 
 @author: aarontallman
 """
+import os
+# import io
 
+import numpy as np
+
+LOCAL=os.path.dirname(os.path.dirname(__file__))
+CDNM =LOCAL+'/cdnmswordlist.txt'
 def codemaster(model):
     """
     """
@@ -338,7 +344,7 @@ def game_maker():
     the number of words in each list are shown in the above parenthesis
     """
     gameboard={}
-    tr = open("cdnmswordlist.txt", 'r')  # targets
+    tr = open(CDNM, 'r')  # targets
     targets = tr.read().split('\n')
     tr.close()
     board=np.random.choice(targets,25,replace=False)
