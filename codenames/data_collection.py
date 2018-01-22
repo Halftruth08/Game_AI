@@ -537,25 +537,25 @@ def compress_to_targets(targetlist, data, bigrams):
             lt = [temp.index(i)]
             for i3 in range(temp.count(i) - 1):
                 lt.append(temp.index(i, lt[len(lt) - 1]))
-            for i2 in [temp[ii] for ii in lt]:
+            for i2,ii in [(temp[ii],ii) for ii in lt]:
                 if i2 in tls:
                     # get prev and next
                     # save bigrams as numbers? sparseness precludes array or
                     # indicial storage
 
-                    if temp.index(i2) == 0:
+                    if ii == 0:
                         a = 0
                     else:
-                        a = temp[temp.index(i2) - 1]
+                        a = temp[ii - 1]
                     b = i2
-                    if len(temp) - temp.index(i2) == 1:
+                    if len(temp) - ii == 1:
                         c = 0
                     else:
-                        c = temp[temp.index(i2) + 1]
+                        c = temp[ii + 1]
     #                if hits.get(b, 0) == 0:
     #                    hits[b] = []
                     if not a == 0:
-                        if not len(temp[temp.index(i2) - 1]) < 3:
+                        if not len(temp[ii - 1]) < 3:
                             # we are not interested in clues shorter than 3 letters long
                             #ab = '%i %i' % (a, b)
                             if b in bigrams.keys():
@@ -567,7 +567,7 @@ def compress_to_targets(targetlist, data, bigrams):
                                 bigrams[b] = {a: [1, 0]}
     #                            hits[b].append(a)
                     if not c == 0:
-                        if not len(temp[temp.index(i2) + 1]) < 3:
+                        if not len(temp[ii + 1]) < 3:
                             #bc = '%i %i' % (b, c)
                             if b in bigrams.keys():
                                 if c in bigrams[b].keys():
@@ -580,23 +580,22 @@ def compress_to_targets(targetlist, data, bigrams):
                 elif i2 in tlsw:
                     mod = spw.index(i2) % 2
                     full = sp[spw.index(i2) // 2]
-                    if min(len(temp) - temp.index(i2) - 2 + mod,
-                           temp.index(i2) - mod) > -1:
-                        if temp[temp.index(
-                                i2) + 1 - 2 * mod] == spw[2 * (spw.index(i2) // 2) + 1 - mod]:
-                            if temp.index(i2) == mod:
+                    if min(len(temp) - ii - 2 + mod,
+                           ii - mod) > -1:
+                        if temp[ii + 1 - 2 * mod] == spw[2 * (spw.index(i2) // 2) + 1 - mod]:
+                            if ii == mod:
                                 a = 0
                             else:
-                                a = temp[temp.index(i2) - 1 - mod]
+                                a = temp[ii - 1 - mod]
                             b = full
-                            if len(temp) - temp.index(i2) == 2 - mod:
+                            if len(temp) - ii == 2 - mod:
                                 c = 0
                             else:
-                                c = temp[temp.index(i2) + 2 - mod]
+                                c = temp[ii + 2 - mod]
     #                        if hits.get(b, 0) == 0:
     #                            hits[b] = []
                             if not a == 0:
-                                if not len(temp[temp.index(i2) - 1 - mod]) < 3:
+                                if not len(temp[ii - 1 - mod]) < 3:
                                     # we are not interested in clues shorter than 3 letters long
                                     #ab = '%i %i' % (a, b)
                                     if b in bigrams.keys():
@@ -608,7 +607,7 @@ def compress_to_targets(targetlist, data, bigrams):
                                         bigrams[b] = {a: [1, 0]}
     #                                    hits[b].append(a)
                             if not c == 0:
-                                if not len(temp[temp.index(i2) + 2 - mod]) < 3:
+                                if not len(temp[ii + 2 - mod]) < 3:
                                     #bc = '%i %i' % (b, c)
                                     if b in bigrams.keys():
                                         if c in bigrams[b].keys():
