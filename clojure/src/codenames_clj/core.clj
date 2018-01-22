@@ -11,6 +11,6 @@
 
   )
 
-(defn generate-gameboard
+#_(defn generate-gameboard
   (->> get-wordlist
       ))
