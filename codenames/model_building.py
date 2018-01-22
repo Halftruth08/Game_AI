@@ -36,7 +36,7 @@ def make_full_model():
     for i in range(len(best_data)):
         best_data[i] = LOCAL + '/data/thesauri/' + best_data[i]
     [model[0], model[1], model[2], count] = collocation(
-        dataf=best_data, weights=[1, 3, 1, 20], appb=True)
+        dataf=best_data, weights=[1, 3, 1, 20], grouping=[1,2,2,1],appb=True)
     return model
 
 
@@ -68,17 +68,20 @@ def load_model(stored_name):
 
 
 def collocation(dataf=[LOCAL + '/data/thesauri/' + open_office_thes],
-                weights=[1], voc_sz=120000, appb=False):
+                weights=[1],grouping=[1], voc_sz=120000, appb=False):
     """appendix builder function set appb True to pass additional local data
     weight is list of ints, same len as dataf, controls the weight given
         to each file in dataf
     """
     vocabulary_size = voc_sz
     wordlist = []
+    docgroups=[]
     if len(weights) == 1 and len(dataf) > 1:
         weights = [1 for i in range(len(dataf))]
     for i in range(len(dataf)):  # now works with a list of datafiles as input
-        wordlist.extend(read_data_dat(dataf[i], weight=weights[i]))
+        dat = read_data_dat(dataf[i], weight=weights[i]) 
+        docgroups.append(len(dat))
+        wordlist.extend(dat)
     groups = []
     groupweights = []
     vocabulary = []
@@ -112,16 +115,28 @@ def collocation(dataf=[LOCAL + '/data/thesauri/' + open_office_thes],
     coloc = list({} for i in range(voc_sz))
     ngr = list(list(dictionary.get(item, 0) for item in sublist)
                for sublist in groups)
-
+    assert len(ngr) == sum(docgroups)
+    increments=[sum(docgroups[:i]) for i in range(len(docgroups))]
+    temp_mode=1
     for ig in range(len(ngr)):  # group based approach, way faster
         if ig % 10000 == 0:
             print(
                 "collocating group %i of %i %s" %
                 (ig, len(ngr), time.ctime()))
-        for i in ngr[ig]:
+        if ig in increments:
+            temp_mode=grouping[increments.index(ig)]
+        if temp_mode == 1:
+            i = ngr[ig][0]
             for i2 in ngr[ig]:
                 if not i == i2:
                     coloc[i][i2] = coloc[i].get(i2, 0) + groupweights[ig]
+                    coloc[i2][i] = coloc[i2].get(i, 0) + groupweights[ig]
+            del i
+        if temp_mode == 2:
+            for i in ngr[ig]:
+                for i2 in ngr[ig]:
+                    if not i == i2:
+                        coloc[i][i2] = coloc[i].get(i2, 0) + groupweights[ig]
 
 
     # conversion to probabilities from counts
