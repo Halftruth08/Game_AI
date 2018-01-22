@@ -10,8 +10,7 @@ import collections
 import time
 import pickle
 LOCAL = os.path.dirname(os.path.dirname(__file__))
-CDNM = LOCAL + '/data/wordslist.txt'
-MODELS = LOCAL + '/data/models'
+=[p;/ bMODELS = LOCAL + '/data/models'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8'  # see if this breaks things???
@@ -29,14 +28,16 @@ def make_full_model():
     """
     model = {}
     best_data = [
-        'europarl-v6.enthes.txt',
+        'news2010.txt',
+        'news2011.txt',
+        'newseuro_v6.txt',
         'fulllist_appx.txt',
         open_office_thes,
         'wiki_full_2deg.txt']
     for i in range(len(best_data)):
         best_data[i] = LOCAL + '/data/thesauri/' + best_data[i]
     [model[0], model[1], model[2], count] = collocation(
-        dataf=best_data, weights=[1, 3, 1, 20], grouping=[1,2,2,1],appb=True)
+        dataf=best_data, weights=[1, 1, 1, 40, 3, 200], grouping=[1,1,1,2,2,1],appb=True)
     return model
 
 

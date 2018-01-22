@@ -352,7 +352,7 @@ def codemaster(model):
         clueword, cluenumber = play_turn()
 
         likesbase.drop(model[2][clueword], inplace=True)  # no reusing clues
-        for guess in range(1, cluenumber + 1):
+        for guess in range(1, cluenumber + 2):
             guessword = prompt_user(clueword, cluenumber, guess)
             if guessword == '':
                 color = ''
