@@ -9,6 +9,7 @@
                             [org.clojure/core.async "0.4.474"]
                             [org.clojure/core.memoize "0.5.9"]
                             [org.clojure/tools.namespace "0.3.0-alpha4"]
+                            [com.rpl/specter "1.1.0"]
                             [mount "0.1.11"]
                             [adzerk/boot-test "RELEASE" :scope "test"]])
 
