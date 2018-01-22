@@ -448,6 +448,7 @@ compression rules
 iterations -- int, number of times to expand on findings from initial seed.
 thesname -- string, what to name the thesaurus written to hold the findings.
 """
+
     # current plan
     # peek at top 50 lines of data in natural language corpus file
     # figure out necessary preprocessing. DO THIS IN SEPARATE func
@@ -522,33 +523,21 @@ thesname -- string, what to name the thesaurus written to hold the findings.
 def compress_to_targets(targetlist, data, bigrams):
     """called by prepped_to_colloc and is the bottleneck, at the moment
     let's sub functionalize this and use a profiler to speed up the slow bits
-
     """
-
-    sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
-    spw = []
-    tls = set(targetlist)
-    for isp in sp:
-        spw.extend(isp.split(' '))
-    tlsw = set(spw)
-
     def add_bigram(temp, set):
+        tlen=len(temp)
         for i in set:
             lt = [temp.index(i)]
             for i3 in range(temp.count(i) - 1):
                 lt.append(temp.index(i, lt[len(lt) - 1]))
             for i2,ii in [(temp[ii],ii) for ii in lt]:
                 if i2 in tls:
-                    # get prev and next
-                    # save bigrams as numbers? sparseness precludes array or
-                    # indicial storage
-
                     if ii == 0:
                         a = 0
                     else:
                         a = temp[ii - 1]
                     b = i2
-                    if len(temp) - ii == 1:
+                    if tlen - ii == 1:
                         c = 0
                     else:
                         c = temp[ii + 1]
@@ -565,10 +554,8 @@ def compress_to_targets(targetlist, data, bigrams):
                                     bigrams[b][a] = [1, 0]
                             else:
                                 bigrams[b] = {a: [1, 0]}
-    #                            hits[b].append(a)
                     if not c == 0:
                         if not len(temp[ii + 1]) < 3:
-                            #bc = '%i %i' % (b, c)
                             if b in bigrams.keys():
                                 if c in bigrams[b].keys():
                                     bigrams[b][c][1] += 1
@@ -576,26 +563,22 @@ def compress_to_targets(targetlist, data, bigrams):
                                     bigrams[b][c] = [0, 1]
                             else:
                                 bigrams[b] = {c: [0, 1]}
-    #                            hits[b].append(c)
-                elif i2 in tlsw:
-                    mod = spw.index(i2) % 2
-                    full = sp[spw.index(i2) // 2]
-                    if min(len(temp) - ii - 2 + mod,
-                           ii - mod) > -1:
-                        if temp[ii + 1 - 2 * mod] == spw[2 * (spw.index(i2) // 2) + 1 - mod]:
-                            if ii == mod:
+                elif i2 in tlsf:
+                    #mod = 0#spw.index(i2) % 2
+                    full = sp[spf.index(i2)]
+                    if tlen - ii > 1:
+                        if temp[ii + 1] == spl[spf.index(i2)]:
+                            if ii == 0:
                                 a = 0
                             else:
-                                a = temp[ii - 1 - mod]
+                                a = temp[ii - 1]
                             b = full
-                            if len(temp) - ii == 2 - mod:
+                            if tlen - ii == 2:
                                 c = 0
                             else:
-                                c = temp[ii + 2 - mod]
-    #                        if hits.get(b, 0) == 0:
-    #                            hits[b] = []
+                                c = temp[ii + 2]
                             if not a == 0:
-                                if not len(temp[ii - 1 - mod]) < 3:
+                                if not len(temp[ii - 1]) < 3:
                                     # we are not interested in clues shorter than 3 letters long
                                     #ab = '%i %i' % (a, b)
                                     if b in bigrams.keys():
@@ -607,7 +590,7 @@ def compress_to_targets(targetlist, data, bigrams):
                                         bigrams[b] = {a: [1, 0]}
     #                                    hits[b].append(a)
                             if not c == 0:
-                                if not len(temp[ii + 2 - mod]) < 3:
+                                if not len(temp[ii + 2]) < 3:
                                     #bc = '%i %i' % (b, c)
                                     if b in bigrams.keys():
                                         if c in bigrams[b].keys():
@@ -619,12 +602,35 @@ def compress_to_targets(targetlist, data, bigrams):
 #                                    hits[b].append(c)
     # any codenames with spaces? clues can't contain spaces, so no need for support
     # beyond first iteration
-    d = open(data, 'r', encoding=ENC)
-    for line in d:
+    def profile_task1(line):
         temp = line.replace('\n', '').split(' ')
         ts = set(temp)
-        if len(ts & tls) > 0 or len(ts & tlsw) > 1:
-            add_bigram(temp, ts & (tls | tlsw))
+        return temp, ts
+    def set_logic():
+        if len(ts & tls) > 0:# or len(ts & tlsw) > 1:
+            if len(ts & tlsf) > 0 and len(ts & tlsl) > 0:
+                add_bigram(temp, ts & tls_sf)
+            else:
+                add_bigram(temp, ts & tls)
+        elif len(ts & tlsf) > 0 and len(ts & tlsl) > 0:
+            add_bigram(temp, ts & tlsf)
+    sp = list(filter(lambda x: x.find(' ') > 0, targetlist))
+    #spw = []
+    spf = []
+    spl = []
+    tls = set(targetlist)
+    for isp in sp:
+        #spw.extend(isp.split(' '))
+        spf.append(isp.split(' ')[0])
+        spl.append(isp.split(' ')[1])
+    #tlsw = set(spw)
+    tlsf = set(spf)
+    tlsl = set(spl)
+    tls_sf = tls | tlsf
+    d = open(data, 'r', encoding=ENC)
+    for line in d:
+        temp, ts = profile_task1(line)
+        set_logic()
     d.close()
     return bigrams
 
