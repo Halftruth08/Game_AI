@@ -68,7 +68,7 @@ def load_model(stored_name):
 
 
 def collocation(dataf=[LOCAL + '/data/thesauri/' + open_office_thes],
-                weights=[1], voc_sz=120000, dim=100, min_co=0, appb=False):
+                weights=[1], voc_sz=120000, appb=False):
     """appendix builder function set appb True to pass additional local data
     weight is list of ints, same len as dataf, controls the weight given
         to each file in dataf
@@ -123,14 +123,6 @@ def collocation(dataf=[LOCAL + '/data/thesauri/' + open_office_thes],
                 if not i == i2:
                     coloc[i][i2] = coloc[i].get(i2, 0) + groupweights[ig]
 
-    # PRUNING FOR SPEED## optional...set min_co to 0
-    # not working b/c dic changes size during iteration. change to do all after
-    if not min_co == 0:
-        for i in range(len(coloc)):
-            if len(coloc[i]) > dim:
-                for key in coloc[i]:
-                    if coloc[i][key] < min_co:
-                        del coloc[i][key]
 
     # conversion to probabilities from counts
     for i in range(len(coloc)):

@@ -625,7 +625,7 @@ def compress_to_targets(targetlist, data, bigrams):
         ts = set(temp)
         if len(ts & tls) > 0 or len(ts & tlsw) > 1:
             add_bigram(temp, ts & (tls | tlsw))
-
+    d.close()
     return bigrams
 
 
