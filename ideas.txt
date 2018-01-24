@@ -1,0 +1,21 @@
+1. Guesser AI 
+      using limited access/varied access to the data, provide rationale for selecting codenames from clues. passing should be an option.
+      
+2. 2/N-degree connections model
+      To increase the interconnectivity of our language model, it might be useful to consider words associated by multiple degrees. This possibility raises new questions: How should the 2-degree connections be given probabilities alongside the 1-degree connections? How should these connections be stored in the working model? 
+      
+3. Recorded Human guesses/ clues:
+      In validation of any bot, performance against a set of games between humans and other humans, humans and bots, and bots and humans can be used as a benchmark. This data would be easiest to gather with a specifically made GUI. 
+
+4. Diversity in language models/data
+      In testing models against models, 
+
+5. language/strategy formalisms
+      The steady state performace of a bot depends on the generalism of the language model and the strategy used in clue making/guessing. these model components must be formalized so that a parametric exploration can be proposed.
+
+
+6. source attribution in code words:
+    somehow, include in each candidate clue a trace back to where the edges involved originated. This will allow for the tuning of source weights over time 
+    
+7. training of models
+    Calibration of parameters, rather than blank ML? TBD
