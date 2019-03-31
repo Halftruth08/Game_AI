@@ -10,7 +10,8 @@ import collections
 import time
 import pickle
 LOCAL = os.path.dirname(os.path.dirname(__file__))
-=[p;/ bMODELS = LOCAL + '/data/models'
+#=[p;/ b
+MODELS = LOCAL + '/data/models'
 open_office_thes = "th_en_US_new2.dat"
 ENC = 'latin_1'
 ENC = 'UTF-8'  # see if this breaks things???
