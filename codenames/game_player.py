@@ -13,11 +13,43 @@ import numpy as np
 LOCAL = os.path.dirname(os.path.dirname(__file__))
 CDNM = LOCAL + '/data/wordslist.txt'
 
+def cpu_player_1deep(model, clue, board,bonus_guess,verbose=True):
+    """if models are identical for codemaster and player, there should be no mistakes
+    """
+    if verbose is True:
+        print("AI player thinking...")
+    #guessword = cpu_player_1deep(player_model, clueword, gamegrid, cluenumber-guess)
+    perhaps=model[0][model[2][clue]]
+    options={}
+    for word in board.values.ravel():
+        if word in ['RED','BLUE','GREY','BLACK']:
+            continue
+        if model[2][word] in perhaps.keys():
+            options[perhaps[model[2][word]]]=word
+    topchoices=list(options.keys())
+    if len(topchoices)==0:
+        print("No obvious choices... passing turn")
+        return "pass"
+    if verbose is True:
+        #topchoices=list(options.keys())
+        topchoices.sort(reverse=True)
+        top_choice_report='Top Choices for %s\n'%clue
+        for i in range(min(len(topchoices),10)):
+            top_choice_report+='Choice %i: %s %f \n'%(i,options[topchoices[i]],topchoices[i])
+        print(top_choice_report)
+    pos=np.argwhere(board.values==options[max(topchoices)]).flatten()
+    if bonus_guess>0:
+        passback = '%i,%i'%(pos[0],pos[1])
+    else:
+        passback ="pass"
+    return passback
 
-def codemaster(model):
+def codemaster(model,player='human',player_model=None,debug=False):
     """
     """
     import pandas
+    if player_model is None:
+        player_model = model#for testing the IO and debugging code
 
     def get_clues_array(targets, blue, grey, black):
         """will run once per game, returning the needed data
@@ -109,7 +141,29 @@ def codemaster(model):
             a, b = guess.split(',')
             a = int(a)
             b = int(b)
-            codename = gamegrid.get_value(a, b)
+            codename = gamegrid.at[a, b]
+            print('Guessing: %s' % codename)
+        elif guess == 'pass':
+            print('Passing Turn')
+        elif guess == 'quit':
+            codename = gameboard['black'][0]
+        else:
+            print('incorrect entry, passing turn as a default while in dev')
+        return 
+    
+    def prompt_cpu(player_model, clue, number, guessnumber):
+        codename = ''
+        print(
+            '%s %i\n%s\n\nGuess(%i/%i) row,column or pass:' %
+            (clue, number, gamegrid, guessnumber, number + 1))
+        
+        guess = cpu_player_1deep(player_model, clue
+                                 , gamegrid, number-guessnumber)
+        if guess.find(',') > -1:
+            a, b = guess.split(',')
+            a = int(a)
+            b = int(b)
+            codename = gamegrid.at[a, b]
             print('Guessing: %s' % codename)
         elif guess == 'pass':
             print('Passing Turn')
@@ -166,6 +220,7 @@ def codemaster(model):
                     # this is total likelihood of bad outcomes per candidate
         # STRATEGY 1: find max in prob codenames, calc odds, take max odds
         # clues
+        
         all_clues = len(likes.index)
         blind_odds = sum([sum(remaining[key]) * weights[key] for key in weights.keys()]
                          ) / sum([sum(remaining[key]) for key in weights.keys()])
@@ -197,12 +252,12 @@ def codemaster(model):
             temp5 = []
             temp6 = []
             for i2 in temp2.get_values():
-                temp6.append(i2 / (likes.get_value(i, 'all_i_sum')))
+                temp6.append(i2 / (likes.at[i, 'all_i_sum']))
             top_io.append(temp6)
             for i2 in temp3:
-                temp4.append(likes.get_value(i, i2))
-                temp5.append(likes.get_value(i, i2) /
-                             (likes.get_value(i, 'all_o_sum')))
+                temp4.append(likes.at[i, i2])
+                temp5.append(likes.at[i, i2] /
+                             (likes.at[i, 'all_o_sum']))
             top_o.append(temp4)
             top_oo.append(temp5)
         likes['filt'] = pandas.Series(filt, index=likes.index)
@@ -217,7 +272,7 @@ def codemaster(model):
         # optional: rewrite the below function to operate along a column
         ign_ev = {1: [], 2: [], 3: [], 4: []}
         for i in likes.index:
-            itotl = likes.get_value(i, 'all_i_sum')
+            itotl = likes.at[i, 'all_i_sum']
             max_ign = 0.4  # 40% chance words are unknown to other player at max vocab
             # make this tunable
             # ign_ev=temp*(1-ign) + ign * blind_odds
@@ -225,7 +280,7 @@ def codemaster(model):
             temp1 = 0.
             for key in gameboard.keys():
                 temp = key + 's_i_sum'
-                temp1 += likes.get_value(i, temp) * weights[key]
+                temp1 += likes.at[i, temp] * weights[key]
             temp1 = temp1 / itotl
             temp1i = temp1 * (1. - ign) + blind_odds * ign
             temp2 = 0.
@@ -234,7 +289,7 @@ def codemaster(model):
             temp2i = 0.
             temp3i = 0.
             temp4i = 0.
-            templist = likes.get_value(i, 'in_odds')
+            templist = likes.at[i, 'in_odds']
             if temp1 > 0.:
                 for i2 in range(len(templist)):
                     l2 = templist[i2]
@@ -298,8 +353,10 @@ def codemaster(model):
         clue1 = ign_ev.nlargest(1, 1).index[0]
         clue2 = ign_ev.nlargest(1, 2).index[0]
         clue3 = ign_ev.nlargest(1, 3).index[0]
-        if ign_ev.get_value(clue2, 2) > ign_ev.get_value(clue1, 1):
-            if ign_ev.get_value(clue3, 3) > ign_ev.get_value(clue2, 2):
+        if debug:
+            print('Clue expected value',clue1,clue2,clue3,'\n')
+        if ign_ev.at[clue2, 2] > ign_ev.at[clue1, 1]:
+            if ign_ev.at[clue3, 3] > ign_ev.at[clue2, 2]:
                 cluenumber = 3
                 clueword = model[1][clue3]
 
@@ -353,7 +410,10 @@ def codemaster(model):
 
         likesbase.drop(model[2][clueword], inplace=True)  # no reusing clues
         for guess in range(1, cluenumber + 2):
-            guessword = prompt_user(clueword, cluenumber, guess)
+            if player == 'human':
+                guessword = prompt_user(clueword, cluenumber, guess)
+            elif player.find('cpu')>-1:
+                guessword = prompt_cpu(player_model, clueword, cluenumber, guess)
             if guessword == '':
                 color = ''
                 break
