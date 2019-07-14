@@ -15,11 +15,42 @@
 
 (defn compact
   [codenames-list full-model]
-   (for [item full-model
-         :when (not (not-any? true? (for [word (entry-words item)] (contains? (apply hash-set codenames-list) word))))]
-     item))             
+  (for [item full-model
+        :when (not (not-any? true? (for [word (entry-words item)] (contains? (apply hash-set codenames-list) word))))]
+    item))             
+
+(defn incorporate-new-pair
+  [word-graph [[word association] m-weight]]
+  
+  (if (not-any? #(clojure.string/includes? word %) (list "-" " "))
+    (reduce (fn [graph new-word]
               
-              
+              (if (not-any? #(clojure.string/includes? new-word %) (list "(" " " word))
+                (update-in graph
+                  [word new-word]
+                  (fn [counter]
+                    ;(println weight)
+                    (if counter
+                      (+ m-weight counter)
+                      m-weight))) 
+                graph))
+      
+      word-graph
+      [association])
+    word-graph))
+
+(defn reverse-hash
+  [model]
+  ;(doseq [x (seq (for [item model] (for [word (seq (val item))] [[(key word) (key item)] (val word)])))] 
+  ;       (println x)]
+  (reduce incorporate-new-pair
+    {}
+    (seq (for [item model
+               x (for [word (seq (val item))] [[(key word) (key item)] (val word)])]
+              x))))
+             
+
+                    
 
 ;(def codenames (range 400))
 (defn get-codeword
@@ -51,5 +82,12 @@
   [words]
   (doseq [row (partition 5 words)]
     (println row)))
+
+(defn odds
+  [])
+
+(defn make-clue
+  [game-hash compact-model])
+  
 
 
