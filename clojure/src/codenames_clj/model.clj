@@ -7,7 +7,7 @@
                   ["thesauri/newscomment.txt" 1]
                   ["thesauri/wiki_full_2deg.txt" 100]])
 ;(def file-weights [3 1 40 1 100])
-                   
+;(def codenames-list-file (io/resource "wordslist.txt"))                   
 
 (defn thesaurus-file-to-line-pairs
   [fname]
