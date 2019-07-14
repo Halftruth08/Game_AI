@@ -1,14 +1,25 @@
 (ns codenames-clj.game
-  (:require [codenames-clj.model :as mdl]
-            [codenames-clj.storage :as store]
-            [clojure.java.io :as io]
-            [clojure.string :as string]))
+  (:require   [clojure.java.io :as io]
+              [clojure.string :as string]))
 
 (def number-of-codenames 400)
 
 (def codenames-list-file (io/resource "wordslist.txt"))  
 
 (def codenames  (vec (string/split (slurp codenames-list-file) #"\n")))
+
+(defn entry-words
+  [entry]
+  
+  (flatten (list (key entry) (keys (val entry)))))
+
+(defn compact
+  [codenames-list full-model]
+   (for [item full-model
+         :when (not (not-any? true? (for [word (entry-words item)] (contains? (apply hash-set codenames-list) word))))]
+     item))             
+              
+              
 
 ;(def codenames (range 400))
 (defn get-codeword
@@ -40,3 +51,5 @@
   [words]
   (doseq [row (partition 5 words)]
     (println row)))
+
+

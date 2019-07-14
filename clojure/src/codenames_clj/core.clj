@@ -37,15 +37,17 @@
                 mdl/model)
          out "resources/models/test.txt"]
     (println (type mod1))
-    (doseq [x (take 5 mod1)] (println x))
+    (doseq [x (take 5 mod1)] (game/entry-words x))
     (doseq [x (take 5 (keys mod1))] (println x))
     (doseq [x (take 5 (keys (first (vals mod1))))] (println x))
     (println (type (first (vals mod1))))
-    (println (store/entry "word" "weight" "leaf"))
-    ;(spit out (string/join "\n" (take 5 (keys (first (vals mod1)))))))
-    (if (.exists (io/as-file "resources/models/model1.txt")) 
-        (doseq [x (take 25 mod1)] (println x))
-        (store/model-save "model1.txt" mod1))))
+    (def modc (game/compact game/codenames mod1))
+    (doseq [x (take 5 modc)] (println x))
+     ;(println (store/entry "word" "weight" "leaf"))
+     ;(spit out (string/join "\n" (take 5 (keys (first (vals mod1)))))))
+    (if (.exists (io/as-file "resources/models/model1c.txt")) 
+      (doseq [x (take 25 modc)] (println x))
+      (store/model-save "model1c.txt" modc))))
      
   ;(store/model-save "model1.txt" mdl/model))
   

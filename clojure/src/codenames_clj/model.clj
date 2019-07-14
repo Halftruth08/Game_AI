@@ -1,5 +1,6 @@
 (ns codenames-clj.model
-  (:require [clojure.zip :as zip]))
+  (:require [clojure.zip :as zip]
+            [codenames-clj.game :as game]))
 
 (def model-files [["thesauri/th_en_US_new2.dat" 3]
                   ["thesauri/europarl-v6.enthes.txt" 1]
@@ -52,7 +53,7 @@
               (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
     {}
     files))
-    
+
     
   
 
