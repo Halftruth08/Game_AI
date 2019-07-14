@@ -1,11 +1,13 @@
-(ns codenames-clj.model)
+(ns codenames-clj.model
+  (:require [clojure.zip :as zip]))
 
-(def model-files #{"thesauri/th_en_US_new2.dat"
-                   "thesauri/europarl-v6.enthes.txt"
-                   "thesauri/fulllist_appx.txt"
-                   "thesauri/newscomment.txt"
-                   "thesauri/wiki_full_2deg.txt"
-                   })
+(def model-files [["thesauri/th_en_US_new2.dat" 3]
+                  ["thesauri/europarl-v6.enthes.txt" 1]
+                  ["thesauri/fulllist_appx.txt" 40]
+                  ["thesauri/newscomment.txt" 1]
+                  ["thesauri/wiki_full_2deg.txt" 100]])
+;(def file-weights [3 1 40 1 100])
+                   
 
 (defn thesaurus-file-to-line-pairs
   [fname]
@@ -13,30 +15,47 @@
        (clojure.java.io/reader)
        (line-seq)
        (partition 2)))
+       
 
 (defn incorporate-new-line
-  [word-graph [word-w associations-w]]
+  [word-graph [[word-w associations-w] m-weight]]
   (let [[word weight-s] (clojure.string/split word-w #"\|")
         weight (Integer/parseInt weight-s)
         associations (clojure.string/split associations-w #"\|")]
-    (reduce (fn [graph new-word]
-              (update-in graph
-                         [word new-word]
-                         (fn [counter]
-                           (if counter
-                             (+ counter weight)
-                             weight))))
-            word-graph
-            associations)))
+    (if (not-any? #(clojure.string/includes? word %) (list "-" " "))
+      (reduce (fn [graph new-word]
+                
+                (if (not-any? #(clojure.string/includes? new-word %) (list "(" " " word))
+                  (update-in graph
+                    [word new-word]
+                    (fn [counter]
+                      ;(println weight)
+                      (if counter
+                        (+ (* m-weight weight) counter)
+                        (* m-weight weight)))) 
+                  graph))
+        
+        word-graph
+        associations)
+      word-graph)))
+
+
+    
 
 (defn generate-all-models
-  []
-  (reduce (fn [model filename]
+  [files]
+  
+  (reduce (fn [model [filename m-weight]]
+            ;(println (take 5 (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
             (reduce incorporate-new-line
-                    model
-                    (thesaurus-file-to-line-pairs filename)))
-          {}
-          model-files))
+              model
+              (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
+    {}
+    files))
+    
+    
+  
 
-(time (def model (generate-all-models)))
+;(def model (range 100))
+(def model #(generate-all-models model-files))
 
