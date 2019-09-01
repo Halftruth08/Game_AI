@@ -10,3 +10,4 @@ clojure/project.clj
 clojure/*.iml
 data/models/*
 data/raw/*.txt
+resources/models/*.txt
