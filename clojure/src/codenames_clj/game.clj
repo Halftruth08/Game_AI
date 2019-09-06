@@ -1,7 +1,9 @@
 (ns codenames_clj.game
   (:require   [clojure.java.io :as io]
               [clojure.string :as string]
-              [clojure.pprint :as pprint]))
+              [clojure.pprint :as pprint]
+              [clojure.set]))
+              
 
 (def number-of-codenames 400)
 
@@ -102,7 +104,10 @@
 (defn candidates
   [game-hash compact-model]
   (println (take 5 (vals compact-model)))
-  (println (filter #(not (nil? %)) (map #(compact-model %) (map #(if (string/starts-with? % "red") %)  (map #(game-hash %) (keys game-hash)))))))
+  (println (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
+                                                                                  (map #(compact-model %) 
+                                                                                    (map #(if (string/starts-with? % "red") %)  
+                                                                                      (map #(game-hash %) (keys game-hash)))))))))))
 
 (defn odds
   [clue game-hash compact-model])
