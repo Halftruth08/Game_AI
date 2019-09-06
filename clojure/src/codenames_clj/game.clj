@@ -101,7 +101,8 @@
 
 (defn candidates
   [game-hash compact-model]
-  (println (map #(compact-model %) (map #(if (string/starts-with? % "red") %)  (map #(game-hash %) (keys game-hash))))))
+  (println (take 5 (vals compact-model)))
+  (println (filter #(not (nil? %)) (map #(compact-model %) (map #(if (string/starts-with? % "red") %)  (map #(game-hash %) (keys game-hash)))))))
 
 (defn odds
   [clue game-hash compact-model])

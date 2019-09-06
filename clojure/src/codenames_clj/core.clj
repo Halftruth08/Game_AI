@@ -23,10 +23,13 @@
   (println "Hello, World!")
   (let [wl1 (game/gen-wordlist (count game/codenames))]
     (let [game-words (game/get-wordlist-words wl1)]
-      (let [agents (game/assign-words game-words)]
-           [mod mdl/model]
+      (let [agents (game/assign-words game-words)
+            mod1 (if (.exists (io/as-file "resources/models/model1.txt")) 
+                   (mdl/generate-all-models [["models/model1.txt" 1]]) 
+                   mdl/model)
+            out "resources/models/test.txt"]
         (game/show-gameboard game-words)
-        (game/candidates agents mod)
+        (game/candidates agents mod1)
         (game/show-gameboard (map #(agents %) game-words)))))
   
   
