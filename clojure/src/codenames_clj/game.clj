@@ -104,10 +104,14 @@
 (defn candidates
   [game-hash compact-model]
   (println (take 5 (vals compact-model)))
-  (println (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
-                                                                                  (map #(compact-model %) 
-                                                                                    (map #(if (string/starts-with? % "red") %)  
-                                                                                      (map #(game-hash %) (keys game-hash)))))))))))
+  ;(println (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
+                                                                                  ;(map #(compact-model %) 
+                                                                                    ;(map #(if (string/starts-with? % "red") %)  
+                                                                                      ;(map #(game-hash %) (keys game-hash)))))
+  (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
+                                                                         (map #(compact-model %) 
+                                                                           (map #(if (string/starts-with? % "red") %)  
+                                                                             (map #(game-hash %) (keys game-hash))))))))))
 
 (defn odds
   [clue game-hash compact-model])

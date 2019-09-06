@@ -29,7 +29,8 @@
                    mdl/model)
             out "resources/models/test.txt"]
         (game/show-gameboard game-words)
-        (game/candidates agents mod1)
+        (let [cds (game/candidates agents mod1)]
+          (println cds))
         (game/show-gameboard (map #(agents %) game-words)))))
   
   
