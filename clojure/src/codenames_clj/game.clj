@@ -114,10 +114,12 @@
                                                                              (map #(game-hash %) (keys game-hash))))))))))
 
 (defn odds
-  [clue game-hash compact-model])
+  [clue game-hash compact-model]
+  (println (if (> (count (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "red") %) (keys game-hash))))) 0) clue)))
 
 (defn make-clue
-  [game-hash compact-model])
+  [game-hash compact-model color])
+  
   
 (defn generate-gameboard
   "use game/codewords as default input"
