@@ -110,12 +110,34 @@
                                                                                       ;(map #(game-hash %) (keys game-hash)))))
   (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
                                                                          (map #(compact-model %) 
-                                                                           (map #(if (string/starts-with? % "red") %)  
-                                                                             (map #(game-hash %) (keys game-hash))))))))))
+                                                                           (map #(if (string/starts-with? (game-hash %) "red") %)  
+                                                                             (keys game-hash)))))))))
+(defn group-words
+  ""
+  [clue color game-hash compact-model]
+  (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) color) %) (keys game-hash)))))
+
+(defn show-numbers
+  ""
+  [clue group lit compact-model]
+  [lit (interleave (seq group) (map #((compact-model clue) %) group))])
+(defn get-numbers
+  ""
+  [clue group lit compact-model]
+  {lit (map #((compact-model clue) %) group)})
 
 (defn odds
+  "we need numbers, let's go with max x of those on board"
   [clue game-hash compact-model]
-  (println (if (> (count (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "red") %) (keys game-hash))))) 0) clue)))
+  (let [reds (group-words clue "red" game-hash compact-model)
+        blues (group-words clue "blue" game-hash compact-model)
+        greys (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "grey") %) (keys game-hash))))
+        blacks (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "black") %) (keys game-hash))))]
+    ;(println ['reds (interleave (seq reds) (map #((compact-model clue) %) reds))])
+    ;(println (show-numbers clue reds 'reds compact-model))
+    (println (reduce conj (map #(get-numbers clue % (game-hash (first %)) compact-model) [reds blues greys blacks])))))
+    ;(println (doseq [x [reds blues greys blacks]] (show-numbers clue x 'x compact-model)))))
+  ;(if (> (count (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "red") %) (keys game-hash))))) 0) clue))
 
 (defn make-clue
   [game-hash compact-model color])
