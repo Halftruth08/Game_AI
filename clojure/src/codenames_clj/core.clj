@@ -31,7 +31,9 @@
         (game/show-gameboard game-words)
         (let [cds (game/candidates agents mod1)]
           (println cds)
-          (doseq [x cds] (game/odds x agents mod1)))
+          (let [nets (map #(game/nets % agents mod1) cds)]
+            ;(println nets)
+            (println (map #(game/odds %1 %2) cds nets))))
           ;(println (filter #(not (nil? %)) (map #(game/odds % agents mod1) cds))))
         
         (game/show-gameboard (map #(agents %) game-words)))))
