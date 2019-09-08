@@ -4,6 +4,7 @@
               [clojure.pprint :as pprint]
               [clojure.set]))
               
+              
 
 (def number-of-codenames 400)
 
@@ -103,7 +104,7 @@
 
 (defn candidates
   [game-hash compact-model]
-  (println (take 5 (vals compact-model)))
+  ;(println (take 5 (vals compact-model)))
   ;(println (seq (reduce #(clojure.set/union %1 %2) (map #(set %) (map #(keys %) (filter #(not (nil? %)) 
                                                                                   ;(map #(compact-model %) 
                                                                                     ;(map #(if (string/starts-with? % "red") %)  
@@ -197,7 +198,11 @@
   ""
   [oddrat common]
   (reduce + 0 (map #(* %1 %2) (take-last 3 params) (oddrat common (* common oddrat)))))
- 
+
+(defn guess2word 
+  ""
+  [raw]
+  (reduce + (vec (map #(* %1 %2) [1 5] (map #(- % 1) (map #(Integer/parseInt %) (string/split raw #",")))))))
 
 (defn make-clue
   [game-hash compact-model color])
@@ -212,5 +217,28 @@
         (show-gameboard game-words))))
         ;(show-gameboard (map #(agents %) game-words))
         ;(vec [game-words]))))
+(defn safe-read-line
+  ""
+  [agents words]
+  (def guess (read-line))
+  (while (not (contains? agents (nth words (guess2word guess))))
+    (def guess (read-line)))
+  guess)
+(defn remaining
+  ""
+  [agents tagents words]
+  (map #(if (contains? tagents %) % (agents %)) words))
+
+(defn outcome 
+  ""
+  [agents words guess]
+  (agents (nth words (guess2word guess))))
+
+(defn execute
+  "after guess is made, make appropriate actions"
+  [agents words guess]
+  
+  (println (agents (nth words (guess2word guess))))
+  (dissoc agents (nth words (guess2word guess))))
     
 
