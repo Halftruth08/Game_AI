@@ -7,28 +7,54 @@
   (:gen-class))
 
 
-
-
+(def win (atom 0))
+(def lose (atom 0))
 
 ;(def model1 (io/resource "models/model1.txt"))
 
-(defn bluef
+(defn wincond
   ""
-  [])
+  []
+  (println "You WON!"))
+
+(defn losecond
+  ""
+  []
+  (println "You LOST!"))
+
+(defn colorstate
+  ""
+  [color tagents]
+  (if (string/starts-with? color "blue")
+    (if (< (count (remove #(not (string/starts-with? % "blue")) (vals tagents))) 2)
+      (swap! lose inc))
+    (if (string/starts-with? color "red")
+      (if (< (count (remove #(not (string/starts-with? % "red")) (vals tagents))) 2)
+        (swap! win inc))
+      (if (string/starts-with? color "black")
+        (swap! lose inc)))))
+
+(defn colorstate2
+  ""
+  [color tagents]
+  (println color))
   
+
 (defn redf
   ""
-  [])
+  [tagents]
+  (if (< (remove #(not (string/starts-with? % "red")) (vals tagents)) 2)
+    (swap! win 1)))
   
 (defn greyf
   ""
-  [])
+  [tagents])
   
 (defn blackf
   ""
-  [])
-  
-(def colorfs [redf greyf bluef blackf])
+  [tagents]
+  (swap! lose 1))
+
 
 
   
@@ -36,8 +62,8 @@
   "I don't do a whole lot ... yet."
   [& args]
   (println "Hello, World!")
-  (def lose (atom 0))
-  (def win (atom 0))
+  (reset! lose 0)
+  (reset! win 0)
   (let [wl1 (game/gen-wordlist (count game/codenames))]
     (let [game-words (game/get-wordlist-words wl1)]
       (let [agents (game/assign-words game-words)
@@ -48,24 +74,25 @@
         ;(game/show-gameboard game-words)
         (let [cds (game/candidates agents mod1)]
           (loop [tagents agents]
-                 
+            
             (when (and (zero? @lose) (zero? @win))
-             (let [twords (game/remaining agents tagents game-words)]
-               (game/show-gameboard twords)
-              ;(println cds)
-              (let [nets (map #(game/nets % tagents mod1) cds)]
-                ;(println nets)
-                ;(println (map #(game/odds %1 %2) cds nets))))
-                (let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
-                  (println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
-                  (let [guess (game/safe-read-line tagents twords)]
-                    (println (tagents (nth twords (game/guess2word guess))))
-                    ;(doseq [x game/colorkeys
-                     ;       f colorfs)
-                    ;(if (string/starts-with? (game/outcome tagents twords guess)))
-                    (recur (game/execute tagents twords guess)))))))))
-               
-          ;(println (filter #(not (nil? %)) (map #(game/odds % agents mod1) cds))))
+              (let [twords (game/remaining agents tagents game-words)]
+                (game/show-gameboard twords)
+                ;(println cds)
+                (let [nets (map #(game/nets % tagents mod1) cds)]
+                  ;(println nets)
+                  ;(println (map #(game/odds %1 %2) cds nets))))
+                  (let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
+                    (game/give-clue clues)
+                    (println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
+                    (let [guess-word (nth twords (game/guess2word (game/safe-read-line tagents twords)))]
+                      ;(println (tagents guess-word))
+                      (colorstate (get tagents guess-word) tagents)
+                      (recur (game/execute tagents guess-word))))))))
+          (if (pos? @win) (wincond))
+          (if (pos? @lose) (losecond)))
+        
+        ;(println (filter #(not (nil? %)) (map #(game/odds % agents mod1) cds))))
         
         (game/show-gameboard (map #(agents %) game-words))))))
 

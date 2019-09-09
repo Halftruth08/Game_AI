@@ -65,8 +65,8 @@
 (defn gen-wordlist
   ""
   [number-of-words]
-  (let [vv (repeat 25 number-of-words)]
-    (vec (map rand-int vv))))
+  (let [vv (range number-of-words)]
+    (vec (take 25 (shuffle vv)))))
     
  
 (defn get-wordlist-words
@@ -217,6 +217,11 @@
         (show-gameboard game-words))))
         ;(show-gameboard (map #(agents %) game-words))
         ;(vec [game-words]))))
+(defn give-clue
+  ""
+  [clues]
+  (println (first (map #(clues %) (sort > (keys clues))))))
+
 (defn safe-read-line
   ""
   [agents words]
@@ -236,9 +241,9 @@
 
 (defn execute
   "after guess is made, make appropriate actions"
-  [agents words guess]
+  [agents guess-word]
   
-  (println (agents (nth words (guess2word guess))))
-  (dissoc agents (nth words (guess2word guess))))
+  (println (agents guess-word))
+  (dissoc agents guess-word))
     
 
