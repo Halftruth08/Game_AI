@@ -52,6 +52,10 @@
     (subt-guess clue)
     []))
     ;(dissoc (first (keys clue)))))
+(defn new-cds
+  "enforce non-repeating clues"
+  [cds clue]
+  (remove #(and (string/starts-with? % (first clue)) (string/ends-with? % (first clue))) cds))
 
 (defn colorstate2
   ""
@@ -91,9 +95,10 @@
                    mdl/model)
             out "resources/models/test.txt"]
         ;(game/show-gameboard game-words)
-        (let [cds (game/candidates agents mod1)]
+        
           (loop [tagents agents
-                 pass-clue []]
+                 pass-clue []
+                 cds (game/candidates agents mod1)]
             
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
@@ -110,9 +115,9 @@
                       ;(println (tagents guess-word))
                       (colorstate (get tagents guess-word) tagents)
                       
-                      (recur (game/execute tagents guess-word) (cluechange (get tagents guess-word) clue))))))))
+                      (recur (game/execute tagents guess-word) (cluechange (get tagents guess-word) clue) (new-cds cds clue))))))))
           (if (pos? @win) (wincond))
-          (if (pos? @lose) (losecond)))
+          (if (pos? @lose) (losecond))
         
         ;(println (filter #(not (nil? %)) (map #(game/odds % agents mod1) cds))))
         
