@@ -217,10 +217,17 @@
         (show-gameboard game-words))))
         ;(show-gameboard (map #(agents %) game-words))
         ;(vec [game-words]))))
+(defn what-clue 
+  ""
+  [cds nets pass-clue]
+  ;(println pass-clue (count pass-clue))
+  (if (> (count pass-clue) 0) pass-clue (let [pc (reduce conj {} (map #(odds %1 %2) cds nets))] (first (map #(pc %) (sort > (keys pc)))))))
+
 (defn give-clue
   ""
-  [clues]
-  (println (first (map #(clues %) (sort > (keys clues))))))
+  [pass-clue]
+  
+  (println pass-clue)) ;(first (map #(pass-clue %) (sort > (keys pass-clue))))))
 
 (defn safe-read-line
   ""

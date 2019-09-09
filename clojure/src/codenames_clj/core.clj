@@ -33,6 +33,25 @@
         (swap! win inc))
       (if (string/starts-with? color "black")
         (swap! lose inc)))))
+(defn subt-1
+  ""
+  [val1]
+  [(first val1) (- (last val1) 1)])
+  
+
+(defn subt-guess
+  ""
+  [clue]
+  (println clue)
+  (if (= (last clue) 1) [] [(first clue) (- (last clue) 1)]))
+
+(defn cluechange
+  ""
+  [color clue]
+  (if (string/starts-with? color "red") 
+    (subt-guess clue)
+    []))
+    ;(dissoc (first (keys clue)))))
 
 (defn colorstate2
   ""
@@ -73,7 +92,8 @@
             out "resources/models/test.txt"]
         ;(game/show-gameboard game-words)
         (let [cds (game/candidates agents mod1)]
-          (loop [tagents agents]
+          (loop [tagents agents
+                 pass-clue []]
             
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
@@ -82,13 +102,15 @@
                 (let [nets (map #(game/nets % tagents mod1) cds)]
                   ;(println nets)
                   ;(println (map #(game/odds %1 %2) cds nets))))
-                  (let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
-                    (game/give-clue clues)
-                    (println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
+                  ;(let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
+                   (let [clue (game/what-clue cds nets pass-clue)] 
+                    (game/give-clue clue)
+                    ;(println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
                     (let [guess-word (nth twords (game/guess2word (game/safe-read-line tagents twords)))]
                       ;(println (tagents guess-word))
                       (colorstate (get tagents guess-word) tagents)
-                      (recur (game/execute tagents guess-word))))))))
+                      
+                      (recur (game/execute tagents guess-word) (cluechange (get tagents guess-word) clue))))))))
           (if (pos? @win) (wincond))
           (if (pos? @lose) (losecond)))
         
