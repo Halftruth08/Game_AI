@@ -104,7 +104,7 @@
               (let [twords (game/remaining agents tagents game-words)]
                 (game/show-gameboard twords)
                 ;(println cds)
-                (let [nets (map #(game/nets % tagents mod1) cds)]
+                (let [nets (map #(game/nets % tagents mod1) (remove #(contains? tagents %) cds))]
                   ;(println nets)
                   ;(println (map #(game/odds %1 %2) cds nets))))
                   ;(let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
