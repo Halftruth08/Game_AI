@@ -20,6 +20,9 @@
 
 (defn incorporate-new-line
   [word-graph [[word-w associations-w] m-weight]]
+  ;(println word-w)
+  ;(println associations-w)
+  ;(println m-weight)
   (let [[word weight-s] (clojure.string/split word-w #"\|")
         weight (Integer/parseInt weight-s)
         associations (clojure.string/split associations-w #"\|")]

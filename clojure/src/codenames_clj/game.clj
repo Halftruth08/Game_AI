@@ -147,7 +147,7 @@
     ;(println (doseq [x [reds blues greys blacks]] (show-numbers clue x 'x compact-model)))))
   ;(if (> (count (clojure.set/intersection (set (keys (compact-model clue))) (set (map #(if (string/starts-with? (game-hash %) "red") %) (keys game-hash))))) 0) clue))
 
-(def params [1. -0.8 -1.6 -8 4. 0.01 1.])
+(def params [1. -0.8 -1.6 -8 8. 0.001 0.6])
 ;params are w_red w_grey w_blue w_black c_odds_ratio c_common c_interaction
 (def colorkeys ["red" "grey" "blue" "black"])
 

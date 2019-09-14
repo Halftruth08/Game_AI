@@ -21,6 +21,7 @@
 (defn model-save
   "save to txt"
   [name model]
+  (println (clojure.string/join ["Saving " name " with " (str (count model)) " entries"]))
   (let [m-name (clojure.string/join "/" ["resources" "models" name])
         out (restring model)]
     ;(println out)
