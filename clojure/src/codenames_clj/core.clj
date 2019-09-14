@@ -78,13 +78,9 @@
   [tagents]
   (swap! lose 1))
 
-
-
-  
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!")
+(defn play
+  "Need to add: different function for different players"
+  [player]
   (reset! lose 0)
   (reset! win 0)
   (let [wl1 (game/gen-wordlist (count game/codenames))]
@@ -118,10 +114,14 @@
                       (recur (game/execute tagents guess-word) (cluechange (get tagents guess-word) clue) (new-cds cds clue))))))))
           (if (pos? @win) (wincond))
           (if (pos? @lose) (losecond))
-        
-        ;(println (filter #(not (nil? %)) (map #(game/odds % agents mod1) cds))))
-        
         (game/show-gameboard (map #(agents %) game-words))))))
+
+  
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println "Hello, World!")
+  (play "human"))
 
   
   ;(game/generate-gameboard game/codenames)
