@@ -1,9 +1,9 @@
-(ns codenames-clj.model
+(ns codenames_clj.model
   (:require [clojure.zip :as zip]
-            [codenames-clj.game :as game]))
+            [codenames_clj.game :as game]))
 
 (def model-files [["thesauri/th_en_US_new2.dat" 3]
-                  ["thesauri/europarl-v6.enthes.txt" 1]
+                  ["thesauri/europarl_v6.enthes.txt" 1]
                   ["thesauri/fulllist_appx.txt" 40]
                   ["thesauri/newscomment.txt" 1]
                   ["thesauri/wiki_full_2deg.txt" 100]])
@@ -20,6 +20,9 @@
 
 (defn incorporate-new-line
   [word-graph [[word-w associations-w] m-weight]]
+  ;(println word-w)
+  ;(println associations-w)
+  ;(println m-weight)
   (let [[word weight-s] (clojure.string/split word-w #"\|")
         weight (Integer/parseInt weight-s)
         associations (clojure.string/split associations-w #"\|")]

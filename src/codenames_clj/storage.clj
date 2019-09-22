@@ -1,5 +1,5 @@
-(ns codenames-clj.storage
-  (:require [codenames-clj.model :as mdl]))
+(ns codenames_clj.storage
+  (:require [codenames_clj.model :as mdl]))
 (require '[clojure.java.io :refer [file reader writer resource]])
 
 (defn entry
@@ -21,6 +21,7 @@
 (defn model-save
   "save to txt"
   [name model]
+  (println (clojure.string/join ["Saving " name " with " (str (count model)) " entries"]))
   (let [m-name (clojure.string/join "/" ["resources" "models" name])
         out (restring model)]
     ;(println out)
