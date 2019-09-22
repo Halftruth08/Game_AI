@@ -19,4 +19,4 @@ For clojure:
 If needed, install native cli, then:
 
 cd Game_AI/clojure
-clj -m clojure_clj.core
+clj -m codenames_clj.core
