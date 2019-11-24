@@ -119,8 +119,10 @@
                           ;(nth twords (game/guess2word (game/safe-read-line tagents twords)))
                           ]
                       ;(println (tagents guess-word))
-                      
-                      (colorstate (get tagents guess-word) tagents)
+                      (-> tagents
+                          (get guess-word)
+                          (colorstate tagents))
+                      ;(colorstate (get tagents guess-word) tagents)
                       ;(println (string/join #"|" [(first clue) (str (count (keys tagents)))]))
                       ;
                       ;(println  (str guess-word)
@@ -131,7 +133,10 @@
           (if (pos? @win) (wincond))
           (if (pos? @lose) (losecond))
         (store/model-save out mmout)
-        (game/show-gameboard (map #(agents %) game-words))))))
+        (->> game-words
+             (map #(agents %))
+             (game/show-gameboard))
+        ))))
 
   
 (defn -main
