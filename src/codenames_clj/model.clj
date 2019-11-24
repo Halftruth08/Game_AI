@@ -3,7 +3,7 @@
             [codenames_clj.game :as game]))
 
 (def model-files [["thesauri/th_en_US_new2.dat" 3]
-                  ["thesauri/europarl_v6.enthes.txt" 1]
+                  ["thesauri/europarl-v6.enthes.txt" 1]
                   ["thesauri/fulllist_appx.txt" 40]
                   ["thesauri/newscomment.txt" 1]
                   ["thesauri/wiki_full_2deg.txt" 100]])
@@ -48,12 +48,17 @@
 
 (defn generate-all-models
   [files]
-  
+  ;(println files)
   (reduce (fn [model [filename m-weight]]
             ;(println (take 5 (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
+            ;(println filename)
             (reduce incorporate-new-line
-              model
-              (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
+                    model
+                    (->> (interleave (thesaurus-file-to-line-pairs filename)
+                                     (repeat m-weight))
+                         (partition 2))
+                    ;(partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))
+                    ))
     {}
     files))
 
@@ -61,5 +66,5 @@
   
 
 ;(def model (range 100))
-(def model #(generate-all-models model-files))
+(def model (generate-all-models model-files))
 

@@ -85,21 +85,26 @@
   (reset! win 0)
   (let [wl1 (game/gen-wordlist (count game/codenames))]
     (let [game-words (game/get-wordlist-words wl1)]
+      ;(println "debug 1")
       (let [agents (game/assign-words game-words)
             mod1 (if (.exists (io/as-file "resources/models/model1b.txt")) 
                    (mdl/generate-all-models [["models/model1b.txt" 1]]) 
                    mdl/model)
             out (string/join [player "_log.txt"])]
+        ;(println mod1)
         ;(game/show-gameboard game-words)
           
           (loop [tagents agents
                  pass-clue []
                  cds (game/candidates agents mod1)
                  mout (if (.exists (io/as-file (string/join ["resources/models/" out]))) (mdl/generate-all-models [[(string/join "models/" out) 1]]) {})]
+            ;(println "debug 2.5")
             (def mmout mout)
+            ;(println "debug 3")
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
                 (game/show-gameboard twords)
+                ;(println "debug 4")
                 ;(println cds)
                 (let [nets (map #(game/nets % tagents mod1) (remove #(contains? tagents %) cds))]
                   ;(println nets)
@@ -108,14 +113,21 @@
                    (let [clue (game/what-clue cds nets pass-clue)] 
                     (game/give-clue clue)
                     ;(println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
-                    (let [guess-word (nth twords (game/guess2word (game/safe-read-line tagents twords)))]
+                    (let [guess-word (->> (game/safe-read-line tagents twords)
+                                          (game/guess2word)
+                                          (nth twords))
+                          ;(nth twords (game/guess2word (game/safe-read-line tagents twords)))
+                          ]
                       ;(println (tagents guess-word))
                       
                       (colorstate (get tagents guess-word) tagents)
                       ;(println (string/join #"|" [(first clue) (str (count (keys tagents)))]))
                       ;
                       ;(println  (str guess-word)
-                      (recur (game/execute tagents guess-word) (cluechange (get tagents guess-word) clue) (new-cds cds clue) (mdl/incorporate-new-line mout [[(string/join #"|" [(first clue) (str (count (keys tagents)))]) (str guess-word)] 1]))))))))
+                      (recur (game/execute tagents guess-word)
+                             (cluechange (get tagents guess-word) clue)
+                             (new-cds cds clue)
+                             (mdl/incorporate-new-line mout [[(string/join #"|" [(first clue) (str (count (keys tagents)))]) (str guess-word)] 1]))))))))
           (if (pos? @win) (wincond))
           (if (pos? @lose) (losecond))
         (store/model-save out mmout)
