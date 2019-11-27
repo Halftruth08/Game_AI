@@ -129,7 +129,10 @@
                       (recur (game/execute tagents guess-word)
                              (cluechange (get tagents guess-word) clue)
                              (new-cds cds clue)
-                             (mdl/incorporate-new-line mout [[(string/join #"|" [(first clue) (str (count (keys tagents)))]) (str guess-word)] 1]))))))))
+                             (mdl/incorporate-new-line mout [[(string/join #"|" (->> (keys tagents)
+                                                                                     count
+                                                                                     str
+                                                                                     (conj [(first clue)]))) (str guess-word)] 1]))))))))
           (if (pos? @win) (wincond))
           (if (pos? @lose) (losecond))
         (store/model-save out mmout)
