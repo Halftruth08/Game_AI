@@ -17,8 +17,12 @@
 
 (defn entry-words
   [entry]
-
-  (flatten (list (key entry) (keys (val entry)))))
+  (->> (val entry)
+       (keys)
+       (list (key entry))
+       (flatten))
+  )
+;(flatten (list (key entry) (keys (val entry))))
 
 (defn compact
   [codenames-list full-model]
@@ -82,43 +86,27 @@
   "Simply pull words from the list of codenames at random"
   [wl]
   ;(println (vec (doall (map get-codeword wl))))
-  (->> (map get-codeword wl)
-       doall
-       vec)
+  (mapv get-codeword wl)
+  ;(->> (map get-codeword wl)
+  ;       doall
+  ;       vec)
   ;(vec (doall (map get-codeword wl)))
   )
-
-
-
-
-
-
 
 
 (defn show-gameboard
   "display the words on the board to the player"
   [words]
-  ;(println (vec (string/split (slurp codenames-list-file) #"\n")))
-  ;(println (partition 5 words))
-  ;(println (map keyword (map str (range 5))))
-  ;(println (interleave (flatten (repeat 5 (map keyword (map str (range 5))))) words))
-  ;(println (apply hash-map (interleave (flatten (repeat 5 (map keyword (map str (range 5)))))  words)))
-  ;(println (vec (map #(apply hash-map %) (partition 10 (interleave (flatten (repeat 5 (map keyword (map str (range 5)))))  words)))))
-  ;(println (map string/join " " (partition 10 (interleave (flatten (repeat 5 (map keyword (map str (range 5))))) words))))
-  ;(map keyword (map str (range 1 6)))
   (let [kw (->> (range 1 6)
                 (map str)
                 (map keyword))]
     (->> words
          (interleave (flatten (repeat 5 kw)))
          (partition 10)
-         (map #(apply hash-map %))
-         (doall)
-         (vec)
+         (mapv #(apply hash-map %))
          (pprint/print-table kw)))
-
-  ;(pprint/print-table (map keyword (map str (range 1 6))) (vec (doall (map #(apply hash-map %) (partition 10 (interleave (flatten (repeat 5 (map keyword (map str (range 1 6))))) words))))))
   )
+
 
 (def colors
   "This definition assumes Red always plays first"

@@ -55,7 +55,8 @@
 (defn new-cds
   "enforce non-repeating clues"
   [cds clue]
-  (remove #(and (string/starts-with? % (first clue)) (string/ends-with? % (first clue))) cds))
+  (remove #(and (string/starts-with? % (first clue))
+                (string/ends-with? % (first clue))) cds))
 
 (defn colorstate2
   ""
