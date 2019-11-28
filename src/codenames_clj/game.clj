@@ -199,7 +199,7 @@
   ""
   [odd-rat commonality]
   (reduce + 0
-          (vec (map #(* %1 %2) (vec (take-last 3 params)) [odd-rat commonality (* commonality odd-rat)]))))
+          (mapv #(* %1 %2) (vec (take-last 3 params)) [odd-rat commonality (* commonality odd-rat)])))
 
 (defn rmmax
   "take larges value out of seq"
