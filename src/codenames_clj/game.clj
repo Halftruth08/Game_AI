@@ -280,12 +280,14 @@
 (defn give-clue
   ""
   [pass-clue]
+  (println pass-clue)
 
-  (println pass-clue))                                      ;(first (map #(pass-clue %) (sort > (keys pass-clue))))))
+  )                                      ;(first (map #(pass-clue %) (sort > (keys pass-clue))))))
 
 (defn safe-read-line
   ""
   [agents words]
+  (Thread/sleep 200)
   (def guess (read-line))
   (while (->> (guess2word guess)
               (nth words)
