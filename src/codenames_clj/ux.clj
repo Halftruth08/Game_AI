@@ -1,4 +1,4 @@
-(ns codenames-clj.ux
+(ns codenames_clj.ux
  (:require [clojure.java.io :as io]
            [clojure.string :as string]
            [seesaw.core :as ssw]
