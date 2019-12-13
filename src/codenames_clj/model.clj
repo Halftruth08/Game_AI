@@ -12,8 +12,8 @@
 
 (defn thesaurus-file-to-line-pairs
   [fname]
-  (->> (clojure.java.io/resource fname)
-       (clojure.java.io/reader)
+  ()
+  (->> (clojure.java.io/reader (clojure.java.io/resource fname))
        (line-seq)
        (partition 2)))
        
@@ -48,7 +48,7 @@
 
 (defn generate-all-models
   [files]
-  ;(println files)
+  (println files)
   (reduce (fn [model [filename m-weight]]
             ;(println (take 5 (partition 2 (interleave (thesaurus-file-to-line-pairs filename) (repeat m-weight)))))
             ;(println filename)

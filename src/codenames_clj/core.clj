@@ -85,6 +85,7 @@
   [player]
   (reset! lose 0)
   (reset! win 0)
+  ;(println "begin play")
   (let [wl1 (game/gen-wordlist (count game/codenames))]
     (let [game-words (game/get-wordlist-words wl1)]
       ;(println "debug 1")
@@ -99,9 +100,10 @@
           (loop [tagents agents
                  pass-clue []
                  cds (game/candidates agents mod1)
-                 mout (if (.exists (io/as-file (string/join ["resources/models/" out]))) (mdl/generate-all-models [[(string/join "models/" out) 1]]) {})]
+                 mout (if (.exists (io/as-file (string/join ["resources/models/" out]))) (mdl/generate-all-models [[(string/join ["models/" out]) 1]]) {})]
             ;(println "debug 2.5")
             (def mmout mout)
+            (def frm (ux/window "" ""))
             ;(println "debug 3")
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
@@ -188,7 +190,7 @@
   "I now play a game with you and remember your answers"
   [& args]
   (println "Hello, World!")
-  (ux/popopen "Hello, User!" "Nice to meet you!")
+  ;(ux/popopen "Hello, User!" "Nice to meet you!")
   (if  (.exists (io/as-file "resources/models/model1b.txt"))
     (println "model1b.txt exists")
     (modelgamut))

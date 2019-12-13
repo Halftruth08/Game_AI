@@ -2,6 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as string]
             [clojure.pprint :as pprint]
+            [codenames_clj.ux :as ux]
             [clojure.set]))
 
 
@@ -96,15 +97,18 @@
 
 (defn show-gameboard
   "display the words on the board to the player"
-  [words]
+  [words fr]
   (let [kw (->> (range 1 6)
                 (map str)
                 (map keyword))]
-    (->> words
-         (interleave (flatten (repeat 5 kw)))
-         (partition 10)
-         (mapv #(apply hash-map %))
-         (pprint/print-table kw)))
+    (binding [*out* (java.io.StringWriter.)]
+      (->> words
+           (interleave (flatten (repeat 5 kw)))
+           (partition 10)
+           (mapv #(apply hash-map %))
+           (pprint/print-table kw))
+      (.toString *out*))
+      )
   )
 
 

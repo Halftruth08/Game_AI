@@ -8,8 +8,25 @@
 (defn popopen
   ""
   [title content]
-  (let [fr (ssw/frame :title title, :content content, :on-close :exit)]
+  (let [fr (ssw/frame :title title, :content content, :on-close :exception)]
     (-> fr
         ssw/pack!
         ssw/show!))
    )
+
+(defn window
+  ""
+  [title content]
+  (ssw/frame :title title, :content content, :on-close :exception))
+
+(defn update
+  [fr kw newcontent]
+  (ssw/config! fr kw newcontent))
+
+
+(defn show
+  ""
+  [fr]
+  (-> fr
+      ssw/pack!
+      ssw/show!))
