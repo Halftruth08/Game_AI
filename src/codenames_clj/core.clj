@@ -108,7 +108,9 @@
             (println "debug 3")
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
-                (game/show-gameboard twords ux/window1)
+                (game/gamebuttons twords ux/window1)
+                (ux/show ux/window1)
+                ;(game/show-gameboard twords ux/window1)
                 ;(println "debug 4")
                 ;(println cds)
                 (let [nets (map #(game/nets % tagents mod1) (remove #(contains? tagents %) cds))]

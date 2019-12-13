@@ -38,3 +38,11 @@
   ""
   [stri]
   (ssw/label stri))
+
+(defn buttons
+  ""
+  [words]
+  (def bvec (map #(ssw/button :text %) words))
+  (ssw/grid-panel
+    :columns 5
+    :items bvec))

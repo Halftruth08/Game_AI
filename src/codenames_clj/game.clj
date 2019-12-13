@@ -94,6 +94,12 @@
   ;(vec (doall (map get-codeword wl)))
   )
 
+(defn gamebuttons
+  "display the words on the board as buttons"
+  [words fr]
+  (ux/update_config fr :content (ux/buttons words))
+  )
+
 
 (defn show-gameboard
   "display the words on the board to the player"
@@ -101,17 +107,12 @@
   (let [kw (->> (range 1 6)
                 (map str)
                 (map keyword))]
-    (binding [*out* (java.io.StringWriter.)]
-      (->> words
-           (interleave (flatten (repeat 5 kw)))
-           (partition 10)
-           (mapv #(apply hash-map %))
-           (pprint/print-table kw))
-      (.toString *out*)
-      (ux/update_config fr :content (ux/lbl *out*) )
-      (ux/show fr))
-      )
-  )
+    (->> words
+         (interleave (flatten (repeat 5 kw)))
+         (partition 10)
+         (mapv #(apply hash-map %))
+         (pprint/print-table kw))
+    ))
 
 
 (def colors
