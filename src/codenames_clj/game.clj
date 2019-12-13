@@ -107,7 +107,9 @@
            (partition 10)
            (mapv #(apply hash-map %))
            (pprint/print-table kw))
-      (.toString *out*))
+      (.toString *out*)
+      (ux/update_config fr :content (ux/lbl *out*) )
+      (ux/show fr))
       )
   )
 

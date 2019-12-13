@@ -14,12 +14,15 @@
         ssw/show!))
    )
 
+(def window1 (ssw/frame :title "Unchanged", :content "Unchanged"))
+
+
 (defn window
   ""
   [title content]
   (ssw/frame :title title, :content content, :on-close :exception))
 
-(defn update
+(defn update_config
   [fr kw newcontent]
   (ssw/config! fr kw newcontent))
 
@@ -30,3 +33,8 @@
   (-> fr
       ssw/pack!
       ssw/show!))
+
+(defn lbl
+  ""
+  [stri]
+  (ssw/label stri))

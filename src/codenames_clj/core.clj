@@ -101,13 +101,14 @@
                  pass-clue []
                  cds (game/candidates agents mod1)
                  mout (if (.exists (io/as-file (string/join ["resources/models/" out]))) (mdl/generate-all-models [[(string/join ["models/" out]) 1]]) {})]
-            ;(println "debug 2.5")
+            (println "debug 2.5")
             (def mmout mout)
-            (def frm (ux/window "" ""))
-            ;(println "debug 3")
+            ;(def frm (ux/window "title" "content"))
+            ;(ux/show frm)
+            (println "debug 3")
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
-                (game/show-gameboard twords)
+                (game/show-gameboard twords ux/window1)
                 ;(println "debug 4")
                 ;(println cds)
                 (let [nets (map #(game/nets % tagents mod1) (remove #(contains? tagents %) cds))]
