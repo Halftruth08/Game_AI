@@ -3,7 +3,8 @@
             [clojure.string :as string]
             [codenames_clj.model :as mdl]
             [codenames_clj.storage :as store]
-            [codenames_clj.game :as game])
+            [codenames_clj.game :as game]
+            [codenames_clj.ux :as ux])
   (:gen-class))
 
 
@@ -187,6 +188,7 @@
   "I now play a game with you and remember your answers"
   [& args]
   (println "Hello, World!")
+  (ux/popopen "Hello, User!" "Nice to meet you!")
   (if  (.exists (io/as-file "resources/models/model1b.txt"))
     (println "model1b.txt exists")
     (modelgamut))
