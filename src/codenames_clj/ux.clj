@@ -86,7 +86,8 @@
                   :font "ARIAL-BOLD-18",
                   ;:selected-text-color (color/color 255 255 0)
                   :listen [:action (fn [event] (ssw/config! frout :content word)
-                                     (println word))]))))
+                                     ;(println word)
+                                     )]))))
 
 (defn buttons
   ""
