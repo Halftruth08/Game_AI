@@ -53,9 +53,9 @@
   ""
   [fr kw]
   (while (contains? #{"0000"} (ssw/config (ssw/config fr kw) :text))
-    (println "waiting")
-    (println (ssw/config (ssw/config fr kw) :text))
-    (Thread/sleep 2000)
+    ;(println "waiting")
+    ;(println (ssw/config (ssw/config fr kw) :text))
+    (Thread/sleep 200)
     )
   (let [d (ssw/config fr kw)]
     (ssw/config! fr kw "0000")
