@@ -2,6 +2,7 @@
  (:require [clojure.java.io :as io]
            [clojure.string :as string]
            [seesaw.core :as ssw]
+           [seesaw.color :as color]
            )
   )
 
@@ -14,7 +15,10 @@
         ssw/show!))
    )
 
-(def window1 (ssw/frame :title "Unchanged", :content "Unchanged"))
+(def window1 (ssw/frame :title "Unchanged", :content (ssw/grid-panel
+                                                       :border "Codenames"
+                                                       :columns 5
+                                                       :items (repeat 25 "nil"))))
 
 
 (defn window
@@ -39,10 +43,15 @@
   [stri]
   (ssw/label stri))
 
+()
+
 (defn buttons
   ""
   [words]
-  (def bvec (map #(ssw/button :text %) words))
+  (def bvec (map #(ssw/button :text %,
+                              :font "ARIAL-BOLD-18",
+                              ;:selected-text-color (color/color 255 255 0)
+                              :listen [:action (fn [event] (ssw/alert %))]) words))
   (ssw/grid-panel
     :columns 5
     :items bvec))

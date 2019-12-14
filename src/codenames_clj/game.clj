@@ -286,9 +286,9 @@
 
 (defn give-clue
   ""
-  [pass-clue]
-  (println pass-clue)
-
+  [pass-clue fr]
+  ;(println pass-clue)
+  (ux/update_config fr :title pass-clue)
   )                                      ;(first (map #(pass-clue %) (sort > (keys pass-clue))))))
 
 (defn safe-read-line

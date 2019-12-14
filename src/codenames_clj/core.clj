@@ -118,7 +118,7 @@
                   ;(println (map #(game/odds %1 %2) cds nets))))
                   ;(let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
                    (let [clue (game/what-clue cds nets pass-clue)] 
-                    (game/give-clue clue)
+                    (game/give-clue clue ux/window1)
                     ;(println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
                     (let [guess-word (->> (game/safe-read-line tagents twords)
                                           (game/guess2word)
