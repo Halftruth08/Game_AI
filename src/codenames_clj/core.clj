@@ -96,20 +96,24 @@
             out (string/join [player "_log.txt"])]
         ;(println mod1)
         ;(game/show-gameboard game-words)
-          
+        (def frm (ux/window "title" "content"))
+        (ux/show frm)
+        (def guesswindow (ux/window "Guess" "0000"))
+        (ux/show guesswindow)
+        ;(ux/show guesswindow)
           (loop [tagents agents
                  pass-clue []
                  cds (game/candidates agents mod1)
                  mout (if (.exists (io/as-file (string/join ["resources/models/" out]))) (mdl/generate-all-models [[(string/join ["models/" out]) 1]]) {})]
             (println "debug 2.5")
             (def mmout mout)
-            ;(def frm (ux/window "title" "content"))
+
             ;(ux/show frm)
             (println "debug 3")
             (when (and (zero? @lose) (zero? @win))
               (let [twords (game/remaining agents tagents game-words)]
-                (game/gamebuttons twords ux/window1)
-                (ux/show ux/window1)
+                (game/gamebuttons twords frm guesswindow)
+                ;(ux/show ux/window1)
                 ;(game/show-gameboard twords ux/window1)
                 ;(println "debug 4")
                 ;(println cds)
@@ -117,14 +121,18 @@
                   ;(println nets)
                   ;(println (map #(game/odds %1 %2) cds nets))))
                   ;(let [clues (reduce conj {} (map #(game/odds %1 %2) cds nets))]
-                   (let [clue (game/what-clue cds nets pass-clue)] 
-                    (game/give-clue clue ux/window1)
+                   (let [clue (game/what-clue cds nets pass-clue)]
+                    (game/give-clue clue frm)
                     ;(println (first (sort > (keys clues))) (first (map #(clues %) (sort > (keys clues)))))
-                    (let [guess-word (->> (game/safe-read-line tagents twords)
-                                          (game/guess2word)
-                                          (nth twords))
+                    (let [guess-word (ux/get_config_block guesswindow :content)
+                          ;(->> (game/safe-read-line tagents twords)
+                          ;                (game/guess2word)
+                          ;                (nth twords))
+
                           ;(nth twords (game/guess2word (game/safe-read-line tagents twords)))
                           ]
+                      (println (ux/get_config (ux/get_config guesswindow :content) :text))
+                      (println guess-word)
                       ;(println (tagents guess-word))
                       (-> tagents
                           (get guess-word)

@@ -96,8 +96,8 @@
 
 (defn gamebuttons
   "display the words on the board as buttons"
-  [words fr]
-  (ux/update_config fr :content (ux/buttons words))
+  [words fr fr2]
+  (ux/update_config fr :content (ux/buttons words fr2))
   )
 
 
